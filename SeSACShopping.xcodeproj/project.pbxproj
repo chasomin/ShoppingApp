@@ -29,6 +29,8 @@
 		79892C612B59290300904F52 /* SearchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79892C5F2B59290300904F52 /* SearchTableViewCell.xib */; };
 		79892C632B592C2200904F52 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79892C622B592C2200904F52 /* UIView+Extension.swift */; };
 		79892C652B59472100904F52 /* SearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79892C642B59472100904F52 /* SearchResultViewController.swift */; };
+		79892C682B594EBC00904F52 /* SearchResultCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79892C662B594EBC00904F52 /* SearchResultCollectionViewCell.swift */; };
+		79892C692B594EBC00904F52 /* SearchResultCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79892C672B594EBC00904F52 /* SearchResultCollectionViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +57,8 @@
 		79892C5F2B59290300904F52 /* SearchTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchTableViewCell.xib; sourceTree = "<group>"; };
 		79892C622B592C2200904F52 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		79892C642B59472100904F52 /* SearchResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewController.swift; sourceTree = "<group>"; };
+		79892C662B594EBC00904F52 /* SearchResultCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCollectionViewCell.swift; sourceTree = "<group>"; };
+		79892C672B594EBC00904F52 /* SearchResultCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchResultCollectionViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +137,8 @@
 				79892C5F2B59290300904F52 /* SearchTableViewCell.xib */,
 				79892C4E2B5915E400904F52 /* Search.storyboard */,
 				79892C642B59472100904F52 /* SearchResultViewController.swift */,
+				79892C662B594EBC00904F52 /* SearchResultCollectionViewCell.swift */,
+				79892C672B594EBC00904F52 /* SearchResultCollectionViewCell.xib */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -213,6 +219,7 @@
 				79892C512B59161000904F52 /* Profile.storyboard in Resources */,
 				79892C422B59112000904F52 /* .gitignore in Resources */,
 				79892C3A2B59107800904F52 /* LaunchScreen.storyboard in Resources */,
+				79892C692B594EBC00904F52 /* SearchResultCollectionViewCell.xib in Resources */,
 				79892C372B59107800904F52 /* Assets.xcassets in Resources */,
 				79892C612B59290300904F52 /* SearchTableViewCell.xib in Resources */,
 				79892C352B59107700904F52 /* Main.storyboard in Resources */,
@@ -231,6 +238,7 @@
 				79892C632B592C2200904F52 /* UIView+Extension.swift in Sources */,
 				79892C592B59192400904F52 /* Shopping.swift in Sources */,
 				79892C492B59150E00904F52 /* SearchViewController.swift in Sources */,
+				79892C682B594EBC00904F52 /* SearchResultCollectionViewCell.swift in Sources */,
 				79892C322B59107700904F52 /* ViewController.swift in Sources */,
 				79892C5D2B5928AD00904F52 /* Identifier.swift in Sources */,
 				79892C2E2B59107700904F52 /* AppDelegate.swift in Sources */,

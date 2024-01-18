@@ -8,6 +8,8 @@
 import UIKit
 
 class SearchViewController: UIViewController {
+    
+    let manager = APIManager()
         
     var search = UserDefaultsManager.shared.search {
         didSet {
@@ -22,7 +24,8 @@ class SearchViewController: UIViewController {
         }
     }
 
-    @IBOutlet var headerLable: UILabel!
+    @IBOutlet var recentView: UIView!
+    @IBOutlet var recentLable: UILabel!
     @IBOutlet var deleteAllButton: UIButton!
     
     
@@ -59,6 +62,7 @@ class SearchViewController: UIViewController {
     @objc func deleteButtonTapped(sender: UIButton) {
         UserDefaultsManager.shared.search.remove(at: sender.tag)
         search.remove(at: sender.tag)
+        
     }
 
 
@@ -77,8 +81,8 @@ extension SearchViewController {
         searchBar.placeholder = "브랜드, 상품, 프로필, 태그 등"
         searchBar.barTintColor = .clear
         
-        headerLable.text = "최근 검색"
-        headerLable.font = .smallBold
+        recentLable.text = "최근 검색"
+        recentLable.font = .smallBold
         
         deleteAllButton.setTitle("모두 지우기", for: .normal)
         deleteAllButton.titleLabel?.font = .smallBold
@@ -118,6 +122,8 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         
         let vc = sb.instantiateViewController(withIdentifier: SearchResultViewController.id)
         
+        vc.navigationItem.title = search[indexPath.row]
+        
         navigationController?.pushViewController(vc, animated: true)
 
         
@@ -128,10 +134,22 @@ extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
         // 콜렉션뷰로 이동
+        let sb = UIStoryboard(name: "Search", bundle: nil)
         
-        search.append(searchBar.text!)
+        let vc = sb.instantiateViewController(withIdentifier: SearchResultViewController.id) as! SearchResultViewController
+        
+        vc.navigationItem.title = searchBar.text
+       
+        navigationController?.pushViewController(vc, animated: true)
+        
+        search.insert(searchBar.text!, at: 0)
         UserDefaultsManager.shared.search = search
         print(UserDefaultsManager.shared.search)
         
+        manager.callRequest(text: searchBar.text!, start: 1) { shopping in
+            vc.total = shopping.total
+        }
+        
+        searchBar.text = ""
     }
 }
