@@ -22,7 +22,7 @@ struct APIManager {
             .responseDecodable(of: Shopping.self) { response in
                 switch response.result {
                 case .success(let success):
-                    dump(success.items)
+                    dump(success.total)
                     completionHandler(success)
                 case .failure(let failure):
                     print(failure)

@@ -11,11 +11,11 @@ struct Shopping: Codable {
     let total: Int
     let start: Int
     let display: Int
-    let items: [Item]
+    var items: [Item]
 }
 
 struct Item: Codable {
-    let title: String
+    var title: String
     let link: String
     let image: String
     let lprice: String

@@ -10,6 +10,7 @@ import UIKit
 class SearchViewController: UIViewController {
     
     let manager = APIManager()
+    
         
     var search = UserDefaultsManager.shared.search {
         didSet {
@@ -120,13 +121,17 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let sb = UIStoryboard(name: "Search", bundle: nil)
         
-        let vc = sb.instantiateViewController(withIdentifier: SearchResultViewController.id)
+        let vc = sb.instantiateViewController(withIdentifier: SearchResultViewController.id) as! SearchResultViewController
         
         vc.navigationItem.title = search[indexPath.row]
+//            
+            manager.callRequest(text: search[indexPath.row], start: 1) { shopping in
+                vc.data = shopping
+            }
         
-        navigationController?.pushViewController(vc, animated: true)
-
         
+            
+            self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 
@@ -139,16 +144,21 @@ extension SearchViewController: UISearchBarDelegate {
         let vc = sb.instantiateViewController(withIdentifier: SearchResultViewController.id) as! SearchResultViewController
         
         vc.navigationItem.title = searchBar.text
-       
-        navigationController?.pushViewController(vc, animated: true)
+        
+        manager.callRequest(text: searchBar.text!, start: 1) { shopping in
+//            vc.total = shopping.total
+            vc.data = shopping
+
+        }
+        
+        
         
         search.insert(searchBar.text!, at: 0)
         UserDefaultsManager.shared.search = search
         print(UserDefaultsManager.shared.search)
         
-        manager.callRequest(text: searchBar.text!, start: 1) { shopping in
-            vc.total = shopping.total
-        }
+            
+            self.navigationController?.pushViewController(vc, animated: true)
         
         searchBar.text = ""
     }

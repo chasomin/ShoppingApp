@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="heW-dh-RWH">
-                                <rect key="frame" x="0.0" y="187.66666666666669" width="393" height="630.33333333333326"/>
+                                <rect key="frame" x="0.0" y="183.33333333333331" width="393" height="634.66666666666674"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="7W5-Up-vTc">
                                     <size key="itemSize" width="128" height="128"/>
@@ -45,28 +45,27 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="3HW-3W-hhT">
-                                <rect key="frame" x="10" y="143.33333333333334" width="330" height="34.333333333333343"/>
+                                <rect key="frame" x="10" y="143.33333333333334" width="214" height="30"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dJE-uN-i5I">
-                                        <rect key="frame" x="0.0" y="0.0" width="75" height="34.333333333333336"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="46" height="30"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Button"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="So0-GV-alG">
-                                        <rect key="frame" x="85" y="0.0" width="75" height="34.333333333333336"/>
+                                        <rect key="frame" x="56" y="0.0" width="46" height="30"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Button"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w3Z-1d-mOJ">
-                                        <rect key="frame" x="170" y="0.0" width="75" height="34.333333333333336"/>
+                                        <rect key="frame" x="112" y="0.0" width="46" height="30"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Button"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QqH-xO-EIP">
-                                        <rect key="frame" x="255" y="0.0" width="75" height="34.333333333333336"/>
+                                        <rect key="frame" x="168" y="0.0" width="46" height="30"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Button"/>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -97,6 +96,40 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1063.3587786259541" y="4.9295774647887329"/>
+        </scene>
+        <!--Item Detail View Controller-->
+        <scene sceneID="sqs-Xe-oOX">
+            <objects>
+                <viewController storyboardIdentifier="ItemDetailViewController" id="xQE-Qo-zrZ" customClass="ItemDetailViewController" customModule="SeSACShopping" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="kkn-qP-2Ql">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kg1-zx-rGQ">
+                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Mnk-Cu-jyq"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Kg1-zx-rGQ" firstAttribute="leading" secondItem="Mnk-Cu-jyq" secondAttribute="leading" id="4wp-WV-DS7"/>
+                            <constraint firstItem="Kg1-zx-rGQ" firstAttribute="top" secondItem="Mnk-Cu-jyq" secondAttribute="top" id="Bl2-op-y7R"/>
+                            <constraint firstItem="Mnk-Cu-jyq" firstAttribute="trailing" secondItem="Kg1-zx-rGQ" secondAttribute="trailing" id="Ual-nm-acZ"/>
+                            <constraint firstItem="Mnk-Cu-jyq" firstAttribute="bottom" secondItem="Kg1-zx-rGQ" secondAttribute="bottom" id="rgb-nZ-BaR"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="webView" destination="Kg1-zx-rGQ" id="oyy-Up-yF1"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JKJ-Hm-tVY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2045" y="6"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="GXU-4q-vuk">

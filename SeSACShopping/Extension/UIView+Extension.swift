@@ -10,4 +10,6 @@ import Foundation
 enum Image {
     static let search = "magnifyingglass"
     static let delete = "xmark"
+    static let heart = "heart"
+    static let heartFill = "heart.fill"
 }
