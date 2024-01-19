@@ -8,7 +8,7 @@
 import UIKit
 
 extension UIImageView {
-    func circle() {
+    func circleBorder() {
         DispatchQueue.main.async {
             self.layer.cornerRadius = self.frame.width / 2
         }

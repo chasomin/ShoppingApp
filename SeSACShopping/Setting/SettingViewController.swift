@@ -72,6 +72,9 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
             
             let vc = sb.instantiateViewController(withIdentifier: ProfileViewController.id) as! ProfileViewController
             
+            vc.userImageView.image = UIImage(named: UserDefaultsManager.shared.image)
+            vc.textfield.text = UserDefaultsManager.shared.nickname
+            
             vc.navigationItem.title = "프로필 수정"
             
             navigationController?.pushViewController(vc, animated: true)

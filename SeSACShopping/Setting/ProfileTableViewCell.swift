@@ -31,7 +31,7 @@ extension ProfileTableViewCell {
     func setUI() {
         setBackgroundColor()
         
-        userImageView.circle()
+        userImageView.circleBorder()
         
         userNicknameLabel.font = .largeBold
         userNicknameLabel.setLabelColor()

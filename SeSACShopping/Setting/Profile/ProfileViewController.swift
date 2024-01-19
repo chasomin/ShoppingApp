@@ -25,6 +25,11 @@ class ProfileViewController: UIViewController {
 
     }
     
+    @IBAction func userImageViewTapped(_ sender: UITapGestureRecognizer) {
+        
+        
+    }
+    
 
 }
 
@@ -32,7 +37,7 @@ extension ProfileViewController {
     func setUI() {
         view.setBackgroundColor()
         
-        userImageView.circle()
+        userImageView.circleBorder()
         
         editImageView.image = UIImage(named: "camera.fill")
         editImageView.tintColor = .white
@@ -55,9 +60,31 @@ extension ProfileViewController {
         stateLabel.text = ""
         
         doneButton.setPointButton()
+        doneButton.addTarget(self, action: #selector(doneButtonTapped), for: .touchUpInside)
+//        if textfield.text == "" || textfield.text == UserDefaultsManager.shared.nickname {
+        doneButton.isEnabled = false
+//        } else {
+//            doneButton.isEnabled = true
+//        }
+//        
         
     }
     
+    @objc func doneButtonTapped() {
+        if stateLabel.textColor == .point {
+
+            let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+            
+            let sceneDelegate = windowScene?.delegate as? SceneDelegate
+            
+            let sb = UIStoryboard(name: "Main", bundle: nil)
+            let vc = sb.instantiateViewController(withIdentifier: "mainTabBar") as! UITabBarController
+            
+            sceneDelegate?.window?.rootViewController = vc
+            sceneDelegate?.window?.makeKeyAndVisible()
+
+        }
+    }
 }
 
 extension ProfileViewController: UITextFieldDelegate {
@@ -79,15 +106,19 @@ extension ProfileViewController: UITextFieldDelegate {
         if isContainsSymbol {
             stateLabel.text = "닉네임에 \(textfield.text!.last!) 는 포함할 수 없어요."
             stateLabel.textColor = .systemRed
+            doneButton.isEnabled = false
         } else if isContainsNumber {
             stateLabel.text = "닉네임에 숫자는 포함할 수 없어요"
             stateLabel.textColor = .systemRed
+            doneButton.isEnabled = false
         } else if textfield.text!.count < 2 || textfield.text!.count > 9 {
             stateLabel.text = "2글자 이상 10글자 미만으로 설정해주세요"
             stateLabel.textColor = .systemRed
+            doneButton.isEnabled = false
         } else if textfield.text != UserDefaultsManager.shared.nickname {
             stateLabel.text = "사용할 수 있는 닉네임이에요."
             stateLabel.textColor = .point
+            doneButton.isEnabled = true
         }
     }
 }
