@@ -31,11 +31,7 @@ extension ProfileTableViewCell {
     func setUI() {
         setBackgroundColor()
         
-        DispatchQueue.main.async {
-            self.userImageView.layer.cornerRadius = self.userImageView.frame.width / 2
-        }
-        userImageView.layer.borderColor = UIColor.point.cgColor
-        userImageView.layer.borderWidth = 5
+        userImageView.circle()
         
         userNicknameLabel.font = .largeBold
         userNicknameLabel.setLabelColor()

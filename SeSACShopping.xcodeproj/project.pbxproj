@@ -32,13 +32,16 @@
 		79892C692B594EBC00904F52 /* SearchResultCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79892C672B594EBC00904F52 /* SearchResultCollectionViewCell.xib */; };
 		79892C6C2B596AEF00904F52 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 79892C6B2B596AEF00904F52 /* Kingfisher */; };
 		79892C6E2B59708300904F52 /* ItemDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79892C6D2B59708300904F52 /* ItemDetailViewController.swift */; };
-		79939F312B5A3EC600728E64 /* Setting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79939F302B5A3EC600728E64 /* Setting.storyboard */; };
+		79939F312B5A3EC600728E64 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79939F302B5A3EC600728E64 /* Profile.storyboard */; };
 		79939F342B5A3F6600728E64 /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79939F322B5A3F6600728E64 /* SettingTableViewCell.swift */; };
 		79939F352B5A3F6600728E64 /* SettingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79939F332B5A3F6600728E64 /* SettingTableViewCell.xib */; };
 		79939F382B5A3F8D00728E64 /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79939F362B5A3F8D00728E64 /* ProfileTableViewCell.swift */; };
 		79939F392B5A3F8D00728E64 /* ProfileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79939F372B5A3F8D00728E64 /* ProfileTableViewCell.xib */; };
 		79939F3B2B5A497300728E64 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79939F3A2B5A497300728E64 /* UILabel+Extension.swift */; };
 		79939F3D2B5A49A400728E64 /* EnumImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79939F3C2B5A49A400728E64 /* EnumImage.swift */; };
+		79939F402B5A4F8800728E64 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79939F3F2B5A4F8800728E64 /* ProfileViewController.swift */; };
+		79939F422B5A50CE00728E64 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79939F412B5A50CE00728E64 /* UIImageView+Extension.swift */; };
+		79939F442B5A519000728E64 /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79939F432B5A519000728E64 /* UIButton+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,13 +70,16 @@
 		79892C662B594EBC00904F52 /* SearchResultCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCollectionViewCell.swift; sourceTree = "<group>"; };
 		79892C672B594EBC00904F52 /* SearchResultCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchResultCollectionViewCell.xib; sourceTree = "<group>"; };
 		79892C6D2B59708300904F52 /* ItemDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailViewController.swift; sourceTree = "<group>"; };
-		79939F302B5A3EC600728E64 /* Setting.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Setting.storyboard; sourceTree = "<group>"; };
+		79939F302B5A3EC600728E64 /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		79939F322B5A3F6600728E64 /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
 		79939F332B5A3F6600728E64 /* SettingTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingTableViewCell.xib; sourceTree = "<group>"; };
 		79939F362B5A3F8D00728E64 /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		79939F372B5A3F8D00728E64 /* ProfileTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileTableViewCell.xib; sourceTree = "<group>"; };
 		79939F3A2B5A497300728E64 /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
 		79939F3C2B5A49A400728E64 /* EnumImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumImage.swift; sourceTree = "<group>"; };
+		79939F3F2B5A4F8800728E64 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		79939F412B5A50CE00728E64 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
+		79939F432B5A519000728E64 /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +139,8 @@
 				79892C462B59133F00904F52 /* UIFont+Extension.swift */,
 				79892C622B592C2200904F52 /* UIView+Extension.swift */,
 				79939F3A2B5A497300728E64 /* UILabel+Extension.swift */,
+				79939F412B5A50CE00728E64 /* UIImageView+Extension.swift */,
+				79939F432B5A519000728E64 /* UIButton+Extension.swift */,
 				79939F3C2B5A49A400728E64 /* EnumImage.swift */,
 			);
 			path = Extension;
@@ -146,7 +154,7 @@
 				79939F372B5A3F8D00728E64 /* ProfileTableViewCell.xib */,
 				79939F322B5A3F6600728E64 /* SettingTableViewCell.swift */,
 				79939F332B5A3F6600728E64 /* SettingTableViewCell.xib */,
-				79939F302B5A3EC600728E64 /* Setting.storyboard */,
+				79939F3E2B5A4D6C00728E64 /* Profile */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -173,6 +181,15 @@
 				79892C582B59192400904F52 /* Shopping.swift */,
 			);
 			path = Data;
+			sourceTree = "<group>";
+		};
+		79939F3E2B5A4D6C00728E64 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				79939F302B5A3EC600728E64 /* Profile.storyboard */,
+				79939F3F2B5A4F8800728E64 /* ProfileViewController.swift */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -249,7 +266,7 @@
 				79939F352B5A3F6600728E64 /* SettingTableViewCell.xib in Resources */,
 				79892C352B59107700904F52 /* Main.storyboard in Resources */,
 				79892C4F2B5915E400904F52 /* Search.storyboard in Resources */,
-				79939F312B5A3EC600728E64 /* Setting.storyboard in Resources */,
+				79939F312B5A3EC600728E64 /* Profile.storyboard in Resources */,
 				79939F392B5A3F8D00728E64 /* ProfileTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -270,6 +287,7 @@
 				79892C322B59107700904F52 /* ViewController.swift in Sources */,
 				79892C5D2B5928AD00904F52 /* Identifier.swift in Sources */,
 				79939F3B2B5A497300728E64 /* UILabel+Extension.swift in Sources */,
+				79939F422B5A50CE00728E64 /* UIImageView+Extension.swift in Sources */,
 				79892C2E2B59107700904F52 /* AppDelegate.swift in Sources */,
 				79892C442B59115D00904F52 /* APIKey.swift in Sources */,
 				79892C652B59472100904F52 /* SearchResultViewController.swift in Sources */,
@@ -279,7 +297,9 @@
 				79892C5B2B59274F00904F52 /* UserDefaultsManager.swift in Sources */,
 				79892C472B59133F00904F52 /* UIFont+Extension.swift in Sources */,
 				79892C602B59290300904F52 /* SearchTableViewCell.swift in Sources */,
+				79939F402B5A4F8800728E64 /* ProfileViewController.swift in Sources */,
 				79892C4B2B59151700904F52 /* SettingViewController.swift in Sources */,
+				79939F442B5A519000728E64 /* UIButton+Extension.swift in Sources */,
 				79892C302B59107700904F52 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

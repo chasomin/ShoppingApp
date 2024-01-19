@@ -66,4 +66,16 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
         
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 0 {
+            let sb = UIStoryboard(name: "Profile", bundle: nil)
+            
+            let vc = sb.instantiateViewController(withIdentifier: ProfileViewController.id) as! ProfileViewController
+            
+            vc.navigationItem.title = "프로필 수정"
+            
+            navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
 }
