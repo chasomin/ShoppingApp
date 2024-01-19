@@ -49,6 +49,7 @@ extension ProfileViewController {
         
         userImageView.image = UIImage(named: "profile\(num)")
         
+        //FIXME: asset 이미지로 변경하기
         editImageView.image = UIImage(named: "camera.fill")
         editImageView.tintColor = .white
         editImageView.backgroundColor = .point

@@ -7,10 +7,10 @@
 
 import UIKit
 
-class ProfileImageCollectionViewCell: UICollectionViewCell {
 
+class ProfileImageCollectionViewCell: UICollectionViewCell {
     @IBOutlet var imageButton: UIButton!
-    
+    var state: Bool = false
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -18,4 +18,5 @@ class ProfileImageCollectionViewCell: UICollectionViewCell {
         imageButton.circle()
     }
     
+
 }

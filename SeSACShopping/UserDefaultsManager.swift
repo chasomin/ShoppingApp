@@ -16,9 +16,19 @@ class UserDefaultsManager {
         case search
         case like
         case image
+        case userState
     }
     
     let ud = UserDefaults.standard
+    
+    var userState: Bool {
+        get {
+            ud.bool(forKey: UDKey.userState.rawValue)
+        }
+        set {
+            ud.set(newValue, forKey: UDKey.userState.rawValue)
+        }
+    }
     
     var nickname: String {
         get {

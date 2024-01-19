@@ -63,10 +63,23 @@ extension ProfileImageViewController: UICollectionViewDelegate, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProfileImageCollectionViewCell.id, for: indexPath) as! ProfileImageCollectionViewCell
+        
         let image = UIImage(named: imageList[indexPath.item])?.withRenderingMode(.alwaysOriginal)
         cell.imageButton.setImage(image, for: .normal)
+        
+        cell.imageButton.tag = indexPath.item
+        cell.imageButton.circle()
+        cell.imageButton.addTarget(self, action: #selector(imageButtonTapped), for: .touchUpInside)
+        
         return cell
     }
+    // FIXME: 유저 이미지 버튼 클릭시 뷰에 반영하기
+    @objc func imageButtonTapped(sender: UIButton) {
+        sender.circleBorder()
+        collectionView.reloadData()
+    }
     
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+    }
 }

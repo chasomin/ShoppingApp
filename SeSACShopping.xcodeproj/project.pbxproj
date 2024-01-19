@@ -45,6 +45,8 @@
 		79939F462B5A676000728E64 /* ProfileImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79939F452B5A676000728E64 /* ProfileImageViewController.swift */; };
 		79939F492B5A6C8000728E64 /* ProfileImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79939F472B5A6C8000728E64 /* ProfileImageCollectionViewCell.swift */; };
 		79939F4A2B5A6C8000728E64 /* ProfileImageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79939F482B5A6C8000728E64 /* ProfileImageCollectionViewCell.xib */; };
+		79939F4D2B5A7F3000728E64 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79939F4C2B5A7F3000728E64 /* Onboarding.storyboard */; };
+		79939F4F2B5A80D100728E64 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79939F4E2B5A80D100728E64 /* OnboardingViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -86,6 +88,8 @@
 		79939F452B5A676000728E64 /* ProfileImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageViewController.swift; sourceTree = "<group>"; };
 		79939F472B5A6C8000728E64 /* ProfileImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		79939F482B5A6C8000728E64 /* ProfileImageCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileImageCollectionViewCell.xib; sourceTree = "<group>"; };
+		79939F4C2B5A7F3000728E64 /* Onboarding.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
+		79939F4E2B5A80D100728E64 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +131,7 @@
 				79892C312B59107700904F52 /* ViewController.swift */,
 				79892C332B59107700904F52 /* Main.storyboard */,
 				79892C522B5917AA00904F52 /* Data */,
+				79939F4B2B5A7F0C00728E64 /* Onboarding */,
 				79892C4D2B59151D00904F52 /* Search */,
 				79892C4C2B59151B00904F52 /* Setting */,
 				79892C362B59107800904F52 /* Assets.xcassets */,
@@ -201,6 +206,15 @@
 			path = Profile;
 			sourceTree = "<group>";
 		};
+		79939F4B2B5A7F0C00728E64 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				79939F4C2B5A7F3000728E64 /* Onboarding.storyboard */,
+				79939F4E2B5A80D100728E64 /* OnboardingViewController.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -270,6 +284,7 @@
 				79892C422B59112000904F52 /* .gitignore in Resources */,
 				79892C3A2B59107800904F52 /* LaunchScreen.storyboard in Resources */,
 				79892C692B594EBC00904F52 /* SearchResultCollectionViewCell.xib in Resources */,
+				79939F4D2B5A7F3000728E64 /* Onboarding.storyboard in Resources */,
 				79892C372B59107800904F52 /* Assets.xcassets in Resources */,
 				79892C612B59290300904F52 /* SearchTableViewCell.xib in Resources */,
 				79939F4A2B5A6C8000728E64 /* ProfileImageCollectionViewCell.xib in Resources */,
@@ -301,6 +316,7 @@
 				79892C2E2B59107700904F52 /* AppDelegate.swift in Sources */,
 				79892C442B59115D00904F52 /* APIKey.swift in Sources */,
 				79939F462B5A676000728E64 /* ProfileImageViewController.swift in Sources */,
+				79939F4F2B5A80D100728E64 /* OnboardingViewController.swift in Sources */,
 				79892C652B59472100904F52 /* SearchResultViewController.swift in Sources */,
 				79939F342B5A3F6600728E64 /* SettingTableViewCell.swift in Sources */,
 				79892C6E2B59708300904F52 /* ItemDetailViewController.swift in Sources */,
