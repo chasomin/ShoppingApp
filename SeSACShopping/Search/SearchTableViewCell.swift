@@ -31,6 +31,7 @@ extension SearchTableViewCell {
         iconImageView.tintColor = .white
         
         label.font = .small
+        label.setLabelColor()
         
         
         deleteButton.setTitle("", for: .normal)

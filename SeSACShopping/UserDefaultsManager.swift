@@ -14,6 +14,8 @@ class UserDefaultsManager {
     enum UDKey: String {
         case nickname
         case search
+        case like
+        case image
     }
     
     let ud = UserDefaults.standard
@@ -27,6 +29,15 @@ class UserDefaultsManager {
         }
     }
     
+    var image: String {
+        get {
+            ud.string(forKey: UDKey.image.rawValue) ?? ""
+        }
+        set {
+            ud.set(newValue, forKey: UDKey.image.rawValue)
+        }
+    }
+    
     var search: [String] {
         get {
             ud.stringArray(forKey: UDKey.search.rawValue) ?? []
@@ -36,6 +47,17 @@ class UserDefaultsManager {
         }
     }
     
+    var like: [String] {
+        get {
+            ud.stringArray(forKey: UDKey.like.rawValue) ?? []
+        }
+        set {
+            ud.set(newValue, forKey: UDKey.like.rawValue)
+        }
+    }
 
+    var likeLabel: String {
+        "\(like.count)개의 상품을 좋아하고 있어요!"
+    }
 }
 

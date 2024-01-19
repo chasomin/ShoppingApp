@@ -26,6 +26,7 @@ extension SearchResultCollectionViewCell {
     func setUI() {
         imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 15
+        
         heartButton.layer.cornerRadius = heartButton.frame.width / 2
         heartButton.setTitle("", for: .normal)
         heartButton.setImage(UIImage(systemName: Image.heart), for: .normal)
@@ -34,9 +35,13 @@ extension SearchResultCollectionViewCell {
         
         mallNameLabel.textColor = .gray
         mallNameLabel.font = .small
+        mallNameLabel.setLabelColor()
         
         titleLabel.font = .regular
         titleLabel.numberOfLines = 2
+        titleLabel.setLabelColor()
+        
+        priceLabel.setLabelColor()
         priceLabel.font = .regularBold
     }
 }

@@ -73,9 +73,12 @@ class SearchViewController: UIViewController {
 
 extension SearchViewController {
     func setUI() {
-        view.backgroundColor = .background
-
+        view.setBackgroundColor()
+        
+        recentView.setBackgroundColor()
+        
         navigationItem.title = "\(UserDefaultsManager.shared.nickname)님의 새싹 쇼핑"
+        self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.text]
         
         tableView.rowHeight = UITableView.automaticDimension
         
@@ -84,6 +87,7 @@ extension SearchViewController {
         
         recentLable.text = "최근 검색"
         recentLable.font = .smallBold
+        recentLable.setLabelColor()
         
         deleteAllButton.setTitle("모두 지우기", for: .normal)
         deleteAllButton.titleLabel?.font = .smallBold
@@ -100,6 +104,7 @@ extension SearchViewController {
         emptyLabel.text = "최근 검색어가 없어요"
         emptyLabel.font = .largeBold
         emptyLabel.textAlignment = .center
+        emptyLabel.setLabelColor()
     }
 }
 

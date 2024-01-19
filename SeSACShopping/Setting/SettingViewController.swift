@@ -8,22 +8,62 @@
 import UIKit
 
 class SettingViewController: UIViewController {
+    
+    let setting: [String] = ["공지사항", "자주 묻는 질문", "1:1 문의", "알림 설정", "처음부터 시작하기"]
 
+    @IBOutlet var tableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationItem.title = "설정"
+        self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.text]
 
-        // Do any additional setup after loading the view.
+        view.setBackgroundColor()
+        tableView.setBackgroundColor()
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.rowHeight = UITableView.automaticDimension
+        
+        let xibProfile = UINib(nibName: ProfileTableViewCell.id, bundle: nil)
+        tableView.register(xibProfile, forCellReuseIdentifier: ProfileTableViewCell.id)
+        
+        let xibSetting = UINib(nibName: SettingTableViewCell.id, bundle: nil)
+        tableView.register(xibSetting, forCellReuseIdentifier: SettingTableViewCell.id)
     }
     
 
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+}
+
+extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        2
     }
-    */
-
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 0 {
+            return 1
+        } else {
+            return 5
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.section == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTableViewCell.id, for: indexPath) as! ProfileTableViewCell
+            
+            cell.configureCell()
+            
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: SettingTableViewCell.id, for: indexPath) as! SettingTableViewCell
+            
+            cell.textLabel?.text = setting[indexPath.row]
+            return cell
+        }
+        
+    }
+    
 }
