@@ -47,7 +47,8 @@ extension SearchResultViewController {
     func setUI() {
         totalLabel.font = .regularBold
         totalLabel.textColor = .point
-        totalLabel.text = "\(data.total) 개의 검색 결과"
+        let number = data.total.formatted()
+        totalLabel.text = "\(number) 개의 검색 결과"
         
         // TODO: 버튼 타이틀 패딩..?
         designButton(accuracyButton, active: true, title: "  정확도  ")

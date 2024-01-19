@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="749-Xq-qRp">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -18,13 +18,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hZu-Iv-GYg">
-                                <rect key="frame" x="78.666666666666671" y="163" width="235.66666666666663" height="153.33333333333337"/>
+                                <rect key="frame" x="78.666666666666671" y="119.00000000000001" width="235.66666666666663" height="153.33333333333337"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="hZu-Iv-GYg" secondAttribute="height" multiplier="2:1.3" id="2fk-Nb-7FU"/>
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uBN-LK-V9z">
-                                <rect key="frame" x="39.333333333333343" y="356.33333333333337" width="314.33333333333326" height="314.33333333333337"/>
+                                <rect key="frame" x="39.333333333333343" y="312.33333333333337" width="314.33333333333326" height="314.33333333333337"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="uBN-LK-V9z" secondAttribute="height" id="S1m-js-Tgb"/>
                                 </constraints>
@@ -63,24 +63,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1066.4122137404579" y="4.9295774647887329"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="e4F-CK-ZKD">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="749-Xq-qRp" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="07I-91-4MK">
-                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="YAc-lK-fIO"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="RRb-lk-gXJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="139.69465648854961" y="4.9295774647887329"/>
         </scene>
     </scenes>
     <resources>

@@ -27,12 +27,17 @@ class ProfileViewController: UIViewController {
         textfield.delegate = self
 
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        userImageView.image = UIImage(named: UserDefaultsManager.shared.image)
+    }
+    
     
     @IBAction func userImageViewTapped(_ sender: UITapGestureRecognizer) {
         
         let vc = storyboard?.instantiateViewController(withIdentifier: ProfileImageViewController.id) as! ProfileImageViewController
         vc.navigationItem.title = self.navigationItem.title
-        vc.image = "profile\(num)"
+//        vc.image = "profile\(num)"
         
         navigationController?.pushViewController(vc, animated: true)
     }
@@ -43,27 +48,36 @@ class ProfileViewController: UIViewController {
 extension ProfileViewController {
     func setUI() {
         view.setBackgroundColor()
+        self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.text]
+
         
         userImageView.circleBorder()
         userImageView.isUserInteractionEnabled = true
         
-        userImageView.image = UIImage(named: "profile\(num)")
-        
-        //FIXME: asset 이미지로 변경하기
-        editImageView.image = UIImage(named: "camera.fill")
-        editImageView.tintColor = .white
-        editImageView.backgroundColor = .point
-        DispatchQueue.main.async {
-            self.editImageView.layer.cornerRadius = self.editImageView.frame.width / 2
+        if UserDefaultsManager.shared.image == "" {
+            userImageView.image = UIImage(named: "profile\(num)")
+            UserDefaultsManager.shared.image = "profile\(num)"
+        } else {
+            userImageView.image = UIImage(named: UserDefaultsManager.shared.image)
         }
-        editImageView.layer.borderColor = UIColor.white.cgColor
-        editImageView.layer.borderWidth = 3
+        //FIXME: asset 이미지로 변경하기
+        editImageView.image = UIImage(named: "camera")
+//        editImageView.tintColor = .white
+//        editImageView.backgroundColor = .point
+//        DispatchQueue.main.async {
+//            self.editImageView.layer.cornerRadius = self.editImageView.frame.width / 2
+//        }
+//        editImageView.layer.borderColor = UIColor.white.cgColor
+//        editImageView.layer.borderWidth = 3
         
         
-        
+        textfield.text = UserDefaultsManager.shared.nickname
         textfield.borderStyle = .none
         textfield.clipsToBounds = true
-        textfield.placeholder = "닉네임을 입력해주세요 :)"
+//        textfield.placeholder = "닉네임을 입력해주세요 :)"
+        textfield.attributedPlaceholder = NSAttributedString(string: "닉네임을 입력해주세요 :)", attributes: [NSAttributedString.Key.foregroundColor : UIColor.systemGray3])
+
+        textfield.textColor = .text
         
         lineView.backgroundColor = .white
         
@@ -71,6 +85,7 @@ extension ProfileViewController {
         stateLabel.text = ""
         
         doneButton.setPointButton()
+        doneButton.setTitle("완료", for: .normal)
         doneButton.addTarget(self, action: #selector(doneButtonTapped), for: .touchUpInside)
 //        if textfield.text == "" || textfield.text == UserDefaultsManager.shared.nickname {
         doneButton.isEnabled = false
@@ -83,6 +98,10 @@ extension ProfileViewController {
     
     @objc func doneButtonTapped() {
         if stateLabel.textColor == .point {
+            
+            UserDefaultsManager.shared.userState = true
+            UserDefaultsManager.shared.nickname = textfield.text!
+//            UserDefaultsManager.shared.image = "profile\(num)"
 
             let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
             
@@ -93,6 +112,11 @@ extension ProfileViewController {
             
             sceneDelegate?.window?.rootViewController = vc
             sceneDelegate?.window?.makeKeyAndVisible()
+            
+            
+                    
+
+                    
 
         }
     }
@@ -126,7 +150,11 @@ extension ProfileViewController: UITextFieldDelegate {
             stateLabel.text = "2글자 이상 10글자 미만으로 설정해주세요"
             stateLabel.textColor = .systemRed
             doneButton.isEnabled = false
-        } else if textfield.text != UserDefaultsManager.shared.nickname {
+        } else if textfield.text == UserDefaultsManager.shared.nickname{
+            stateLabel.text = "현재 닉네임과 다른 닉네임으로 설정해주세요"
+            stateLabel.textColor = .systemRed
+            doneButton.isEnabled = false
+        } else {
             stateLabel.text = "사용할 수 있는 닉네임이에요."
             stateLabel.textColor = .point
             doneButton.isEnabled = true

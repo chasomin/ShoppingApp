@@ -49,20 +49,27 @@ class SearchViewController: UIViewController {
         
         if UserDefaultsManager.shared.search.isEmpty {
             tableView.isHidden = true
+            recentView.isHidden = true
             emptyView.isHidden = false
         } else {
             emptyView.isHidden = true
+            recentView.isHidden = false
             tableView.isHidden = false
         }
     }
     
     @objc func deleteAllButtonTapped() {
+        recentView.isHidden = true
         UserDefaultsManager.shared.search.removeAll()
         search = []
     }
     @objc func deleteButtonTapped(sender: UIButton) {
         UserDefaultsManager.shared.search.remove(at: sender.tag)
         search.remove(at: sender.tag)
+        if UserDefaultsManager.shared.search.isEmpty {
+            recentView.isHidden = true
+        }
+
         
     }
 
@@ -129,7 +136,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         let vc = sb.instantiateViewController(withIdentifier: SearchResultViewController.id) as! SearchResultViewController
         
         vc.navigationItem.title = search[indexPath.row]
-//            
+            
             manager.callRequest(text: search[indexPath.row], start: 1) { shopping in
                 vc.data = shopping
             }
@@ -143,6 +150,8 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
 extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
+        recentView.isHidden = false
+
         // 콜렉션뷰로 이동
         let sb = UIStoryboard(name: "Search", bundle: nil)
         

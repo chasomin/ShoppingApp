@@ -21,6 +21,8 @@ extension UIButton {
             self.layer.cornerRadius = self.frame.width / 2
         }
         self.clipsToBounds = true
+        self.layer.borderColor = UIColor.clear.cgColor
+
     }
     
     func circleBorder() {

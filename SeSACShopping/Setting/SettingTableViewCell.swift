@@ -14,7 +14,6 @@ class SettingTableViewCell: UITableViewCell {
         super.awakeFromNib()
         
         selectionStyle = .none
-        setBackgroundColor()
         label.setLabelColor()
     }
 

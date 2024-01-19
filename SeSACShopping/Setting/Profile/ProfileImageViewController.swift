@@ -10,7 +10,7 @@ import UIKit
 class ProfileImageViewController: UIViewController {
     let imageList: [String] = ["profile1", "profile2", "profile3", "profile4", "profile5", "profile6", "profile7", "profile8", "profile9", "profile10", "profile11","profile12","profile13","profile14"]
     
-    var image = ""  // 이전 뷰에서 받아온 이미지
+//    var image = ""  // 이전 뷰에서 받아온 이미지
     @IBOutlet var imageView: UIImageView!
     
     @IBOutlet var collectionView: UICollectionView!
@@ -25,6 +25,7 @@ class ProfileImageViewController: UIViewController {
         
         let xib = UINib(nibName: ProfileImageCollectionViewCell.id, bundle: nil)
         collectionView.register(xib, forCellWithReuseIdentifier: ProfileImageCollectionViewCell.id)
+        print(UserDefaultsManager.shared.image)
 
     }
     
@@ -37,7 +38,7 @@ class ProfileImageViewController: UIViewController {
 extension ProfileImageViewController {
     func setUI() {
         imageView.circleBorder()
-        imageView.image = UIImage(named: image)
+        imageView.image = UIImage(named: UserDefaultsManager.shared.image)
     }
     
     func setCollectionView() {
@@ -67,19 +68,27 @@ extension ProfileImageViewController: UICollectionViewDelegate, UICollectionView
         let image = UIImage(named: imageList[indexPath.item])?.withRenderingMode(.alwaysOriginal)
         cell.imageButton.setImage(image, for: .normal)
         
-        cell.imageButton.tag = indexPath.item
-        cell.imageButton.circle()
+        cell.imageButton.tag = indexPath.item + 1
+        
+        if UserDefaultsManager.shared.image == "profile\(cell.imageButton.tag)" {
+            cell.imageButton.circleBorder()
+        } else {
+            cell.imageButton.circle()
+        }
+
+            
         cell.imageButton.addTarget(self, action: #selector(imageButtonTapped), for: .touchUpInside)
         
         return cell
     }
+    
+    
     // FIXME: 유저 이미지 버튼 클릭시 뷰에 반영하기
     @objc func imageButtonTapped(sender: UIButton) {
-        sender.circleBorder()
+        UserDefaultsManager.shared.image = "profile\(sender.tag)"
         collectionView.reloadData()
+        imageView.image = UIImage(named: UserDefaultsManager.shared.image)
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-    }
+
 }

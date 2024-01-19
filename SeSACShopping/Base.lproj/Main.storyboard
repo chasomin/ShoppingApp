@@ -60,30 +60,32 @@
                                 <rect key="frame" x="0.0" y="219" width="393" height="550"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="jrT-fu-7fZ">
-                                        <rect key="frame" x="0.0" y="64.999999999999972" width="393" height="420.33333333333326"/>
+                                        <rect key="frame" x="0.0" y="50" width="393" height="350"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="USR-AM-dmK">
-                                                <rect key="frame" x="0.0" y="0.0" width="393" height="400"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="400" id="0jU-1m-1kK"/>
-                                                </constraints>
+                                                <rect key="frame" x="0.0" y="0.0" width="393" height="330"/>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WfF-yJ-NQ0">
-                                                <rect key="frame" x="0.0" y="400" width="393" height="20.333333333333314"/>
+                                                <rect key="frame" x="0.0" y="330" width="393" height="20"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="20" id="TbX-eH-pXZ"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="350" id="suL-8a-UBe"/>
+                                        </constraints>
                                     </stackView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="jrT-fu-7fZ" secondAttribute="bottom" constant="50" id="Aj2-s6-5uD"/>
+                                    <constraint firstAttribute="bottom" secondItem="jrT-fu-7fZ" secondAttribute="bottom" constant="150" id="Aj2-s6-5uD"/>
                                     <constraint firstAttribute="trailing" secondItem="jrT-fu-7fZ" secondAttribute="trailing" id="BS3-zK-a7T"/>
                                     <constraint firstItem="jrT-fu-7fZ" firstAttribute="leading" secondItem="65w-99-8iu" secondAttribute="leading" id="GB7-Ur-Dvo"/>
                                     <constraint firstItem="jrT-fu-7fZ" firstAttribute="top" relation="greaterThanOrEqual" secondItem="65w-99-8iu" secondAttribute="top" constant="50" id="g2W-w3-S4w"/>
-                                    <constraint firstItem="jrT-fu-7fZ" firstAttribute="centerY" secondItem="65w-99-8iu" secondAttribute="centerY" id="qOh-v5-Vqe"/>
                                     <constraint firstItem="jrT-fu-7fZ" firstAttribute="centerX" secondItem="65w-99-8iu" secondAttribute="centerX" id="zjp-5z-WEe"/>
                                 </constraints>
                             </view>

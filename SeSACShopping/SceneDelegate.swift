@@ -16,10 +16,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         
         //FIXME: 지울 코드
-        UserDefaultsManager.shared.userState = false
+//        UserDefaultsManager.shared.userState = false
         
         print(UserDefaultsManager.shared.userState)
-        if UserDefaultsManager.shared.userState == false {
+        print(UserDefaultsManager.shared.nickname)
+
+        if UserDefaultsManager.shared.userState == false || UserDefaultsManager.shared.nickname == "" {
             
             guard let scene = (scene as? UIWindowScene) else { return }
             
@@ -28,7 +30,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let sb = UIStoryboard(name: "Onboarding", bundle: nil)
             let vc = sb.instantiateViewController(withIdentifier: OnboardingViewController.id) as! OnboardingViewController
             
-            window?.rootViewController = vc
+             let nav = UINavigationController(rootViewController: vc)
+
+            window?.rootViewController = nav
             
             window?.makeKeyAndVisible()
         } else {

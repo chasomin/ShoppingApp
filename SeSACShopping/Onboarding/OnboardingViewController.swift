@@ -15,6 +15,7 @@ class OnboardingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.setBackgroundColor()
         
         titleImageView.image = UIImage(named: "sesacShopping")
         titleImageView.contentMode = .scaleAspectFit
@@ -27,21 +28,25 @@ class OnboardingViewController: UIViewController {
         startButton.addTarget(self, action: #selector(startButtonTapped), for: .touchUpInside)
 
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        UserDefaultsManager.shared.image = ""
+    }
 
     @objc func startButtonTapped() {
-        UserDefaultsManager.shared.userState = true
-        
-        let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
-        
-        let sceneDelegate = windowScene?.delegate as? SceneDelegate
         
         let sb = UIStoryboard(name: "Profile", bundle: nil)
         let vc = sb.instantiateViewController(withIdentifier: ProfileViewController.id) as! ProfileViewController
-        let nav = UINavigationController(rootViewController: vc)
+//        let nav = UINavigationController(rootViewController: vc)
 
         vc.navigationItem.title = "프로필 설정"
-        sceneDelegate?.window?.rootViewController = nav
-        sceneDelegate?.window?.makeKeyAndVisible()
+        
+//        nav.pushViewController(nav, animated: true)
+        navigationController?.pushViewController(vc, animated: true)
+
+
     }
 
 

@@ -29,23 +29,38 @@ class ProfileTableViewCell: UITableViewCell {
 extension ProfileTableViewCell {
     
     func setUI() {
-        setBackgroundColor()
+//        setBackgroundColor()
         
+//        backgroundColor = .darkGray
         userImageView.circleBorder()
         
         userNicknameLabel.font = .largeBold
         userNicknameLabel.setLabelColor()
+        userNicknameLabel.numberOfLines = 1
         
         userLikeLabel.font = .regularBold
         userLikeLabel.setLabelColor()
+        userLikeLabel.text = UserDefaultsManager.shared.likeLabel
+        userLikeLabel.numberOfLines = 1
 
         selectionStyle = .none
-    }
-    
-    func configureCell() {
+        
         userImageView.image = UIImage(named: UserDefaultsManager.shared.image)
         userNicknameLabel.text = UserDefaultsManager.shared.nickname
-        userLikeLabel.text = UserDefaultsManager.shared.likeLabel
+        
+        let fullText = userLikeLabel.text ?? ""
+        let attributedString = NSMutableAttributedString(string: fullText)
+        
+        let range = (fullText as NSString).range(of: "\(UserDefaultsManager.shared.like.count)개의 상품")
+        
+        attributedString.addAttribute(.foregroundColor, value: UIColor.point, range: range)
+        userLikeLabel.attributedText = attributedString
+
+
         
     }
+    
+//    func configureCell() {
+//        
+//    }
 }
