@@ -15,4 +15,20 @@ extension UIButton {
         self.tintColor = .text
         self.titleLabel?.font = .largeBold
     }
+    
+    func circle() {
+        DispatchQueue.main.async {
+            self.layer.cornerRadius = self.frame.width / 2
+        }
+        self.clipsToBounds = true
+    }
+    
+    func circleBorder() {
+        DispatchQueue.main.async {
+            self.layer.cornerRadius = self.frame.width / 2
+        }
+        self.clipsToBounds = true
+        self.layer.borderColor = UIColor.point.cgColor
+        self.layer.borderWidth = 5
+    }
 }

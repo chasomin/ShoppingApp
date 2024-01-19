@@ -71,9 +71,9 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
             let sb = UIStoryboard(name: "Profile", bundle: nil)
             
             let vc = sb.instantiateViewController(withIdentifier: ProfileViewController.id) as! ProfileViewController
-            
-            vc.userImageView.image = UIImage(named: UserDefaultsManager.shared.image)
-            vc.textfield.text = UserDefaultsManager.shared.nickname
+           // FIXME: 나중에 유저디폴트에 값 넣으면 주석 풀기
+//            vc.userImageView.image = UIImage(named: UserDefaultsManager.shared.image)
+//            vc.textfield.text = UserDefaultsManager.shared.nickname
             
             vc.navigationItem.title = "프로필 수정"
             

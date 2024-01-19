@@ -16,6 +16,9 @@ class ProfileViewController: UIViewController {
     @IBOutlet var doneButton: UIButton!
     @IBOutlet var lineView: UIView!
     
+    
+    let num = Int.random(in: 1...14)
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -27,7 +30,11 @@ class ProfileViewController: UIViewController {
     
     @IBAction func userImageViewTapped(_ sender: UITapGestureRecognizer) {
         
+        let vc = storyboard?.instantiateViewController(withIdentifier: ProfileImageViewController.id) as! ProfileImageViewController
+        vc.navigationItem.title = self.navigationItem.title
+        vc.image = "profile\(num)"
         
+        navigationController?.pushViewController(vc, animated: true)
     }
     
 
@@ -38,6 +45,9 @@ extension ProfileViewController {
         view.setBackgroundColor()
         
         userImageView.circleBorder()
+        userImageView.isUserInteractionEnabled = true
+        
+        userImageView.image = UIImage(named: "profile\(num)")
         
         editImageView.image = UIImage(named: "camera.fill")
         editImageView.tintColor = .white

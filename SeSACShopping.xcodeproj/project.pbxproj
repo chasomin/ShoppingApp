@@ -42,6 +42,9 @@
 		79939F402B5A4F8800728E64 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79939F3F2B5A4F8800728E64 /* ProfileViewController.swift */; };
 		79939F422B5A50CE00728E64 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79939F412B5A50CE00728E64 /* UIImageView+Extension.swift */; };
 		79939F442B5A519000728E64 /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79939F432B5A519000728E64 /* UIButton+Extension.swift */; };
+		79939F462B5A676000728E64 /* ProfileImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79939F452B5A676000728E64 /* ProfileImageViewController.swift */; };
+		79939F492B5A6C8000728E64 /* ProfileImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79939F472B5A6C8000728E64 /* ProfileImageCollectionViewCell.swift */; };
+		79939F4A2B5A6C8000728E64 /* ProfileImageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79939F482B5A6C8000728E64 /* ProfileImageCollectionViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -80,6 +83,9 @@
 		79939F3F2B5A4F8800728E64 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		79939F412B5A50CE00728E64 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		79939F432B5A519000728E64 /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
+		79939F452B5A676000728E64 /* ProfileImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageViewController.swift; sourceTree = "<group>"; };
+		79939F472B5A6C8000728E64 /* ProfileImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		79939F482B5A6C8000728E64 /* ProfileImageCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileImageCollectionViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,6 +194,9 @@
 			children = (
 				79939F302B5A3EC600728E64 /* Profile.storyboard */,
 				79939F3F2B5A4F8800728E64 /* ProfileViewController.swift */,
+				79939F452B5A676000728E64 /* ProfileImageViewController.swift */,
+				79939F472B5A6C8000728E64 /* ProfileImageCollectionViewCell.swift */,
+				79939F482B5A6C8000728E64 /* ProfileImageCollectionViewCell.xib */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -263,6 +272,7 @@
 				79892C692B594EBC00904F52 /* SearchResultCollectionViewCell.xib in Resources */,
 				79892C372B59107800904F52 /* Assets.xcassets in Resources */,
 				79892C612B59290300904F52 /* SearchTableViewCell.xib in Resources */,
+				79939F4A2B5A6C8000728E64 /* ProfileImageCollectionViewCell.xib in Resources */,
 				79939F352B5A3F6600728E64 /* SettingTableViewCell.xib in Resources */,
 				79892C352B59107700904F52 /* Main.storyboard in Resources */,
 				79892C4F2B5915E400904F52 /* Search.storyboard in Resources */,
@@ -290,10 +300,12 @@
 				79939F422B5A50CE00728E64 /* UIImageView+Extension.swift in Sources */,
 				79892C2E2B59107700904F52 /* AppDelegate.swift in Sources */,
 				79892C442B59115D00904F52 /* APIKey.swift in Sources */,
+				79939F462B5A676000728E64 /* ProfileImageViewController.swift in Sources */,
 				79892C652B59472100904F52 /* SearchResultViewController.swift in Sources */,
 				79939F342B5A3F6600728E64 /* SettingTableViewCell.swift in Sources */,
 				79892C6E2B59708300904F52 /* ItemDetailViewController.swift in Sources */,
 				79939F3D2B5A49A400728E64 /* EnumImage.swift in Sources */,
+				79939F492B5A6C8000728E64 /* ProfileImageCollectionViewCell.swift in Sources */,
 				79892C5B2B59274F00904F52 /* UserDefaultsManager.swift in Sources */,
 				79892C472B59133F00904F52 /* UIFont+Extension.swift in Sources */,
 				79892C602B59290300904F52 /* SearchTableViewCell.swift in Sources */,

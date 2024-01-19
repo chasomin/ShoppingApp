@@ -14,7 +14,11 @@ extension UIImageView {
         }
         self.layer.borderColor = UIColor.point.cgColor
         self.layer.borderWidth = 5
-        
-        
+    }
+    
+    func circle() {
+        DispatchQueue.main.async {
+            self.layer.cornerRadius = self.frame.width / 2
+        }
     }
 }
