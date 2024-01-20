@@ -72,8 +72,16 @@ class SearchViewController: UIViewController {
 
         
     }
-
-
+    
+    
+    @IBAction func keyboardDismiss(_ sender: UIPanGestureRecognizer) {
+        view.endEditing(true)
+    }
+    
+    @IBAction func keyboardDimissTap(_ sender: UITapGestureRecognizer) {
+        view.endEditing(true)
+    }
+    
 
 }
 
@@ -139,11 +147,12 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         
         manager.callRequest(text: search[indexPath.row], start: 1, sort: Sort.accuracy.rawValue) { shopping in
             vc.data = shopping
-            vc.text = self.search[indexPath.row]
         }
+        vc.text = search[indexPath.row]
+        vc.start = 1
         
         
-            
+        
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }
@@ -158,16 +167,14 @@ extension SearchViewController: UISearchBarDelegate {
         
         let vc = sb.instantiateViewController(withIdentifier: SearchResultViewController.id) as! SearchResultViewController
         
-        vc.navigationItem.title = searchBar.text
+        vc.navigationItem.title = searchBar.text!
         
         manager.callRequest(text: searchBar.text!, start: 1, sort: Sort.accuracy.rawValue) { shopping in
-//            vc.total = shopping.total
             vc.data = shopping
-            vc.text = searchBar.text!
-
         }
         
-        
+        vc.text = searchBar.text!
+        vc.start = 1
         
         search.insert(searchBar.text!, at: 0)
         UserDefaultsManager.shared.search = search
@@ -177,5 +184,7 @@ extension SearchViewController: UISearchBarDelegate {
         self.navigationController?.pushViewController(vc, animated: true)
         
         searchBar.text = ""
+        view.endEditing(true)
     }
 }
+

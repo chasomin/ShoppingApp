@@ -14,10 +14,13 @@ class SearchResultViewController: UIViewController {
             collectionView.reloadData()
             let number = data.total.formatted()
             totalLabel.text = "\(number) 개의 검색 결과"
+            start = 1
+
         }
     }
     let manager = APIManager()
     var text = ""
+    var start = 1
 
     @IBOutlet var totalLabel: UILabel!
     
@@ -35,7 +38,11 @@ class SearchResultViewController: UIViewController {
         
 
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        collectionView.reloadData() // 좋아요 버튼 동기화
+
+    }
 
 
 }
@@ -66,6 +73,12 @@ extension SearchResultViewController {
         dateButton.addTarget(self, action: #selector(dateButtonTapped), for: .touchUpInside)
         highPriceButton.addTarget(self, action: #selector(highPriceButtonTapped), for: .touchUpInside)
         lowPriceButton.addTarget(self, action: #selector(lowPriceButtonTapped), for: .touchUpInside)
+        
+        accuracyButton.isSelected = true
+        dateButton.isSelected = false
+        highPriceButton.isSelected = false
+        lowPriceButton.isSelected = false
+
 
     }
     
@@ -80,10 +93,12 @@ extension SearchResultViewController {
     func designActiveButton(_ button: UIButton, active: Bool) {
         if active {
             button.backgroundColor = .white
-            button.tintColor = .black
+            button.setTitleColor(.black, for: .normal)
+            button.tintColor = .clear
         } else {
             button.backgroundColor = .black
-            button.tintColor = .white
+            button.setTitleColor(.white, for: .normal)
+            button.tintColor = .clear
         }
     }
     
@@ -93,6 +108,7 @@ extension SearchResultViewController {
         
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.prefetchDataSource = self
         
         let spacing: CGFloat = 10
         let width = (UIScreen.main.bounds.width - (spacing * 3)) / 2
@@ -116,9 +132,17 @@ extension SearchResultViewController {
         designActiveButton(highPriceButton, active: false)
         designActiveButton(lowPriceButton, active: false)
         
-        manager.callRequest(text: text, start: 1, sort: Sort.accuracy.rawValue) { shopping in
+        accuracyButton.isSelected = true
+        dateButton.isSelected = false
+        highPriceButton.isSelected = false
+        lowPriceButton.isSelected = false
+
+        
+        manager.callRequest(text: text, start: start, sort: Sort.accuracy.rawValue) { shopping in
             self.data = shopping
         }
+        
+        self.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
     }
     
     @objc func dateButtonTapped() {
@@ -127,10 +151,17 @@ extension SearchResultViewController {
         designActiveButton(highPriceButton, active: false)
         designActiveButton(lowPriceButton, active: false)
         
-        manager.callRequest(text: text, start: 1, sort: Sort.date.rawValue) { shopping in
+        accuracyButton.isSelected = false
+        dateButton.isSelected = true
+        highPriceButton.isSelected = false
+        lowPriceButton.isSelected = false
+
+        
+        manager.callRequest(text: text, start: start, sort: Sort.date.rawValue) { shopping in
             self.data = shopping
         }
         
+        self.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
 
     }
     @objc func highPriceButtonTapped() {
@@ -139,11 +170,17 @@ extension SearchResultViewController {
         designActiveButton(highPriceButton, active: true)
         designActiveButton(lowPriceButton, active: false)
         
-        manager.callRequest(text: text, start: 1, sort: Sort.highPrice.rawValue) { shopping in
+        accuracyButton.isSelected = false
+        dateButton.isSelected = false
+        highPriceButton.isSelected = true
+        lowPriceButton.isSelected = false
+
+        
+        manager.callRequest(text: text, start: start, sort: Sort.highPrice.rawValue) { shopping in
             self.data = shopping
-            
         }
         
+        self.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
             
     }
     
@@ -154,11 +191,16 @@ extension SearchResultViewController {
         designActiveButton(highPriceButton, active: false)
         designActiveButton(lowPriceButton, active: true)
         
-        manager.callRequest(text: text, start: 1, sort: Sort.lowPrice.rawValue) { shopping in
-            
+        accuracyButton.isSelected = false
+        dateButton.isSelected = false
+        highPriceButton.isSelected = false
+        lowPriceButton.isSelected = true
+
+        manager.callRequest(text: text, start: start, sort: Sort.lowPrice.rawValue) { shopping in
             self.data = shopping
         }
         
+        self.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
         
         
     }
@@ -189,7 +231,6 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
         } else {
             cell.heartButton.heartButton()
         }
-        
 
         cell.priceLabel.text = Int(data.items[indexPath.item].lprice)?.formatted()
 
@@ -224,4 +265,42 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
         print(UserDefaultsManager.shared.like.count)
         collectionView.reloadData()
     }
+}
+
+
+
+extension SearchResultViewController: UICollectionViewDataSourcePrefetching {
+    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+        print(#function, indexPaths)
+        
+        for item in indexPaths {
+            if data.items.count - 7 == item.row && data.items.count != data.total {
+                start += 30
+                if accuracyButton.isSelected {
+                    manager.callRequest(text: text, start: start, sort: Sort.accuracy.rawValue) { shopping in
+                        self.data.items.append(contentsOf: shopping.items)
+                    }
+                } else if dateButton.isSelected {
+                    manager.callRequest(text: text, start: start, sort: Sort.date.rawValue) { shopping in
+                        self.data.items.append(contentsOf: shopping.items)
+                    }
+                } else if highPriceButton.isSelected{
+                    manager.callRequest(text: text, start: start, sort: Sort.highPrice.rawValue) { shopping in
+                        self.data.items.append(contentsOf: shopping.items)
+                    }
+                } else if lowPriceButton.isSelected {
+                    manager.callRequest(text: text, start: start, sort: Sort.lowPrice.rawValue) { shopping in
+                        self.data.items.append(contentsOf: shopping.items)
+                    }
+                }
+            }
+                
+            
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cancelPrefetchingForItemsAt indexPaths: [IndexPath]) {
+        print(#function, indexPaths)
+    }
+    // 취소 기능: 직접 취소하는 기능을 구현해주어야 동작함!
 }

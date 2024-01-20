@@ -8,7 +8,7 @@
 import Foundation
 
 struct Shopping: Codable {
-    let total: Int
+    var total: Int
     let start: Int
     let display: Int
     var items: [Item]
