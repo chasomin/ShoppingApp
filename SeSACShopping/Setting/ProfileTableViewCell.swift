@@ -38,16 +38,24 @@ extension ProfileTableViewCell {
         userNicknameLabel.setLabelColor()
         userNicknameLabel.numberOfLines = 1
         
-        userLikeLabel.font = .regularBold
-        userLikeLabel.setLabelColor()
-        userLikeLabel.text = UserDefaultsManager.shared.likeLabel
-        userLikeLabel.numberOfLines = 1
+        setLikeButton()
 
         selectionStyle = .none
         
         userImageView.image = UIImage(named: UserDefaultsManager.shared.image)
         userNicknameLabel.text = UserDefaultsManager.shared.nickname
         
+        
+
+
+        
+    }
+    
+    func setLikeButton() {
+        userLikeLabel.font = .regularBold
+        userLikeLabel.setLabelColor()
+        userLikeLabel.text = UserDefaultsManager.shared.likeLabel
+        userLikeLabel.numberOfLines = 1
         let fullText = userLikeLabel.text ?? ""
         let attributedString = NSMutableAttributedString(string: fullText)
         
@@ -55,12 +63,5 @@ extension ProfileTableViewCell {
         
         attributedString.addAttribute(.foregroundColor, value: UIColor.point, range: range)
         userLikeLabel.attributedText = attributedString
-
-
-        
     }
-    
-//    func configureCell() {
-//        
-//    }
 }

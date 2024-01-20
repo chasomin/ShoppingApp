@@ -26,10 +26,7 @@ class SearchResultViewController: UIViewController {
 
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
 
-    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -58,6 +55,7 @@ extension SearchResultViewController {
         
     }
     
+    // 필터링 버튼
     func designButton(_ button: UIButton, active: Bool, title: String) {
         if active {
             button.backgroundColor = .white
@@ -112,8 +110,14 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
         let resultTitle = filterTitle.replacingOccurrences(of: "</b>", with: "")
         cell.titleLabel.text = resultTitle
         
+        cell.heartButton.tag = indexPath.row
+        cell.heartButton.addTarget(self, action: #selector(heartButtonTapped(sender:)), for: .touchUpInside)
         
-        
+        if UserDefaultsManager.shared.like.contains(data.items[indexPath.row].productId) {
+            cell.heartButton.heartFillButton()
+        } else {
+            cell.heartButton.heartButton()
+        }
         
 
         cell.priceLabel.text = Int(data.items[indexPath.item].lprice)?.formatted()
@@ -133,8 +137,22 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
         let resultTitle = filterTitle.replacingOccurrences(of: "</b>", with: "")
 
         vc.navigationItem.title = resultTitle
+        vc.productId = data.items[indexPath.item].productId
         
         navigationController?.pushViewController(vc, animated: true)
         
+    }
+    
+    @objc func heartButtonTapped(sender: UIButton) {
+        print("====")
+        if UserDefaultsManager.shared.like.contains(data.items[sender.tag].productId) {
+            guard let index = UserDefaultsManager.shared.like.firstIndex(of: data.items[sender.tag].productId) else { return }
+            UserDefaultsManager.shared.like.remove(at: index)
+        } else {
+            UserDefaultsManager.shared.like.append(data.items[sender.tag].productId)
+        }
+        
+        print(UserDefaultsManager.shared.like.count)
+        collectionView.reloadData()
     }
 }

@@ -8,11 +8,18 @@
 import Foundation
 import Alamofire
 
+enum Sort: String{
+    case date = "date"
+    case dsc = "dsc" // 가격 높은 순
+    case asc = "asc" // 저렴한 순
+}
+
 struct APIManager {
+    var sort: String = Sort.date.rawValue
     
     func callRequest(text: String, start: Int, completionHandler: @escaping (Shopping) -> ()) {
         let query = text.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
-        let url = "https://openapi.naver.com/v1/search/shop.json?query=\(query)&display=30&start=\(start)"
+        let url = "https://openapi.naver.com/v1/search/shop.json?query=\(query)&display=30&start=\(start)&sort=\(sort)"
         let headers: HTTPHeaders = ["X-Naver-Client-Id":APIKey.clientID,
                                    "X-Naver-Client-Secret":APIKey.clientSecret]
         
@@ -29,4 +36,5 @@ struct APIManager {
                 }
             }
     }
+
 }

@@ -33,4 +33,20 @@ extension UIButton {
         self.layer.borderColor = UIColor.point.cgColor
         self.layer.borderWidth = 5
     }
+    
+    func heartButton() {
+        circle()
+        self.setTitle("", for: .normal)
+        self.setImage(UIImage(systemName: Image.heart), for: .normal)
+        self.backgroundColor = .white
+        self.tintColor = .black
+    }
+    
+    func heartFillButton() {
+        circle()
+        self.setTitle("", for: .normal)
+        self.setImage(UIImage(systemName: Image.heartFill), for: .normal)
+        self.backgroundColor = .white
+        self.tintColor = .black
+    }
 }

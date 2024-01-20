@@ -36,8 +36,13 @@ class SettingViewController: UIViewController {
         let xibSetting = UINib(nibName: SettingTableViewCell.id, bundle: nil)
         tableView.register(xibSetting, forCellReuseIdentifier: SettingTableViewCell.id)
         setAlert()
+        print(#function)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+    }
 
 
 }
@@ -90,7 +95,8 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTableViewCell.id, for: indexPath) as! ProfileTableViewCell
             
-//            cell.configureCell()
+            cell.setLikeButton()
+
             
             return cell
         } else {
