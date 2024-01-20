@@ -136,14 +136,15 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         let vc = sb.instantiateViewController(withIdentifier: SearchResultViewController.id) as! SearchResultViewController
         
         vc.navigationItem.title = search[indexPath.row]
-            
-            manager.callRequest(text: search[indexPath.row], start: 1) { shopping in
-                vc.data = shopping
-            }
+        
+        manager.callRequest(text: search[indexPath.row], start: 1, sort: Sort.accuracy.rawValue) { shopping in
+            vc.data = shopping
+            vc.text = self.search[indexPath.row]
+        }
         
         
             
-            self.navigationController?.pushViewController(vc, animated: true)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 
@@ -159,9 +160,10 @@ extension SearchViewController: UISearchBarDelegate {
         
         vc.navigationItem.title = searchBar.text
         
-        manager.callRequest(text: searchBar.text!, start: 1) { shopping in
+        manager.callRequest(text: searchBar.text!, start: 1, sort: Sort.accuracy.rawValue) { shopping in
 //            vc.total = shopping.total
             vc.data = shopping
+            vc.text = searchBar.text!
 
         }
         
@@ -172,7 +174,7 @@ extension SearchViewController: UISearchBarDelegate {
         print(UserDefaultsManager.shared.search)
         
             
-            self.navigationController?.pushViewController(vc, animated: true)
+        self.navigationController?.pushViewController(vc, animated: true)
         
         searchBar.text = ""
     }

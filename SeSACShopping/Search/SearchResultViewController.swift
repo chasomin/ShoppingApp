@@ -9,7 +9,15 @@ import UIKit
 import Kingfisher
 
 class SearchResultViewController: UIViewController {
-    var data = Shopping(total: 0, start: 0, display: 0, items: [])
+    var data = Shopping(total: 0, start: 0, display: 0, items: []) {
+        didSet {
+            collectionView.reloadData()
+            let number = data.total.formatted()
+            totalLabel.text = "\(number) 개의 검색 결과"
+        }
+    }
+    let manager = APIManager()
+    var text = ""
 
     @IBOutlet var totalLabel: UILabel!
     
@@ -22,19 +30,12 @@ class SearchResultViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
+        setButton()
         setCollectionView()
+        
 
     }
     
-
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        setUI()
-        collectionView.reloadData()
-        print(data.total)
-    }
-
 
 
 }
@@ -47,26 +48,43 @@ extension SearchResultViewController {
         let number = data.total.formatted()
         totalLabel.text = "\(number) 개의 검색 결과"
         
+    }
+    
+    func setButton() {
         // TODO: 버튼 타이틀 패딩..?
-        designButton(accuracyButton, active: true, title: "  정확도  ")
-        designButton(dateButton, active: false, title: "  날짜순  ")
-        designButton(highPriceButton, active: false, title: "  가격높은순  ")
-        designButton(lowPriceButton, active: false, title: "  가격낮은순  ")
+        designButton(accuracyButton, title: "  정확도  ")
+        designButton(dateButton, title: "  날짜순  ")
+        designButton(highPriceButton, title: "  가격높은순  ")
+        designButton(lowPriceButton, title: "  가격낮은순  ")
         
+        designActiveButton(accuracyButton, active: true)
+        designActiveButton(dateButton, active: false)
+        designActiveButton(highPriceButton, active: false)
+        designActiveButton(lowPriceButton, active: false)
+
+        accuracyButton.addTarget(self, action: #selector(accuracyButtonTapped), for: .touchUpInside)
+        dateButton.addTarget(self, action: #selector(dateButtonTapped), for: .touchUpInside)
+        highPriceButton.addTarget(self, action: #selector(highPriceButtonTapped), for: .touchUpInside)
+        lowPriceButton.addTarget(self, action: #selector(lowPriceButtonTapped), for: .touchUpInside)
+
     }
     
     // 필터링 버튼
-    func designButton(_ button: UIButton, active: Bool, title: String) {
-        if active {
-            button.backgroundColor = .white
-            button.tintColor = .black
-        } else {
-            button.tintColor = .white
-        }
+    func designButton(_ button: UIButton, title: String) {
         button.layer.cornerRadius = 10
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor.white.cgColor
         button.setTitle(title, for: .normal)
+    }
+    
+    func designActiveButton(_ button: UIButton, active: Bool) {
+        if active {
+            button.backgroundColor = .white
+            button.tintColor = .black
+        } else {
+            button.backgroundColor = .black
+            button.tintColor = .white
+        }
     }
     
     func setCollectionView() {
@@ -88,14 +106,67 @@ extension SearchResultViewController {
         collectionView.collectionViewLayout = layout
         
     }
+}
+
+
+extension SearchResultViewController {
+    @objc func accuracyButtonTapped() {
+        designActiveButton(accuracyButton, active: true)
+        designActiveButton(dateButton, active: false)
+        designActiveButton(highPriceButton, active: false)
+        designActiveButton(lowPriceButton, active: false)
+        
+        manager.callRequest(text: text, start: 1, sort: Sort.accuracy.rawValue) { shopping in
+            self.data = shopping
+        }
+    }
+    
+    @objc func dateButtonTapped() {
+        designActiveButton(accuracyButton, active: false)
+        designActiveButton(dateButton, active: true)
+        designActiveButton(highPriceButton, active: false)
+        designActiveButton(lowPriceButton, active: false)
+        
+        manager.callRequest(text: text, start: 1, sort: Sort.date.rawValue) { shopping in
+            self.data = shopping
+        }
+        
+
+    }
+    @objc func highPriceButtonTapped() {
+        designActiveButton(accuracyButton, active: false)
+        designActiveButton(dateButton, active: false)
+        designActiveButton(highPriceButton, active: true)
+        designActiveButton(lowPriceButton, active: false)
+        
+        manager.callRequest(text: text, start: 1, sort: Sort.highPrice.rawValue) { shopping in
+            self.data = shopping
+            
+        }
+        
+            
+    }
     
     
+    @objc func lowPriceButtonTapped() {
+        designActiveButton(accuracyButton, active: false)
+        designActiveButton(dateButton, active: false)
+        designActiveButton(highPriceButton, active: false)
+        designActiveButton(lowPriceButton, active: true)
+        
+        manager.callRequest(text: text, start: 1, sort: Sort.lowPrice.rawValue) { shopping in
+            
+            self.data = shopping
+        }
+        
+        
+        
+    }
 }
 
 
 extension SearchResultViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print(data.items.count)
         return data.items.count
     }
     
@@ -122,7 +193,6 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
 
         cell.priceLabel.text = Int(data.items[indexPath.item].lprice)?.formatted()
 
-
         return cell
     }
     
@@ -144,7 +214,6 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
     }
     
     @objc func heartButtonTapped(sender: UIButton) {
-        print("====")
         if UserDefaultsManager.shared.like.contains(data.items[sender.tag].productId) {
             guard let index = UserDefaultsManager.shared.like.firstIndex(of: data.items[sender.tag].productId) else { return }
             UserDefaultsManager.shared.like.remove(at: index)
