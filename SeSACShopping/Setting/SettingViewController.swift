@@ -18,17 +18,10 @@ class SettingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.title = "설정"
-        self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.text]
-
-        view.setBackgroundColor()
-        tableView.backgroundColor = .clear
-        tableView.sectionHeaderTopPadding = 0
-        tableView.sectionFooterHeight = 0
+        setUI()
         
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.rowHeight = UITableView.automaticDimension
         
         let xibProfile = UINib(nibName: ProfileTableViewCell.id, bundle: nil)
         tableView.register(xibProfile, forCellReuseIdentifier: ProfileTableViewCell.id)
@@ -36,7 +29,6 @@ class SettingViewController: UIViewController {
         let xibSetting = UINib(nibName: SettingTableViewCell.id, bundle: nil)
         tableView.register(xibSetting, forCellReuseIdentifier: SettingTableViewCell.id)
         setAlert()
-        print(#function)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -48,6 +40,19 @@ class SettingViewController: UIViewController {
 }
 
 extension SettingViewController {
+    
+    func setUI() {
+        navigationItem.title = "설정"
+        self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.text]
+
+        view.setBackgroundColor()
+        tableView.backgroundColor = .clear
+        tableView.sectionHeaderTopPadding = 0
+        tableView.sectionFooterHeight = 0
+        tableView.rowHeight = UITableView.automaticDimension
+
+    }
+    
     func setAlert() {
         let cancelButton = UIAlertAction(title: "취소", style: .cancel)
         
@@ -94,6 +99,8 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTableViewCell.id, for: indexPath) as! ProfileTableViewCell
+            
+            cell.userImageView.image = UIImage(named: UserDefaultsManager.shared.image)
             
             cell.setLikeButton()
 

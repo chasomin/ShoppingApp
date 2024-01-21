@@ -51,15 +51,7 @@ class SearchViewController: UIViewController {
         let xib = UINib(nibName: SearchTableViewCell.id, bundle: nil)
         tableView.register(xib, forCellReuseIdentifier:  SearchTableViewCell.id)
         
-        if UserDefaultsManager.shared.search.isEmpty {
-            tableView.isHidden = true
-            recentView.isHidden = true
-            emptyView.isHidden = false
-        } else {
-            emptyView.isHidden = true
-            recentView.isHidden = false
-            tableView.isHidden = false
-        }
+        setHiddenView()
     }
     
     @objc func deleteAllButtonTapped() {
@@ -98,7 +90,6 @@ extension SearchViewController {
         recentView.setBackgroundColor()
         
         navigationItem.title = "\(UserDefaultsManager.shared.nickname)님의 새싹 쇼핑"
-        self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.text]
         
         tableView.rowHeight = UITableView.automaticDimension
         
@@ -125,6 +116,18 @@ extension SearchViewController {
         emptyLabel.font = .largeBold
         emptyLabel.textAlignment = .center
         emptyLabel.setLabelColor()
+    }
+    
+    func setHiddenView() {
+        if UserDefaultsManager.shared.search.isEmpty {
+            tableView.isHidden = true
+            recentView.isHidden = true
+            emptyView.isHidden = false
+        } else {
+            emptyView.isHidden = true
+            recentView.isHidden = false
+            tableView.isHidden = false
+        }
     }
 }
 

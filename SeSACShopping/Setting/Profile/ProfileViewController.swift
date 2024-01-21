@@ -8,7 +8,7 @@
 import UIKit
 
 class ProfileViewController: UIViewController {
-
+    
     @IBOutlet var userImageView: UIImageView!
     @IBOutlet var editImageView: UIImageView!
     @IBOutlet var textfield: UITextField!
@@ -18,15 +18,16 @@ class ProfileViewController: UIViewController {
     
     
     let num = Int.random(in: 1...14)
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setUI()
         
         textfield.delegate = self
-
+        
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         userImageView.image = UIImage(named: UserDefaultsManager.shared.image)
@@ -37,22 +38,21 @@ class ProfileViewController: UIViewController {
         
         let vc = storyboard?.instantiateViewController(withIdentifier: ProfileImageViewController.id) as! ProfileImageViewController
         vc.navigationItem.title = self.navigationItem.title
-//        vc.image = "profile\(num)"
         
         navigationController?.pushViewController(vc, animated: true)
     }
     
-
+    
 }
 
 extension ProfileViewController {
     func setUI() {
         view.setBackgroundColor()
-
+        
         navigationController?.setNavigationBar()
         
         self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.text]
-
+        
         
         userImageView.circleBorder()
         userImageView.isUserInteractionEnabled = true
@@ -63,23 +63,16 @@ extension ProfileViewController {
         } else {
             userImageView.image = UIImage(named: UserDefaultsManager.shared.image)
         }
-        //FIXME: asset 이미지로 변경하기
+        
         editImageView.image = UIImage(named: "camera")
-//        editImageView.tintColor = .white
-//        editImageView.backgroundColor = .point
-//        DispatchQueue.main.async {
-//            self.editImageView.layer.cornerRadius = self.editImageView.frame.width / 2
-//        }
-//        editImageView.layer.borderColor = UIColor.white.cgColor
-//        editImageView.layer.borderWidth = 3
         
         
         textfield.text = UserDefaultsManager.shared.nickname
         textfield.borderStyle = .none
         textfield.clipsToBounds = true
-//        textfield.placeholder = "닉네임을 입력해주세요 :)"
-        textfield.attributedPlaceholder = NSAttributedString(string: "닉네임을 입력해주세요 :)", attributes: [NSAttributedString.Key.foregroundColor : UIColor.systemGray3])
-
+        textfield.placeholder = "닉네임을 입력해주세요 :)"
+        //        textfield.attributedPlaceholder = NSAttributedString(string: "닉네임을 입력해주세요 :)", attributes: [NSAttributedString.Key.foregroundColor : UIColor.systemGray3])
+        
         textfield.textColor = .text
         
         lineView.backgroundColor = .white
@@ -90,13 +83,7 @@ extension ProfileViewController {
         doneButton.setPointButton()
         doneButton.setTitle("완료", for: .normal)
         doneButton.addTarget(self, action: #selector(doneButtonTapped), for: .touchUpInside)
-//        if textfield.text == "" || textfield.text == UserDefaultsManager.shared.nickname {
         doneButton.isEnabled = false
-//        } else {
-//            doneButton.isEnabled = true
-//        }
-//        
-        
     }
     
     @objc func doneButtonTapped() {
@@ -104,8 +91,7 @@ extension ProfileViewController {
             
             UserDefaultsManager.shared.userState = true
             UserDefaultsManager.shared.nickname = textfield.text!
-//            UserDefaultsManager.shared.image = "profile\(num)"
-
+            
             let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
             
             let sceneDelegate = windowScene?.delegate as? SceneDelegate
@@ -115,12 +101,7 @@ extension ProfileViewController {
             
             sceneDelegate?.window?.rootViewController = vc
             sceneDelegate?.window?.makeKeyAndVisible()
-            
-            
-                    
-
-                    
-
+                        
         }
     }
 }

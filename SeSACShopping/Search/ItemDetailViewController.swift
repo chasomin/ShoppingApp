@@ -18,16 +18,10 @@ class ItemDetailViewController: UIViewController {
         super.viewDidLoad()
         setWebView()
 
-        
         setButton()
         
         navigationController?.setNavigationBar()
-        
     }
-    
-
-
-
 }
 
 extension ItemDetailViewController {

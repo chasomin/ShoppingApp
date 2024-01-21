@@ -39,11 +39,9 @@ class OnboardingViewController: UIViewController {
         
         let sb = UIStoryboard(name: "Profile", bundle: nil)
         let vc = sb.instantiateViewController(withIdentifier: ProfileViewController.id) as! ProfileViewController
-//        let nav = UINavigationController(rootViewController: vc)
 
         vc.navigationItem.title = "프로필 설정"
         
-//        nav.pushViewController(nav, animated: true)
         navigationController?.pushViewController(vc, animated: true)
 
 

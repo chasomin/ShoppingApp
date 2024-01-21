@@ -17,21 +17,12 @@ class ProfileTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         setUI()
-        
-        
     }
-    
-    
-
-
 }
 
 extension ProfileTableViewCell {
     
     func setUI() {
-//        setBackgroundColor()
-        
-//        backgroundColor = .darkGray
         userImageView.circleBorder()
         
         userNicknameLabel.font = .largeBold
@@ -43,12 +34,9 @@ extension ProfileTableViewCell {
         selectionStyle = .none
         
         userImageView.image = UIImage(named: UserDefaultsManager.shared.image)
+        
         userNicknameLabel.text = UserDefaultsManager.shared.nickname
-        
-        
-
-
-        
+                
     }
     
     func setLikeButton() {

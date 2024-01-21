@@ -17,9 +17,6 @@ class SearchTableViewCell: UITableViewCell {
         super.awakeFromNib()
         setUI()
     }
-
- 
-    
 }
 
 extension SearchTableViewCell {
@@ -39,12 +36,4 @@ extension SearchTableViewCell {
         deleteButton.tintColor = .gray
         
     }
-
-    func configureCell() {
-        
-    }
-    
-    //TODO: delelte버튼 눌렀을 때 tableview reload
-
-        
 }

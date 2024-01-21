@@ -42,14 +42,14 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eT4-WL-OUH">
-                                <rect key="frame" x="15" y="230" width="363" height="2"/>
+                                <rect key="frame" x="15" y="230" width="363" height="1"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="2" id="I2K-3w-TnZ"/>
+                                    <constraint firstAttribute="height" constant="1" id="I2K-3w-TnZ"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Owg-me-qFm">
-                                <rect key="frame" x="15" y="272" width="363" height="40"/>
+                                <rect key="frame" x="15" y="271" width="363" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="0Sh-tg-laf"/>
                                 </constraints>
@@ -57,7 +57,7 @@
                                 <buttonConfiguration key="configuration" style="plain" title="Button"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jtf-8N-yU9">
-                                <rect key="frame" x="15" y="237" width="363" height="20"/>
+                                <rect key="frame" x="15" y="236" width="363" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="Pio-6Q-y3X"/>
                                 </constraints>

@@ -16,7 +16,5 @@ class SettingTableViewCell: UITableViewCell {
         selectionStyle = .none
         label.setLabelColor()
     }
-
-
     
 }

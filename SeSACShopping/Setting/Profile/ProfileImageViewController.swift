@@ -10,7 +10,6 @@ import UIKit
 class ProfileImageViewController: UIViewController {
     let imageList: [String] = ["profile1", "profile2", "profile3", "profile4", "profile5", "profile6", "profile7", "profile8", "profile9", "profile10", "profile11","profile12","profile13","profile14"]
     
-//    var image = ""  // 이전 뷰에서 받아온 이미지
     @IBOutlet var imageView: UIImageView!
     
     @IBOutlet var collectionView: UICollectionView!
@@ -25,12 +24,7 @@ class ProfileImageViewController: UIViewController {
         
         let xib = UINib(nibName: ProfileImageCollectionViewCell.id, bundle: nil)
         collectionView.register(xib, forCellWithReuseIdentifier: ProfileImageCollectionViewCell.id)
-        print(UserDefaultsManager.shared.image)
-
     }
-    
-
-
 }
 
 
@@ -78,7 +72,6 @@ extension ProfileImageViewController: UICollectionViewDelegate, UICollectionView
         } else {
             cell.imageButton.circle()
         }
-
             
         cell.imageButton.addTarget(self, action: #selector(imageButtonTapped), for: .touchUpInside)
         
@@ -86,7 +79,6 @@ extension ProfileImageViewController: UICollectionViewDelegate, UICollectionView
     }
     
     
-    // FIXME: 유저 이미지 버튼 클릭시 뷰에 반영하기
     @objc func imageButtonTapped(sender: UIButton) {
         UserDefaultsManager.shared.image = "profile\(sender.tag)"
         collectionView.reloadData()

@@ -154,8 +154,8 @@
 				79939F3A2B5A497300728E64 /* UILabel+Extension.swift */,
 				79939F412B5A50CE00728E64 /* UIImageView+Extension.swift */,
 				79939F432B5A519000728E64 /* UIButton+Extension.swift */,
-				79939F3C2B5A49A400728E64 /* Enum.swift */,
 				79939F502B5CE9A600728E64 /* UINavigation+Extension.swift */,
+				79939F3C2B5A49A400728E64 /* Enum.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -487,6 +487,7 @@
 				DEVELOPMENT_TEAM = FQNUU3X32C;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SeSACShopping/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "새싹 쇼핑";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -520,6 +521,7 @@
 				DEVELOPMENT_TEAM = FQNUU3X32C;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SeSACShopping/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "새싹 쇼핑";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

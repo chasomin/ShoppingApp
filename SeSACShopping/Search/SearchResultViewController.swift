@@ -92,6 +92,7 @@ extension SearchResultViewController {
         button.setTitle(title, for: .normal)
     }
     
+    // 상태에 따른 필터링 버튼 디자인 차이
     func designActiveButton(_ button: UIButton, active: Bool) {
         if active {
             button.backgroundColor = .white
@@ -127,6 +128,7 @@ extension SearchResultViewController {
 }
 
 
+// 필터링 버튼들 클릭 시 수행 할 액션
 extension SearchResultViewController {
     @objc func accuracyButtonTapped() {
         designActiveButton(accuracyButton, active: true)
