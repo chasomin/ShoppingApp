@@ -9,7 +9,7 @@ import UIKit
 
 extension UINavigationController {
     func setNavigationBar() {
-        navigationBar.topItem?.title = ""
+        navigationBar.topItem?.backButtonTitle = ""
         navigationBar.tintColor = .white
     }
 }
