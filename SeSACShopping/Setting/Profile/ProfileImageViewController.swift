@@ -39,6 +39,9 @@ extension ProfileImageViewController {
     func setUI() {
         imageView.circleBorder()
         imageView.image = UIImage(named: UserDefaultsManager.shared.image)
+        
+        navigationController?.setNavigationBar()
+
     }
     
     func setCollectionView() {

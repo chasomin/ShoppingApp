@@ -50,6 +50,8 @@ class SearchResultViewController: UIViewController {
 
 extension SearchResultViewController {
     func setUI() {
+        navigationController?.setNavigationBar()
+        
         totalLabel.font = .regularBold
         totalLabel.textColor = .point
         let number = data.total.formatted()

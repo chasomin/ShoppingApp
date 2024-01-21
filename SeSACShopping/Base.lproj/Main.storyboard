@@ -115,7 +115,6 @@
                         </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="Gzc-5L-prn" appends="YES" id="3dO-fB-TbH"/>
-                            <outletCollection property="gestureRecognizers" destination="Pix-ZF-GQG" appends="YES" id="8vd-tf-ydC"/>
                         </connections>
                     </view>
                     <navigationItem key="navigationItem" id="kN1-f9-UWF"/>
@@ -133,14 +132,9 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <panGestureRecognizer minimumNumberOfTouches="1" id="Gzc-5L-prn">
                     <connections>
-                        <action selector="keyboardDismiss:" destination="BYZ-38-t0r" id="fA4-Ca-gPM"/>
+                        <action selector="keyboardDismiss:" destination="BYZ-38-t0r" id="i4t-8a-e1e"/>
                     </connections>
                 </panGestureRecognizer>
-                <tapGestureRecognizer id="Pix-ZF-GQG">
-                    <connections>
-                        <action selector="keyboardDimissTap:" destination="BYZ-38-t0r" id="v6G-bl-s4y"/>
-                    </connections>
-                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1900" y="-2.1126760563380285"/>
         </scene>

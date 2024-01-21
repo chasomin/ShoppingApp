@@ -48,6 +48,9 @@ class ProfileViewController: UIViewController {
 extension ProfileViewController {
     func setUI() {
         view.setBackgroundColor()
+
+        navigationController?.setNavigationBar()
+        
         self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.text]
 
         

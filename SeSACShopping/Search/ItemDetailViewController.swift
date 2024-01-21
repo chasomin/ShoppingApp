@@ -21,6 +21,7 @@ class ItemDetailViewController: UIViewController {
         
         setButton()
         
+        navigationController?.setNavigationBar()
         
     }
     

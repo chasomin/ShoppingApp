@@ -78,9 +78,10 @@ class SearchViewController: UIViewController {
         view.endEditing(true)
     }
     
-    @IBAction func keyboardDimissTap(_ sender: UITapGestureRecognizer) {
-        view.endEditing(true)
-    }
+//    @IBAction func keyboardDimissTap(_ sender: UITapGestureRecognizer) {
+//        view.endEditing(true)
+//    }
+    // 이거 넣으면 검색기록 터치 안됨 ㅜ
     
 
 }
