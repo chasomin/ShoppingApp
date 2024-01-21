@@ -18,10 +18,14 @@ class SearchViewController: UIViewController {
             if !search.isEmpty {
                 tableView.isHidden = false
                 emptyView.isHidden = true
+                recentView.isHidden = false
             } else {
                 tableView.isHidden = true
                 emptyView.isHidden = false
+                recentView.isHidden = true
+
             }
+            
         }
     }
 
@@ -160,31 +164,41 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        
-        recentView.isHidden = false
+        let text = searchBar.text!.lowercased().trimmingCharacters(in: .whitespaces)
 
         // 콜렉션뷰로 이동
         let sb = UIStoryboard(name: "Search", bundle: nil)
         
         let vc = sb.instantiateViewController(withIdentifier: SearchResultViewController.id) as! SearchResultViewController
         
-        vc.navigationItem.title = searchBar.text!
-        
-        manager.callRequest(text: searchBar.text!, start: 1, sort: Sort.accuracy.rawValue) { shopping in
-            vc.data = shopping
+        vc.navigationItem.title = text
+        vc.text = text
+        vc.start = 1
+
+        if text != "" {
+            manager.callRequest(text: text, start: 1, sort: Sort.accuracy.rawValue) { shopping in
+                vc.data = shopping
+            }
+            
+            
+            if !UserDefaultsManager.shared.search.contains(text){
+                search.insert(text, at: 0)
+                UserDefaultsManager.shared.search = search
+            } else if UserDefaultsManager.shared.search.contains(text){
+                guard let index = search.firstIndex(of: text) else {return}
+                search.remove(at: index)
+                search.insert(text, at: 0)
+                UserDefaultsManager.shared.search = search
+            }
+            
+            self.navigationController?.pushViewController(vc, animated: true)
+
         }
         
-        vc.text = searchBar.text!
-        vc.start = 1
-        
-        search.insert(searchBar.text!, at: 0)
-        UserDefaultsManager.shared.search = search
+        searchBar.text = ""
+
         print(UserDefaultsManager.shared.search)
         
-            
-        self.navigationController?.pushViewController(vc, animated: true)
-        
-        searchBar.text = ""
         view.endEditing(true)
     }
 }
