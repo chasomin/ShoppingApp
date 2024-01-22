@@ -29,13 +29,12 @@ extension SearchResultCollectionViewCell {
                 
         mallNameLabel.textColor = .gray
         mallNameLabel.font = .small
-        mallNameLabel.setLabelColor()
         
         titleLabel.font = .regular
         titleLabel.numberOfLines = 2
         titleLabel.setLabelColor()
         
         priceLabel.setLabelColor()
-        priceLabel.font = .regularBold
+        priceLabel.font = .largeBold
     }
 }

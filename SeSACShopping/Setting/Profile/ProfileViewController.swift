@@ -123,7 +123,7 @@ extension ProfileViewController: UITextFieldDelegate {
         }
         
         if isContainsSymbol {
-            stateLabel.text = "닉네임에 \(textfield.text!.last!) 는 포함할 수 없어요."
+            stateLabel.text = "닉네임에 @, #, $, % 는 포함할 수 없어요."
             stateLabel.textColor = .systemRed
             doneButton.isEnabled = false
         } else if isContainsNumber {

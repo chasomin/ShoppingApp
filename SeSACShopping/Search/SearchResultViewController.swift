@@ -117,7 +117,7 @@ extension SearchResultViewController {
         let width = (UIScreen.main.bounds.width - (spacing * 3)) / 2
         
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: width, height: width + 100)
+        layout.itemSize = CGSize(width: width, height: width + 70)
         layout.minimumLineSpacing = spacing
         layout.minimumInteritemSpacing = spacing
         layout.sectionInset = UIEdgeInsets(top: 0, left: spacing, bottom: 0, right: spacing)

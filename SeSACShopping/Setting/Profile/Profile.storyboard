@@ -53,11 +53,11 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="0Sh-tg-laf"/>
                                 </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jtf-8N-yU9">
-                                <rect key="frame" x="15" y="236" width="363" height="20"/>
+                                <rect key="frame" x="20" y="236" width="353" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="Pio-6Q-y3X"/>
                                 </constraints>
@@ -73,18 +73,18 @@
                             <constraint firstItem="S2h-f7-Xc5" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="6w4-BP-OQb"/>
                             <constraint firstItem="ruN-Yb-LB0" firstAttribute="bottom" secondItem="S2h-f7-Xc5" secondAttribute="bottom" id="87i-hP-E4e"/>
                             <constraint firstItem="TJG-zo-Btx" firstAttribute="top" secondItem="S2h-f7-Xc5" secondAttribute="bottom" constant="30" id="B9s-8p-V0Y"/>
-                            <constraint firstItem="Owg-me-qFm" firstAttribute="leading" secondItem="jtf-8N-yU9" secondAttribute="leading" id="Hg0-AE-6ey"/>
                             <constraint firstItem="eT4-WL-OUH" firstAttribute="top" secondItem="TJG-zo-Btx" secondAttribute="bottom" constant="7" id="IVm-U8-XGk"/>
-                            <constraint firstItem="jtf-8N-yU9" firstAttribute="trailing" secondItem="eT4-WL-OUH" secondAttribute="trailing" id="JJ2-4z-7Em"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="eT4-WL-OUH" secondAttribute="trailing" constant="15" id="Jy5-gN-9qD"/>
+                            <constraint firstItem="Owg-me-qFm" firstAttribute="leading" secondItem="eT4-WL-OUH" secondAttribute="leading" id="Pvd-0r-4b4"/>
                             <constraint firstItem="Owg-me-qFm" firstAttribute="top" secondItem="jtf-8N-yU9" secondAttribute="bottom" constant="15" id="VRA-Wu-a5g"/>
-                            <constraint firstItem="jtf-8N-yU9" firstAttribute="leading" secondItem="eT4-WL-OUH" secondAttribute="leading" id="bre-6Q-Io8"/>
+                            <constraint firstItem="Owg-me-qFm" firstAttribute="trailing" secondItem="eT4-WL-OUH" secondAttribute="trailing" id="alv-9l-Jc4"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="TJG-zo-Btx" secondAttribute="trailing" constant="20" id="gYS-p1-SCp"/>
-                            <constraint firstItem="Owg-me-qFm" firstAttribute="trailing" secondItem="jtf-8N-yU9" secondAttribute="trailing" id="lOX-hz-jB9"/>
+                            <constraint firstItem="jtf-8N-yU9" firstAttribute="trailing" secondItem="TJG-zo-Btx" secondAttribute="trailing" id="kXM-LD-0YK"/>
                             <constraint firstItem="S2h-f7-Xc5" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="20" id="pef-RI-OQW"/>
                             <constraint firstItem="ruN-Yb-LB0" firstAttribute="trailing" secondItem="S2h-f7-Xc5" secondAttribute="trailing" id="xXu-Sx-0er"/>
                             <constraint firstItem="eT4-WL-OUH" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="15" id="z0Z-j4-Cqp"/>
                             <constraint firstItem="TJG-zo-Btx" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="z3t-y0-0xa"/>
+                            <constraint firstItem="jtf-8N-yU9" firstAttribute="leading" secondItem="TJG-zo-Btx" secondAttribute="leading" id="zRw-S2-PQL"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Vqb-ZH-x8J"/>
