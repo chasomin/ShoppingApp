@@ -487,7 +487,7 @@
 				DEVELOPMENT_TEAM = FQNUU3X32C;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SeSACShopping/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "새싹 쇼핑";
+				INFOPLIST_KEY_CFBundleDisplayName = "차소민";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -521,7 +521,7 @@
 				DEVELOPMENT_TEAM = FQNUU3X32C;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SeSACShopping/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "새싹 쇼핑";
+				INFOPLIST_KEY_CFBundleDisplayName = "차소민";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
