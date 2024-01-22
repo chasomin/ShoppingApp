@@ -15,6 +15,15 @@ class SearchResultViewController: UIViewController {
             let number = data.total.formatted()
             totalLabel.text = "\(number) 개의 검색 결과"
             start = 1
+            if data.total == 0 {
+                collectionView.isHidden = true
+                emptyView.isHidden = false
+            } else {
+                collectionView.isHidden = false
+                emptyView.isHidden = true
+
+            }
+
 
         }
     }
@@ -30,6 +39,13 @@ class SearchResultViewController: UIViewController {
     @IBOutlet var lowPriceButton: UIButton!
     
     @IBOutlet var collectionView: UICollectionView!
+    
+    @IBOutlet var emptyView: UIView!
+    @IBOutlet var emptyImageView: UIImageView!
+    @IBOutlet var emptyLabel: UILabel!
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
@@ -57,6 +73,21 @@ extension SearchResultViewController {
         let number = data.total.formatted()
         totalLabel.text = "\(number) 개의 검색 결과"
         
+        emptyView.setBackgroundColor()
+        
+        emptyLabel.text = "검색어에 맞는 상품이 없어요"
+        emptyLabel.font = .largeBold
+        emptyLabel.textAlignment = .center
+        emptyLabel.setLabelColor()
+
+        emptyImageView.image = UIImage(named: "empty")
+        emptyImageView.contentMode = .scaleAspectFit
+        
+        if data.total == 0 {
+            collectionView.isHidden = true
+        } else {
+            collectionView.isHidden = false
+        }
     }
     
     func setButton() {
@@ -146,7 +177,9 @@ extension SearchResultViewController {
             self.data = shopping
         }
         
-        self.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
+        if data.total != 0 {
+            self.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
+        }
     }
     
     @objc func dateButtonTapped() {
@@ -165,7 +198,9 @@ extension SearchResultViewController {
             self.data = shopping
         }
         
-        self.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
+        if data.total != 0 {
+            self.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
+        }
 
     }
     @objc func highPriceButtonTapped() {
@@ -184,8 +219,9 @@ extension SearchResultViewController {
             self.data = shopping
         }
         
-        self.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
-            
+        if data.total != 0 {
+            self.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
+        }
     }
     
     
@@ -204,8 +240,9 @@ extension SearchResultViewController {
             self.data = shopping
         }
         
-        self.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
-        
+        if data.total != 0 {
+            self.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
+        }
         
     }
 }
