@@ -48,6 +48,7 @@
 		79939F4D2B5A7F3000728E64 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79939F4C2B5A7F3000728E64 /* Onboarding.storyboard */; };
 		79939F4F2B5A80D100728E64 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79939F4E2B5A80D100728E64 /* OnboardingViewController.swift */; };
 		79939F512B5CE9A600728E64 /* UINavigation+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79939F502B5CE9A600728E64 /* UINavigation+Extension.swift */; };
+		799E72102B5FAA9900F93669 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799E720F2B5FAA9900F93669 /* UIViewController+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -92,6 +93,7 @@
 		79939F4C2B5A7F3000728E64 /* Onboarding.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
 		79939F4E2B5A80D100728E64 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		79939F502B5CE9A600728E64 /* UINavigation+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigation+Extension.swift"; sourceTree = "<group>"; };
+		799E720F2B5FAA9900F93669 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +157,7 @@
 				79939F412B5A50CE00728E64 /* UIImageView+Extension.swift */,
 				79939F432B5A519000728E64 /* UIButton+Extension.swift */,
 				79939F502B5CE9A600728E64 /* UINavigation+Extension.swift */,
+				799E720F2B5FAA9900F93669 /* UIViewController+Extension.swift */,
 				79939F3C2B5A49A400728E64 /* Enum.swift */,
 			);
 			path = Extension;
@@ -310,6 +313,7 @@
 				79892C632B592C2200904F52 /* UIView+Extension.swift in Sources */,
 				79892C592B59192400904F52 /* Shopping.swift in Sources */,
 				79939F382B5A3F8D00728E64 /* ProfileTableViewCell.swift in Sources */,
+				799E72102B5FAA9900F93669 /* UIViewController+Extension.swift in Sources */,
 				79892C492B59150E00904F52 /* SearchViewController.swift in Sources */,
 				79892C682B594EBC00904F52 /* SearchResultCollectionViewCell.swift in Sources */,
 				79892C322B59107700904F52 /* ViewController.swift in Sources */,

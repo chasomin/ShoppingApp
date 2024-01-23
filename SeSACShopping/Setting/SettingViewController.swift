@@ -10,7 +10,6 @@ import UIKit
 class SettingViewController: UIViewController {
     
     let setting: [String] = ["공지사항", "자주 묻는 질문", "1:1 문의", "알림 설정", "처음부터 시작하기"]
-    let alert = UIAlertController(title: "처음부터 시작하기", message: "데이터를 모두 초기화하시겠습니까?", preferredStyle: .alert)
     
 
     @IBOutlet var tableView: UITableView!
@@ -28,7 +27,6 @@ class SettingViewController: UIViewController {
         
         let xibSetting = UINib(nibName: SettingTableViewCell.id, bundle: nil)
         tableView.register(xibSetting, forCellReuseIdentifier: SettingTableViewCell.id)
-        setAlert()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -50,33 +48,6 @@ extension SettingViewController {
         tableView.sectionHeaderTopPadding = 0
         tableView.sectionFooterHeight = 0
         tableView.rowHeight = UITableView.automaticDimension
-
-    }
-    
-    func setAlert() {
-        let cancelButton = UIAlertAction(title: "취소", style: .cancel)
-        
-        let okButton = UIAlertAction(title: "확인", style: .default) {_ in
-            UserDefaultsManager.shared.nickname = ""
-            UserDefaultsManager.shared.image = ""
-            UserDefaultsManager.shared.search = []
-            UserDefaultsManager.shared.like = []
-            UserDefaultsManager.shared.userState = false
-            
-            let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
-            
-            let sceneDelegate = windowScene?.delegate as? SceneDelegate
-            
-            let sb = UIStoryboard(name: "Onboarding", bundle: nil)
-            let vc = sb.instantiateViewController(withIdentifier: OnboardingViewController.id) as! OnboardingViewController
-            let nav = UINavigationController(rootViewController: vc)
-
-            sceneDelegate?.window?.rootViewController = nav
-            sceneDelegate?.window?.makeKeyAndVisible()
-        }
-        
-        alert.addAction(cancelButton)
-        alert.addAction(okButton)
 
     }
 }
@@ -128,8 +99,24 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
         
         if indexPath.section == 1 && indexPath.row == 4 {
             
-            
-            present(alert, animated: true)
+            showAlert(title: "처음부터 시작하기", message: "데이터를 모두 초기화하시겠습니까?", buttonTitle: "확인") {
+                UserDefaultsManager.shared.nickname = ""
+                UserDefaultsManager.shared.image = ""
+                UserDefaultsManager.shared.search = []
+                UserDefaultsManager.shared.like = []
+                UserDefaultsManager.shared.userState = false
+                
+                let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+                
+                let sceneDelegate = windowScene?.delegate as? SceneDelegate
+                
+                let sb = UIStoryboard(name: "Onboarding", bundle: nil)
+                let vc = sb.instantiateViewController(withIdentifier: OnboardingViewController.id) as! OnboardingViewController
+                let nav = UINavigationController(rootViewController: vc)
+                
+                sceneDelegate?.window?.rootViewController = nav
+                sceneDelegate?.window?.makeKeyAndVisible()
+            }
         }
     }
     
