@@ -11,7 +11,9 @@ import Kingfisher
 class SearchResultViewController: UIViewController {
     var data = Shopping(total: 0, start: 0, display: 0, items: []) {
         didSet {
-            collectionView.reloadData()
+            if collectionView != nil {
+                collectionView.reloadData()
+            }
             let number = data.total.formatted()
             totalLabel.text = "\(number) 개의 검색 결과"
             start = 1
@@ -27,7 +29,6 @@ class SearchResultViewController: UIViewController {
 
         }
     }
-    let manager = APIManager()
     var text = ""
     var start = 1
 
@@ -173,7 +174,7 @@ extension SearchResultViewController {
         lowPriceButton.isSelected = false
 
         
-        manager.callRequest(text: text, start: start, sort: Sort.accuracy.rawValue) { shopping in
+        APIManager.shard.callRequest(text: text, start: start, sort: Sort.accuracy.rawValue) { shopping in
             self.data = shopping
         }
         
@@ -194,7 +195,7 @@ extension SearchResultViewController {
         lowPriceButton.isSelected = false
 
         
-        manager.callRequest(text: text, start: start, sort: Sort.date.rawValue) { shopping in
+        APIManager.shard.callRequest(text: text, start: start, sort: Sort.date.rawValue) { shopping in
             self.data = shopping
         }
         
@@ -215,7 +216,7 @@ extension SearchResultViewController {
         lowPriceButton.isSelected = false
 
         
-        manager.callRequest(text: text, start: start, sort: Sort.highPrice.rawValue) { shopping in
+        APIManager.shard.callRequest(text: text, start: start, sort: Sort.highPrice.rawValue) { shopping in
             self.data = shopping
         }
         
@@ -236,7 +237,7 @@ extension SearchResultViewController {
         highPriceButton.isSelected = false
         lowPriceButton.isSelected = true
 
-        manager.callRequest(text: text, start: start, sort: Sort.lowPrice.rawValue) { shopping in
+        APIManager.shard.callRequest(text: text, start: start, sort: Sort.lowPrice.rawValue) { shopping in
             self.data = shopping
         }
         
@@ -318,19 +319,19 @@ extension SearchResultViewController: UICollectionViewDataSourcePrefetching {
             if data.items.count - 7 == item.row && data.items.count != data.total {
                 start += 30
                 if accuracyButton.isSelected {
-                    manager.callRequest(text: text, start: start, sort: Sort.accuracy.rawValue) { shopping in
+                    APIManager.shard.callRequest(text: text, start: start, sort: Sort.accuracy.rawValue) { shopping in
                         self.data.items.append(contentsOf: shopping.items)
                     }
                 } else if dateButton.isSelected {
-                    manager.callRequest(text: text, start: start, sort: Sort.date.rawValue) { shopping in
+                    APIManager.shard.callRequest(text: text, start: start, sort: Sort.date.rawValue) { shopping in
                         self.data.items.append(contentsOf: shopping.items)
                     }
                 } else if highPriceButton.isSelected{
-                    manager.callRequest(text: text, start: start, sort: Sort.highPrice.rawValue) { shopping in
+                    APIManager.shard.callRequest(text: text, start: start, sort: Sort.highPrice.rawValue) { shopping in
                         self.data.items.append(contentsOf: shopping.items)
                     }
                 } else if lowPriceButton.isSelected {
-                    manager.callRequest(text: text, start: start, sort: Sort.lowPrice.rawValue) { shopping in
+                    APIManager.shard.callRequest(text: text, start: start, sort: Sort.lowPrice.rawValue) { shopping in
                         self.data.items.append(contentsOf: shopping.items)
                     }
                 }

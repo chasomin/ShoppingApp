@@ -8,9 +8,7 @@
 import UIKit
 
 class SearchViewController: UIViewController {
-    
-    let manager = APIManager()
-    
+        
         
     var search = UserDefaultsManager.shared.search {
         didSet {
@@ -52,6 +50,13 @@ class SearchViewController: UIViewController {
         tableView.register(xib, forCellReuseIdentifier:  SearchTableViewCell.id)
         
         setHiddenView()
+//        print(UserDefaultsManager.shared.search)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        print(UserDefaultsManager.shared.search)
     }
     
     @objc func deleteAllButtonTapped() {
@@ -154,14 +159,21 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         
         vc.navigationItem.title = search[indexPath.row]
         
-        manager.callRequest(text: search[indexPath.row], start: 1, sort: Sort.accuracy.rawValue) { shopping in
+        APIManager.shard.callRequest(text: search[indexPath.row], start: 1, sort: Sort.accuracy.rawValue) { shopping in
             vc.data = shopping
         }
         vc.text = search[indexPath.row]
         vc.start = 1
+
         
-        
-        
+        if indexPath.row != 0 {
+            let text = search[indexPath.row]
+            
+            search.remove(at: indexPath.row)
+            search.insert(text, at: 0)
+            UserDefaultsManager.shared.search = search
+            
+        }
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }
@@ -180,7 +192,7 @@ extension SearchViewController: UISearchBarDelegate {
         vc.start = 1
 
         if text != "" {
-            manager.callRequest(text: text, start: 1, sort: Sort.accuracy.rawValue) { shopping in
+            APIManager.shard.callRequest(text: text, start: 1, sort: Sort.accuracy.rawValue) { shopping in
                 vc.data = shopping
             }
             
@@ -188,7 +200,7 @@ extension SearchViewController: UISearchBarDelegate {
             if !UserDefaultsManager.shared.search.contains(text){
                 search.insert(text, at: 0)
                 UserDefaultsManager.shared.search = search
-            } else if UserDefaultsManager.shared.search.contains(text){
+            } else {
                 guard let index = search.firstIndex(of: text) else {return}
                 search.remove(at: index)
                 search.insert(text, at: 0)

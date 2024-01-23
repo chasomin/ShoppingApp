@@ -17,6 +17,8 @@ enum Sort: String{
 
 struct APIManager {
     
+    static let shard = APIManager()
+    
     func callRequest(text: String, start: Int, sort: String, completionHandler: @escaping (Shopping) -> ()) {
         let query = text.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
         let url = "https://openapi.naver.com/v1/search/shop.json?query=\(query)&display=30&start=\(start)&sort=\(sort)"
