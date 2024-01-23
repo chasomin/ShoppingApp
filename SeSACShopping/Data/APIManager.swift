@@ -15,9 +15,12 @@ enum Sort: String{
     case lowPrice = "asc" // 저렴한 순
 }
 
+
 struct APIManager {
     
     static let shard = APIManager()
+    
+    private init() { }
     
     func callRequest(text: String, start: Int, sort: String, completionHandler: @escaping (Shopping) -> ()) {
         let query = text.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!

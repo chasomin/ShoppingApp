@@ -49,6 +49,10 @@
 		79939F4F2B5A80D100728E64 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79939F4E2B5A80D100728E64 /* OnboardingViewController.swift */; };
 		79939F512B5CE9A600728E64 /* UINavigation+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79939F502B5CE9A600728E64 /* UINavigation+Extension.swift */; };
 		799E72102B5FAA9900F93669 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799E720F2B5FAA9900F93669 /* UIViewController+Extension.swift */; };
+		799E72132B5FB56700F93669 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799E72122B5FB56700F93669 /* NotificationViewController.swift */; };
+		799E72152B5FB57A00F93669 /* Notification.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 799E72142B5FB57A00F93669 /* Notification.storyboard */; };
+		799E72182B5FB79F00F93669 /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799E72162B5FB79F00F93669 /* NotificationTableViewCell.swift */; };
+		799E72192B5FB79F00F93669 /* NotificationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 799E72172B5FB79F00F93669 /* NotificationTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -94,6 +98,10 @@
 		79939F4E2B5A80D100728E64 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		79939F502B5CE9A600728E64 /* UINavigation+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigation+Extension.swift"; sourceTree = "<group>"; };
 		799E720F2B5FAA9900F93669 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		799E72122B5FB56700F93669 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
+		799E72142B5FB57A00F93669 /* Notification.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Notification.storyboard; sourceTree = "<group>"; };
+		799E72162B5FB79F00F93669 /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
+		799E72172B5FB79F00F93669 /* NotificationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,6 +180,7 @@
 				79939F322B5A3F6600728E64 /* SettingTableViewCell.swift */,
 				79939F332B5A3F6600728E64 /* SettingTableViewCell.xib */,
 				79939F3E2B5A4D6C00728E64 /* Profile */,
+				799E72112B5FB44000F93669 /* Notification */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -219,6 +228,17 @@
 				79939F4E2B5A80D100728E64 /* OnboardingViewController.swift */,
 			);
 			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		799E72112B5FB44000F93669 /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				799E72122B5FB56700F93669 /* NotificationViewController.swift */,
+				799E72162B5FB79F00F93669 /* NotificationTableViewCell.swift */,
+				799E72172B5FB79F00F93669 /* NotificationTableViewCell.xib */,
+				799E72142B5FB57A00F93669 /* Notification.storyboard */,
+			);
+			path = Notification;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -290,6 +310,7 @@
 				79892C422B59112000904F52 /* .gitignore in Resources */,
 				79892C3A2B59107800904F52 /* LaunchScreen.storyboard in Resources */,
 				79892C692B594EBC00904F52 /* SearchResultCollectionViewCell.xib in Resources */,
+				799E72152B5FB57A00F93669 /* Notification.storyboard in Resources */,
 				79939F4D2B5A7F3000728E64 /* Onboarding.storyboard in Resources */,
 				79892C372B59107800904F52 /* Assets.xcassets in Resources */,
 				79892C612B59290300904F52 /* SearchTableViewCell.xib in Resources */,
@@ -298,6 +319,7 @@
 				79892C352B59107700904F52 /* Main.storyboard in Resources */,
 				79892C4F2B5915E400904F52 /* Search.storyboard in Resources */,
 				79939F312B5A3EC600728E64 /* Profile.storyboard in Resources */,
+				799E72192B5FB79F00F93669 /* NotificationTableViewCell.xib in Resources */,
 				79939F392B5A3F8D00728E64 /* ProfileTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -315,6 +337,7 @@
 				79939F382B5A3F8D00728E64 /* ProfileTableViewCell.swift in Sources */,
 				799E72102B5FAA9900F93669 /* UIViewController+Extension.swift in Sources */,
 				79892C492B59150E00904F52 /* SearchViewController.swift in Sources */,
+				799E72182B5FB79F00F93669 /* NotificationTableViewCell.swift in Sources */,
 				79892C682B594EBC00904F52 /* SearchResultCollectionViewCell.swift in Sources */,
 				79892C322B59107700904F52 /* ViewController.swift in Sources */,
 				79892C5D2B5928AD00904F52 /* Identifier.swift in Sources */,
@@ -335,6 +358,7 @@
 				79892C602B59290300904F52 /* SearchTableViewCell.swift in Sources */,
 				79939F402B5A4F8800728E64 /* ProfileViewController.swift in Sources */,
 				79892C4B2B59151700904F52 /* SettingViewController.swift in Sources */,
+				799E72132B5FB56700F93669 /* NotificationViewController.swift in Sources */,
 				79939F442B5A519000728E64 /* UIButton+Extension.swift in Sources */,
 				79892C302B59107700904F52 /* SceneDelegate.swift in Sources */,
 			);

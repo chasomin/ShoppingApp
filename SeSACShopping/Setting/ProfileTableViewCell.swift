@@ -42,14 +42,7 @@ extension ProfileTableViewCell {
     func setLikeButton() {
         userLikeLabel.font = .regularBold
         userLikeLabel.setLabelColor()
-        userLikeLabel.text = UserDefaultsManager.shared.likeLabel
         userLikeLabel.numberOfLines = 1
-        let fullText = userLikeLabel.text ?? ""
-        let attributedString = NSMutableAttributedString(string: fullText)
-        
-        let range = (fullText as NSString).range(of: "\(UserDefaultsManager.shared.like.count)개의 상품")
-        
-        attributedString.addAttribute(.foregroundColor, value: UIColor.point, range: range)
-        userLikeLabel.attributedText = attributedString
+        userLikeLabel.attributedText = UserDefaultsManager.shared.likeLabel
     }
 }

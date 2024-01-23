@@ -8,9 +8,7 @@
 import UIKit
 
 class SettingViewController: UIViewController {
-    
-    let setting: [String] = ["공지사항", "자주 묻는 질문", "1:1 문의", "알림 설정", "처음부터 시작하기"]
-    
+        
 
     @IBOutlet var tableView: UITableView!
     
@@ -80,7 +78,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: SettingTableViewCell.id, for: indexPath) as! SettingTableViewCell
             
-            cell.textLabel?.text = setting[indexPath.row]
+            cell.textLabel?.text = Constants.Setting.title[indexPath.row]
             return cell
         }
         
@@ -118,6 +116,17 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
                 sceneDelegate?.window?.makeKeyAndVisible()
             }
         }
+        if indexPath.section == 1 && indexPath.row == 3 {
+            
+            let sb = UIStoryboard(name: "Notification", bundle: nil)
+            let vc = sb.instantiateViewController(withIdentifier: NotificationViewController.id) as! NotificationViewController
+            
+            vc.navigationItem.title = "알림 설정"
+            
+            navigationController?.pushViewController(vc, animated: true)
+
+        }
+        
     }
     
 }

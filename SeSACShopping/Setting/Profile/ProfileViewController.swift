@@ -64,14 +64,13 @@ extension ProfileViewController {
             userImageView.image = UIImage(named: UserDefaultsManager.shared.image)
         }
         
-        editImageView.image = UIImage(named: "camera")
+        editImageView.image = UIImage(named: Constants.Image.camera)
         
         
         textfield.text = UserDefaultsManager.shared.nickname
         textfield.borderStyle = .none
         textfield.clipsToBounds = true
         textfield.placeholder = "닉네임을 입력해주세요 :)"
-        //        textfield.attributedPlaceholder = NSAttributedString(string: "닉네임을 입력해주세요 :)", attributes: [NSAttributedString.Key.foregroundColor : UIColor.systemGray3])
         
         textfield.textColor = .text
         

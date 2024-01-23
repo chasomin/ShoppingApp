@@ -5,7 +5,7 @@
 //  Created by 차소민 on 1/18/24.
 //
 
-import Foundation
+import UIKit
 
 class UserDefaultsManager {
     static let shared = UserDefaultsManager()
@@ -66,8 +66,17 @@ class UserDefaultsManager {
         }
     }
 
-    var likeLabel: String {
-        "\(like.count)개의 상품을 좋아하고 있어요!"
+    var likeLabel: NSMutableAttributedString {
+        let fullText = "\(like.count)개의 상품을 좋아하고 있어요!"
+        
+        let attributedString = NSMutableAttributedString(string: fullText)
+        
+        let range = (fullText as NSString).range(of: "\(like.count)개의 상품")
+        
+        attributedString.addAttribute(.foregroundColor, value: UIColor.point, range: range)
+
+        return attributedString
+
     }
 }
 

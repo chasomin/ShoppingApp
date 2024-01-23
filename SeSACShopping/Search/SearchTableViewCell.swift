@@ -24,7 +24,7 @@ extension SearchTableViewCell {
         backgroundColor = .clear
         selectionStyle = .none
         
-        iconImageView.image = UIImage(systemName: Image.search)
+        iconImageView.image = UIImage(systemName: Constants.Image.search)
         iconImageView.tintColor = .white
         
         label.font = .small
@@ -32,7 +32,7 @@ extension SearchTableViewCell {
         
         
         deleteButton.setTitle("", for: .normal)
-        deleteButton.setImage(UIImage(systemName: Image.delete, withConfiguration: UIImage.SymbolConfiguration(pointSize: 12, weight: .regular)), for: .normal)
+        deleteButton.setImage(UIImage(systemName: Constants.Image.delete, withConfiguration: UIImage.SymbolConfiguration(pointSize: 12, weight: .regular)), for: .normal)
         deleteButton.tintColor = .gray
         
     }

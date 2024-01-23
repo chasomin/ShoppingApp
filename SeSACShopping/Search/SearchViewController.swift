@@ -50,7 +50,6 @@ class SearchViewController: UIViewController {
         tableView.register(xib, forCellReuseIdentifier:  SearchTableViewCell.id)
         
         setHiddenView()
-//        print(UserDefaultsManager.shared.search)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -115,7 +114,7 @@ extension SearchViewController {
         
         emptyView.backgroundColor = .clear
         
-        emptyImageView.image = UIImage(named: "empty")
+        emptyImageView.image = UIImage(named: Constants.Image.empty)
         emptyImageView.contentMode = .scaleAspectFit
 
         emptyLabel.text = "최근 검색어가 없어요"
@@ -182,7 +181,6 @@ extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         let text = searchBar.text!.lowercased().trimmingCharacters(in: .whitespaces)
 
-        // 콜렉션뷰로 이동
         let sb = UIStoryboard(name: "Search", bundle: nil)
         
         let vc = sb.instantiateViewController(withIdentifier: SearchResultViewController.id) as! SearchResultViewController

@@ -81,7 +81,7 @@ extension SearchResultViewController {
         emptyLabel.textAlignment = .center
         emptyLabel.setLabelColor()
 
-        emptyImageView.image = UIImage(named: "empty")
+        emptyImageView.image = UIImage(named: Constants.Image.empty)
         emptyImageView.contentMode = .scaleAspectFit
         
         if data.total == 0 {
@@ -93,10 +93,10 @@ extension SearchResultViewController {
     
     func setButton() {
         // TODO: 버튼 타이틀 패딩..?
-        designButton(accuracyButton, title: "  정확도  ")
-        designButton(dateButton, title: "  날짜순  ")
-        designButton(highPriceButton, title: "  가격높은순  ")
-        designButton(lowPriceButton, title: "  가격낮은순  ")
+        designButton(accuracyButton, title: "정확도")
+        designButton(dateButton, title: "날짜순")
+        designButton(highPriceButton, title: "가격높은순")
+        designButton(lowPriceButton, title: "가격낮은순")
         
         designActiveButton(accuracyButton, active: true)
         designActiveButton(dateButton, active: false)
@@ -122,6 +122,9 @@ extension SearchResultViewController {
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor.white.cgColor
         button.setTitle(title, for: .normal)
+        let edgeInsets = UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)
+        button.contentEdgeInsets = edgeInsets
+        
     }
     
     // 상태에 따른 필터링 버튼 디자인 차이
@@ -261,9 +264,7 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
         
         cell.mallNameLabel.text = data.items[indexPath.item].mallName
         
-        let filterTitle = data.items[indexPath.item].title.replacingOccurrences(of: "<b>", with: "")
-        let resultTitle = filterTitle.replacingOccurrences(of: "</b>", with: "")
-        cell.titleLabel.text = resultTitle
+        cell.titleLabel.text = data.items[indexPath.item].titleFilter
         
         cell.heartButton.tag = indexPath.row
         cell.heartButton.addTarget(self, action: #selector(heartButtonTapped(sender:)), for: .touchUpInside)
@@ -286,10 +287,8 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
         let vc = storyboard?.instantiateViewController(withIdentifier: ItemDetailViewController.id) as! ItemDetailViewController
         
         vc.urlString = url
-        let filterTitle = data.items[indexPath.item].title.replacingOccurrences(of: "<b>", with: "")
-        let resultTitle = filterTitle.replacingOccurrences(of: "</b>", with: "")
 
-        vc.navigationItem.title = resultTitle
+        vc.navigationItem.title = data.items[indexPath.item].titleFilter
         vc.productId = data.items[indexPath.item].productId
         
         navigationController?.pushViewController(vc, animated: true)

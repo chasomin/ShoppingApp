@@ -60,8 +60,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func sceneDidBecomeActive(_ scene: UIScene) {
-        // Called when the scene has moved from an inactive state to an active state.
-        // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
+        UIApplication.shared.applicationIconBadgeNumber = 0     // 0이면 리무브
+        
+        UNUserNotificationCenter.current().removeAllDeliveredNotifications()
     }
 
     func sceneWillResignActive(_ scene: UIScene) {
@@ -75,9 +76,24 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func sceneDidEnterBackground(_ scene: UIScene) {
-        // Called as the scene transitions from the foreground to the background.
-        // Use this method to save data, release shared resources, and store enough scene-specific state information
-        // to restore the scene back to its current state.
+        
+        if !UserDefaultsManager.shared.like.isEmpty {
+            
+            let content = UNMutableNotificationContent()
+            content.title = "'좋아요'한 상품을 구매해보세요"
+            content.body = "\(UserDefaultsManager.shared.like.count)개의 상품이 기다리고 있어요!"
+            content.badge = (UIApplication.shared.applicationIconBadgeNumber + 1) as NSNumber
+            
+            var component = DateComponents()
+            component.hour = 12
+            
+            let trigger = UNCalendarNotificationTrigger(dateMatching: component, repeats: true)
+            
+            let request = UNNotificationRequest(identifier: "wishList", content: content, trigger: trigger)
+            
+            UNUserNotificationCenter.current().add(request)
+            
+        }
     }
 
 
