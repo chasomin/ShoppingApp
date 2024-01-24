@@ -8,7 +8,7 @@
 import UIKit
 
 class NotificationTableViewCell: UITableViewCell {
-
+    
     
     @IBOutlet var label: UILabel!
     
@@ -18,7 +18,7 @@ class NotificationTableViewCell: UITableViewCell {
         super.awakeFromNib()
         setUI()
     }
-
+    
     @IBAction func notificationSwitchTapped(_ sender: UISwitch) {
         
     }
@@ -32,28 +32,29 @@ extension NotificationTableViewCell {
         label.textAlignment = .left
         
         notificationSwitch.tintColor = .point
-         UNUserNotificationCenter.current().getNotificationSettings(completionHandler: { permission in
+        
+        UNUserNotificationCenter.current().getNotificationSettings(completionHandler: { permission in
             switch permission.authorizationStatus {
                 
-            case .notDetermined: 
+            case .notDetermined:
                 print("한번만허용")
                 
             case .denied:
-//                self.notificationSwitch.isOn = false
+                DispatchQueue.main.async {
+                    self.notificationSwitch.isOn = false
+                }
                 print("허용 안 함")
-
+                
             case .authorized:
-//                self.notificationSwitch.isOn = true
+                DispatchQueue.main.async {
+                    self.notificationSwitch.isOn = true
+                }
                 print("허용")
-            case .provisional:
-                print("임시중단")
-
-            case .ephemeral:
-                print("푸시 설정이 App Clip에 대해서만 부분적으로 동의한 경우")
-            @unknown default:
-                print("Unknow Status")
-
+            
+            default:
+                print("ERROR")
             }
         })
     }
+    
 }

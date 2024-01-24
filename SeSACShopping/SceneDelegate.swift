@@ -5,6 +5,22 @@
 //  Created by 차소민 on 1/18/24.
 //
 
+protocol SominDelegate: NSObject {
+    func didBecomeActive()
+}
+
+final class Somin {
+    static let shared = Somin()
+    
+    private init() { }
+    
+    weak var delegate: SominDelegate?
+    
+    func didBecomeActive() {
+        delegate?.didBecomeActive()
+    }
+}
+
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
@@ -61,8 +77,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func sceneDidBecomeActive(_ scene: UIScene) {
         UIApplication.shared.applicationIconBadgeNumber = 0     // 0이면 리무브
-        
         UNUserNotificationCenter.current().removeAllDeliveredNotifications()
+        
+        Somin.shared.didBecomeActive()
     }
 
     func sceneWillResignActive(_ scene: UIScene) {
