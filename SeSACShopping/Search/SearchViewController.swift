@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class SearchViewController: UIViewController {
         
@@ -27,29 +28,35 @@ class SearchViewController: UIViewController {
         }
     }
 
-    @IBOutlet var recentView: UIView!
-    @IBOutlet var recentLable: UILabel!
-    @IBOutlet var deleteAllButton: UIButton!
+    let recentView = UIView()
+    let recentLable = UILabel()
+    let deleteAllButton = UIButton()
     
     
-    @IBOutlet var searchBar: UISearchBar!
-    @IBOutlet var tableView: UITableView!
-    @IBOutlet var emptyView: UIView!
-    @IBOutlet var emptyImageView: UIImageView!
-    @IBOutlet var emptyLabel: UILabel!
+    let searchBar = UISearchBar()
+    let tableView = UITableView()
+    let emptyView = UIView()
+    let emptyImageView = UIImageView()
+    let emptyLabel = UILabel()
+    
+    let panGesture = UIPanGestureRecognizer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureHierarchy()
         setUI()
+        setupConstraints()
 
         tableView.delegate = self
         tableView.dataSource = self
         searchBar.delegate = self
 
-        let xib = UINib(nibName: SearchTableViewCell.id, bundle: nil)
-        tableView.register(xib, forCellReuseIdentifier:  SearchTableViewCell.id)
+//        let xib = UINib(nibName: SearchTableViewCell.id, bundle: nil)
+        tableView.register(SearchTableViewCell.self, forCellReuseIdentifier: SearchTableViewCell.id)
         
         setHiddenView()
+        
+        panGesture.addTarget(self, action: #selector(keyboardDismiss))
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -74,7 +81,7 @@ class SearchViewController: UIViewController {
     }
     
     
-    @IBAction func keyboardDismiss(_ sender: UIPanGestureRecognizer) {
+    @objc func keyboardDismiss(_ sender: UIPanGestureRecognizer) {
         view.endEditing(true)
     }
     
@@ -88,6 +95,23 @@ class SearchViewController: UIViewController {
 
 
 extension SearchViewController {
+    
+    func configureHierarchy() {
+        view.addSubview(searchBar)
+        
+        view.addSubview(recentView)
+        recentView.addSubview(recentLable)
+        recentView.addSubview(deleteAllButton)
+        
+        view.addSubview(emptyView)
+        emptyView.addSubview(emptyImageView)
+        emptyView.addSubview(emptyLabel)
+        
+        view.addSubview(tableView)
+        
+        view.addGestureRecognizer(panGesture)
+    }
+    
     func setUI() {
         view.setBackgroundColor()
         
@@ -107,6 +131,7 @@ extension SearchViewController {
         deleteAllButton.setTitle("모두 지우기", for: .normal)
         deleteAllButton.titleLabel?.font = .smallBold
         deleteAllButton.contentHorizontalAlignment = .trailing
+        deleteAllButton.setTitleColor(.point, for: .normal)
         deleteAllButton.addTarget(self, action: #selector(deleteAllButtonTapped), for: .touchUpInside)
         
         tableView.backgroundColor = .clear
@@ -121,6 +146,52 @@ extension SearchViewController {
         emptyLabel.font = .largeBold
         emptyLabel.textAlignment = .center
         emptyLabel.setLabelColor()
+    }
+    
+    func setupConstraints() {
+        searchBar.snp.makeConstraints { make in
+            make.top.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
+            make.height.equalTo(56)
+        }
+        
+        recentView.snp.makeConstraints { make in
+            make.top.equalTo(searchBar.snp.bottom)
+            make.horizontalEdges.equalToSuperview()
+            make.height.equalTo(60)
+        }
+        
+        recentLable.snp.makeConstraints { make in
+            make.verticalEdges.equalToSuperview()
+            make.leading.equalToSuperview().inset(15)
+        }
+        
+        deleteAllButton.snp.makeConstraints { make in
+            make.trailing.verticalEdges.equalToSuperview()
+            make.trailing.equalToSuperview().inset(15)
+        }
+        
+        emptyView.snp.makeConstraints { make in
+            make.top.equalTo(recentView.snp.bottom)
+            make.bottom.horizontalEdges.equalToSuperview()
+        }
+        
+        emptyImageView.snp.makeConstraints { make in
+            make.horizontalEdges.equalToSuperview()
+            make.height.equalTo(330)
+            make.top.greaterThanOrEqualToSuperview().inset(50)
+        }
+        emptyLabel.snp.makeConstraints { make in
+            make.horizontalEdges.equalToSuperview()
+            make.top.equalTo(emptyImageView.snp.bottom)
+            make.bottom.equalToSuperview().inset(200)
+            make.height.equalTo(20)
+        }
+        
+        tableView.snp.makeConstraints { make in
+            make.top.equalTo(recentView.snp.bottom)
+            make.bottom.horizontalEdges.equalToSuperview()
+
+        }
     }
     
     func setHiddenView() {
@@ -216,4 +287,3 @@ extension SearchViewController: UISearchBarDelegate {
         view.endEditing(true)
     }
 }
-

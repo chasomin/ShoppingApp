@@ -56,11 +56,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             
             window = UIWindow(windowScene: scene)
             
-            let sb = UIStoryboard(name: "Main", bundle: nil)
-            let vc = sb.instantiateViewController(withIdentifier: "mainTabBar") as! UITabBarController
+//            let sb = UIStoryboard(name: "Main", bundle: nil)
+//            let vc = sb.instantiateViewController(withIdentifier: "mainTabBar") as! UITabBarController
+            let tabbar = UITabBarController()
+
+            let searchViewController = UINavigationController(rootViewController: SearchViewController())
+            let settingViewController = UINavigationController(rootViewController: SettingViewController())
+
+            searchViewController.tabBarItem = UITabBarItem(title: "검색", image: UIImage(systemName: "magnifyingglass"),selectedImage: UIImage(systemName: "magnifyingglass"))
+            settingViewController.tabBarItem = UITabBarItem(title: "설정", image: UIImage(systemName: "person"),selectedImage: UIImage(systemName: "person"))
+
             
-            window?.rootViewController = vc
+            tabbar.viewControllers = [searchViewController, settingViewController]
             
+            window?.rootViewController = tabbar
             window?.makeKeyAndVisible()
             
             

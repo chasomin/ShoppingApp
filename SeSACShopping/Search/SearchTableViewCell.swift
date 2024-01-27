@@ -9,17 +9,34 @@ import UIKit
 
 class SearchTableViewCell: UITableViewCell {
 
-    @IBOutlet var iconImageView: UIImageView!
-    @IBOutlet var label: UILabel!
-    @IBOutlet var deleteButton: UIButton!
+    let iconImageView = UIImageView()
+    let label = UILabel()
+    let deleteButton = UIButton()
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        configureHierarchy()
+        setUI()
+        setupConstraints()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        setUI()
     }
 }
 
 extension SearchTableViewCell {
+    
+    func configureHierarchy() {
+        contentView.addSubview(iconImageView)
+        contentView.addSubview(label)
+        contentView.addSubview(deleteButton)
+    }
+
     func setUI() {
         backgroundColor = .clear
         selectionStyle = .none
@@ -34,6 +51,27 @@ extension SearchTableViewCell {
         deleteButton.setTitle("", for: .normal)
         deleteButton.setImage(UIImage(systemName: Constants.Image.delete, withConfiguration: UIImage.SymbolConfiguration(pointSize: 12, weight: .regular)), for: .normal)
         deleteButton.tintColor = .gray
+        
+    }
+    
+    func setupConstraints() {
+        
+        iconImageView.snp.makeConstraints { make in
+            make.leading.equalTo(contentView).inset(20)
+            make.width.height.equalTo(20)
+            make.centerY.equalTo(contentView)
+        }
+        
+        label.snp.makeConstraints { make in
+            make.leading.equalTo(iconImageView.snp.trailing).offset(20)
+            make.centerY.equalTo(contentView)
+            make.top.bottom.equalTo(contentView).inset(15)
+        }
+        deleteButton.snp.makeConstraints { make in
+            make.trailing.equalTo(contentView).inset(20)
+            make.leading.equalTo(label.snp.trailing).offset(15)
+            make.top.bottom.equalTo(contentView).inset(15)
+        }
         
     }
 }

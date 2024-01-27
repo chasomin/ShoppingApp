@@ -10,21 +10,22 @@ import UIKit
 class SettingViewController: UIViewController {
         
 
-    @IBOutlet var tableView: UITableView!
+    let tableView = UITableView.init(frame: CGRect.zero, style: .insetGrouped)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        configureHierarchy()
         setUI()
+        setupConstraints()
         
         tableView.delegate = self
         tableView.dataSource = self
         
-        let xibProfile = UINib(nibName: ProfileTableViewCell.id, bundle: nil)
-        tableView.register(xibProfile, forCellReuseIdentifier: ProfileTableViewCell.id)
+//        let xibProfile = UINib(nibName: ProfileTableViewCell.id, bundle: nil)
+        tableView.register(ProfileTableViewCell.self, forCellReuseIdentifier: ProfileTableViewCell.id)
         
-        let xibSetting = UINib(nibName: SettingTableViewCell.id, bundle: nil)
-        tableView.register(xibSetting, forCellReuseIdentifier: SettingTableViewCell.id)
+//        let xibSetting = UINib(nibName: SettingTableViewCell.id, bundle: nil)
+        tableView.register(SettingTableViewCell.self, forCellReuseIdentifier: SettingTableViewCell.id)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -37,6 +38,10 @@ class SettingViewController: UIViewController {
 
 extension SettingViewController {
     
+    func configureHierarchy() {
+        view.addSubview(tableView)
+    }
+    
     func setUI() {
         navigationItem.title = "설정"
         self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.text]
@@ -47,6 +52,11 @@ extension SettingViewController {
         tableView.sectionFooterHeight = 0
         tableView.rowHeight = UITableView.automaticDimension
 
+    }
+    func setupConstraints() {
+        tableView.snp.makeConstraints { make in
+            make.edges.equalTo(view.safeAreaLayoutGuide)
+        }
     }
 }
 
@@ -79,6 +89,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: SettingTableViewCell.id, for: indexPath) as! SettingTableViewCell
             
             cell.textLabel?.text = Constants.Setting.title[indexPath.row]
+            cell.textLabel?.font = .small
             return cell
         }
         
