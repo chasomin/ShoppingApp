@@ -229,7 +229,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         
         vc.navigationItem.title = search[indexPath.row]
         
-        APIManager.shard.callRequest(text: search[indexPath.row], start: 1, sort: Sort.accuracy.rawValue) { shopping in
+        APIManager.shard.callRequest(text: search[indexPath.row], start: 1, sort: Constants.Sort.accuracy.rawValue) { shopping in
             vc.data = shopping
         }
         vc.text = search[indexPath.row]
@@ -261,7 +261,7 @@ extension SearchViewController: UISearchBarDelegate {
         vc.start = 1
 
         if text != "" {
-            APIManager.shard.callRequest(text: text, start: 1, sort: Sort.accuracy.rawValue) { shopping in
+            APIManager.shard.callRequest(text: text, start: 1, sort: Constants.Sort.accuracy.rawValue) { shopping in
                 vc.data = shopping
             }
             
