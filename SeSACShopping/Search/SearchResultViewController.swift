@@ -8,7 +8,8 @@
 import UIKit
 import Kingfisher
 
-class SearchResultViewController: UIViewController {
+class SearchResultViewController: UIViewController {        
+
     var data = Shopping(total: 0, start: 0, display: 0, items: []) {
         didSet {
             if collectionView != nil {
@@ -45,7 +46,8 @@ class SearchResultViewController: UIViewController {
     @IBOutlet var emptyImageView: UIImageView!
     @IBOutlet var emptyLabel: UILabel!
     
-    
+    lazy var buttons: [UIButton] = [accuracyButton, dateButton, highPriceButton, lowPriceButton]
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -92,32 +94,30 @@ extension SearchResultViewController {
     }
     
     func setButton() {
-        // TODO: 버튼 타이틀 패딩..?
-        designButton(accuracyButton, title: "정확도")
-        designButton(dateButton, title: "날짜순")
-        designButton(highPriceButton, title: "가격높은순")
-        designButton(lowPriceButton, title: "가격낮은순")
+        for i in 0..<buttons.count {
+            buttons[i].tag = i
+        }
         
-        designActiveButton(accuracyButton, active: true)
-        designActiveButton(dateButton, active: false)
-        designActiveButton(highPriceButton, active: false)
-        designActiveButton(lowPriceButton, active: false)
-
-        accuracyButton.addTarget(self, action: #selector(accuracyButtonTapped), for: .touchUpInside)
-        dateButton.addTarget(self, action: #selector(dateButtonTapped), for: .touchUpInside)
-        highPriceButton.addTarget(self, action: #selector(highPriceButtonTapped), for: .touchUpInside)
-        lowPriceButton.addTarget(self, action: #selector(lowPriceButtonTapped), for: .touchUpInside)
+        filterButtonTapped(accuracyButton)
         
-        accuracyButton.isSelected = true
-        dateButton.isSelected = false
-        highPriceButton.isSelected = false
-        lowPriceButton.isSelected = false
-
-
+        accuracyButton.addTarget(self, action: #selector(filterButtonTapped), for: .touchUpInside)
+        dateButton.addTarget(self, action: #selector(filterButtonTapped), for: .touchUpInside)
+        highPriceButton.addTarget(self, action: #selector(filterButtonTapped), for: .touchUpInside)
+        lowPriceButton.addTarget(self, action: #selector(filterButtonTapped), for: .touchUpInside)
+        
     }
-    
-    // 필터링 버튼
-    func designButton(_ button: UIButton, title: String) {
+        
+    // 상태에 따른 필터링 버튼 디자인 차이
+    func designActiveButton(_ button: UIButton, active: Bool, title: String) {
+        if active {
+            button.backgroundColor = .white
+            button.setTitleColor(.black, for: .normal)
+            button.tintColor = .clear
+        } else {
+            button.backgroundColor = .black
+            button.setTitleColor(.white, for: .normal)
+            button.tintColor = .clear
+        }
         button.layer.cornerRadius = 10
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor.white.cgColor
@@ -127,16 +127,10 @@ extension SearchResultViewController {
         
     }
     
-    // 상태에 따른 필터링 버튼 디자인 차이
-    func designActiveButton(_ button: UIButton, active: Bool) {
-        if active {
-            button.backgroundColor = .white
-            button.setTitleColor(.black, for: .normal)
-            button.tintColor = .clear
-        } else {
-            button.backgroundColor = .black
-            button.setTitleColor(.white, for: .normal)
-            button.tintColor = .clear
+    func filterButtonInactive() {
+        for i in 0..<Constants.FilterButton.allCases.count {
+            designActiveButton(buttons[i], active: false, title: Constants.FilterButton.allCases[i].rawValue)
+            buttons[i].isSelected = false
         }
     }
     
@@ -165,89 +159,20 @@ extension SearchResultViewController {
 
 // 필터링 버튼들 클릭 시 수행 할 액션
 extension SearchResultViewController {
-    @objc func accuracyButtonTapped() {
-        designActiveButton(accuracyButton, active: true)
-        designActiveButton(dateButton, active: false)
-        designActiveButton(highPriceButton, active: false)
-        designActiveButton(lowPriceButton, active: false)
+    @objc func filterButtonTapped(_ sender: UIButton) {
+        filterButtonInactive()
         
-        accuracyButton.isSelected = true
-        dateButton.isSelected = false
-        highPriceButton.isSelected = false
-        lowPriceButton.isSelected = false
+        designActiveButton(sender, active: true, title: Constants.FilterButton.allCases[sender.tag].rawValue)
+        sender.isSelected = true
+        print(sender)
 
-        
-        APIManager.shard.callRequest(text: text, start: start, sort: Sort.accuracy.rawValue) { shopping in
+        APIManager.shard.callRequest(text: text, start: start, sort: Constants.Sort.allCases[sender.tag].rawValue) { shopping in
             self.data = shopping
         }
         
         if data.total != 0 {
             self.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
         }
-    }
-    
-    @objc func dateButtonTapped() {
-        designActiveButton(accuracyButton, active: false)
-        designActiveButton(dateButton, active: true)
-        designActiveButton(highPriceButton, active: false)
-        designActiveButton(lowPriceButton, active: false)
-        
-        accuracyButton.isSelected = false
-        dateButton.isSelected = true
-        highPriceButton.isSelected = false
-        lowPriceButton.isSelected = false
-
-        
-        APIManager.shard.callRequest(text: text, start: start, sort: Sort.date.rawValue) { shopping in
-            self.data = shopping
-        }
-        
-        if data.total != 0 {
-            self.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
-        }
-
-    }
-    @objc func highPriceButtonTapped() {
-        designActiveButton(accuracyButton, active: false)
-        designActiveButton(dateButton, active: false)
-        designActiveButton(highPriceButton, active: true)
-        designActiveButton(lowPriceButton, active: false)
-        
-        accuracyButton.isSelected = false
-        dateButton.isSelected = false
-        highPriceButton.isSelected = true
-        lowPriceButton.isSelected = false
-
-        
-        APIManager.shard.callRequest(text: text, start: start, sort: Sort.highPrice.rawValue) { shopping in
-            self.data = shopping
-        }
-        
-        if data.total != 0 {
-            self.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
-        }
-    }
-    
-    
-    @objc func lowPriceButtonTapped() {
-        designActiveButton(accuracyButton, active: false)
-        designActiveButton(dateButton, active: false)
-        designActiveButton(highPriceButton, active: false)
-        designActiveButton(lowPriceButton, active: true)
-        
-        accuracyButton.isSelected = false
-        dateButton.isSelected = false
-        highPriceButton.isSelected = false
-        lowPriceButton.isSelected = true
-
-        APIManager.shard.callRequest(text: text, start: start, sort: Sort.lowPrice.rawValue) { shopping in
-            self.data = shopping
-        }
-        
-        if data.total != 0 {
-            self.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
-        }
-        
     }
 }
 
@@ -318,19 +243,19 @@ extension SearchResultViewController: UICollectionViewDataSourcePrefetching {
             if data.items.count - 7 == item.row && data.items.count != data.total {
                 start += 30
                 if accuracyButton.isSelected {
-                    APIManager.shard.callRequest(text: text, start: start, sort: Sort.accuracy.rawValue) { shopping in
+                    APIManager.shard.callRequest(text: text, start: start, sort: Constants.Sort.accuracy.rawValue) { shopping in
                         self.data.items.append(contentsOf: shopping.items)
                     }
                 } else if dateButton.isSelected {
-                    APIManager.shard.callRequest(text: text, start: start, sort: Sort.date.rawValue) { shopping in
+                    APIManager.shard.callRequest(text: text, start: start, sort: Constants.Sort.date.rawValue) { shopping in
                         self.data.items.append(contentsOf: shopping.items)
                     }
                 } else if highPriceButton.isSelected{
-                    APIManager.shard.callRequest(text: text, start: start, sort: Sort.highPrice.rawValue) { shopping in
+                    APIManager.shard.callRequest(text: text, start: start, sort: Constants.Sort.highPrice.rawValue) { shopping in
                         self.data.items.append(contentsOf: shopping.items)
                     }
                 } else if lowPriceButton.isSelected {
-                    APIManager.shard.callRequest(text: text, start: start, sort: Sort.lowPrice.rawValue) { shopping in
+                    APIManager.shard.callRequest(text: text, start: start, sort: Constants.Sort.lowPrice.rawValue) { shopping in
                         self.data.items.append(contentsOf: shopping.items)
                     }
                 }

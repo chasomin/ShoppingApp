@@ -8,14 +8,6 @@
 import Foundation
 import Alamofire
 
-enum Sort: String{
-    case accuracy = "sim"
-    case date = "date"
-    case highPrice = "dsc" // 가격 높은 순
-    case lowPrice = "asc" // 저렴한 순
-}
-
-
 struct APIManager {
     
     static let shard = APIManager()
