@@ -119,8 +119,8 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
                 
                 let sceneDelegate = windowScene?.delegate as? SceneDelegate
                 
-                let sb = UIStoryboard(name: "Onboarding", bundle: nil)
-                let vc = sb.instantiateViewController(withIdentifier: OnboardingViewController.id) as! OnboardingViewController
+                let vc = OnboardingViewController()
+                
                 let nav = UINavigationController(rootViewController: vc)
                 
                 sceneDelegate?.window?.rootViewController = nav

@@ -15,9 +15,9 @@ class PointBorderUserImageView: UIImageView {
     }
     
     func configureView() {
-        DispatchQueue.main.async {
-            self.layer.cornerRadius = self.frame.width / 2
-        }
+//        DispatchQueue.main.async {
+//            self.layer.cornerRadius = self.frame.width / 2
+//        }
         self.clipsToBounds = true
         self.layer.borderColor = UIColor.point.cgColor
         self.layer.borderWidth = 5

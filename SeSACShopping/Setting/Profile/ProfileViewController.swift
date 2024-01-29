@@ -36,7 +36,6 @@ class ProfileViewController: UIViewController {
     
     @objc func userImageViewTapped(_ sender: UITapGestureRecognizer) {
         
-        //let vc = storyboard?.instantiateViewController(withIdentifier: ProfileImageViewController.id) as! ProfileImageViewController
         let vc = ProfileImageViewController()
         
         vc.navigationItem.title = self.navigationItem.title
@@ -65,7 +64,10 @@ extension ProfileViewController {
         
         self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.text]
         
-        
+        // FIXME: customview로 하니까 cornerradius 잘 안 됨
+        DispatchQueue.main.async {
+            self.userImageView.layer.cornerRadius = self.userImageView.frame.width / 2
+        }
         userImageView.isUserInteractionEnabled = true
         
         if UserDefaultsManager.shared.image == "" {
@@ -136,12 +138,18 @@ extension ProfileViewController {
             
             let sceneDelegate = windowScene?.delegate as? SceneDelegate
             
-            let sb = UIStoryboard(name: "Main", bundle: nil)
-            let vc = sb.instantiateViewController(withIdentifier: "mainTabBar") as! UITabBarController
+            let tabbar = UITabBarController()
             
-            sceneDelegate?.window?.rootViewController = vc
+            let searchViewController = UINavigationController(rootViewController: SearchViewController())
+            let settingViewController = UINavigationController(rootViewController: SettingViewController())
+
+            searchViewController.tabBarItem = UITabBarItem(title: "검색", image: UIImage(systemName: "magnifyingglass"),selectedImage: UIImage(systemName: "magnifyingglass"))
+            settingViewController.tabBarItem = UITabBarItem(title: "설정", image: UIImage(systemName: "person"),selectedImage: UIImage(systemName: "person"))
+            
+            tabbar.viewControllers = [searchViewController, settingViewController]
+
+            sceneDelegate?.window?.rootViewController = tabbar
             sceneDelegate?.window?.makeKeyAndVisible()
-                        
         }
     }
 }

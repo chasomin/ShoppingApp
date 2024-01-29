@@ -42,12 +42,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             guard let scene = (scene as? UIWindowScene) else { return }
             
             window = UIWindow(windowScene: scene)
+                        
+            let vc = OnboardingViewController()
+            let nav = UINavigationController(rootViewController: vc)
             
-            let sb = UIStoryboard(name: "Onboarding", bundle: nil)
-            let vc = sb.instantiateViewController(withIdentifier: OnboardingViewController.id) as! OnboardingViewController
-            
-             let nav = UINavigationController(rootViewController: vc)
-
             window?.rootViewController = nav
             
             window?.makeKeyAndVisible()
@@ -56,8 +54,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             
             window = UIWindow(windowScene: scene)
             
-//            let sb = UIStoryboard(name: "Main", bundle: nil)
-//            let vc = sb.instantiateViewController(withIdentifier: "mainTabBar") as! UITabBarController
             let tabbar = UITabBarController()
 
             let searchViewController = UINavigationController(rootViewController: SearchViewController())
