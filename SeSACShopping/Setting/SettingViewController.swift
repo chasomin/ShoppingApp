@@ -21,10 +21,8 @@ class SettingViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
-//        let xibProfile = UINib(nibName: ProfileTableViewCell.id, bundle: nil)
         tableView.register(ProfileTableViewCell.self, forCellReuseIdentifier: ProfileTableViewCell.id)
         
-//        let xibSetting = UINib(nibName: SettingTableViewCell.id, bundle: nil)
         tableView.register(SettingTableViewCell.self, forCellReuseIdentifier: SettingTableViewCell.id)
     }
     
@@ -97,9 +95,11 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 {
-            let sb = UIStoryboard(name: "Profile", bundle: nil)
+            //let sb = UIStoryboard(name: "Profile", bundle: nil)
             
-            let vc = sb.instantiateViewController(withIdentifier: ProfileViewController.id) as! ProfileViewController
+            //let vc = sb.instantiateViewController(withIdentifier: ProfileViewController.id) as! ProfileViewController
+            
+            let vc = ProfileViewController()
             
             vc.navigationItem.title = "프로필 수정"
             

@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Profile View Controller-->
+        <!--View Controller-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController storyboardIdentifier="ProfileViewController" id="Y6W-OH-hqX" customClass="ProfileViewController" customModule="SeSACShopping" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProfileViewController" id="Y6W-OH-hqX" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -88,14 +88,6 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Vqb-ZH-x8J"/>
-                    <connections>
-                        <outlet property="doneButton" destination="Owg-me-qFm" id="0u1-ao-oD2"/>
-                        <outlet property="editImageView" destination="ruN-Yb-LB0" id="bvy-gH-ePJ"/>
-                        <outlet property="lineView" destination="eT4-WL-OUH" id="rMh-NR-SNZ"/>
-                        <outlet property="stateLabel" destination="jtf-8N-yU9" id="h9r-Wk-9eB"/>
-                        <outlet property="textfield" destination="TJG-zo-Btx" id="U6W-yI-xAQ"/>
-                        <outlet property="userImageView" destination="S2h-f7-Xc5" id="8QN-wA-vgm"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="48W-Il-RvK">
@@ -106,10 +98,10 @@
             </objects>
             <point key="canvasLocation" x="1061.8320610687022" y="4.9295774647887329"/>
         </scene>
-        <!--Profile Image View Controller-->
+        <!--View Controller-->
         <scene sceneID="Qir-KU-wCy">
             <objects>
-                <viewController storyboardIdentifier="ProfileImageViewController" id="vof-Ga-90L" customClass="ProfileImageViewController" customModule="SeSACShopping" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProfileImageViewController" id="vof-Ga-90L" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VHc-zm-SBJ">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -153,10 +145,6 @@
                             <constraint firstItem="917-k2-KVC" firstAttribute="top" secondItem="Jiy-aq-okE" secondAttribute="bottom" constant="30" id="zsW-ob-zeq"/>
                         </constraints>
                     </view>
-                    <connections>
-                        <outlet property="collectionView" destination="917-k2-KVC" id="doD-OF-Bgd"/>
-                        <outlet property="imageView" destination="Jiy-aq-okE" id="itE-y5-xtz"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C8e-49-aE5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

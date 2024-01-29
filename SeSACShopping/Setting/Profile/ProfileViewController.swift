@@ -9,21 +9,21 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
-    @IBOutlet var userImageView: UIImageView!
-    @IBOutlet var editImageView: UIImageView!
-    @IBOutlet var textfield: UITextField!
-    @IBOutlet var stateLabel: UILabel!
-    @IBOutlet var doneButton: UIButton!
-    @IBOutlet var lineView: UIView!
-    
+    let userImageView = PointBorderUserImageView(frame: .zero)
+    let editImageView = EditUserImageView(frame: .zero)
+    let textfield = NicknameTextField()
+    let stateLabel = UILabel()
+    let doneButton = PointCornerRadiusButton()
+    let lineView = UIView()
+    let gesture = UITapGestureRecognizer()
     
     let num = Int.random(in: 1...14)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        configureHierarchy()
         setUI()
-        
+        setupConstraints()
         textfield.delegate = self
         
     }
@@ -34,9 +34,11 @@ class ProfileViewController: UIViewController {
     }
     
     
-    @IBAction func userImageViewTapped(_ sender: UITapGestureRecognizer) {
+    @objc func userImageViewTapped(_ sender: UITapGestureRecognizer) {
         
-        let vc = storyboard?.instantiateViewController(withIdentifier: ProfileImageViewController.id) as! ProfileImageViewController
+        //let vc = storyboard?.instantiateViewController(withIdentifier: ProfileImageViewController.id) as! ProfileImageViewController
+        let vc = ProfileImageViewController()
+        
         vc.navigationItem.title = self.navigationItem.title
         
         navigationController?.pushViewController(vc, animated: true)
@@ -46,6 +48,16 @@ class ProfileViewController: UIViewController {
 }
 
 extension ProfileViewController {
+    func configureHierarchy() {
+        view.addSubview(userImageView)
+        view.addSubview(editImageView)
+        view.addSubview(textfield)
+        view.addSubview(stateLabel)
+        view.addSubview(doneButton)
+        view.addSubview(lineView)
+        view.addGestureRecognizer(gesture)
+    }
+    
     func setUI() {
         view.setBackgroundColor()
         
@@ -54,7 +66,6 @@ extension ProfileViewController {
         self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.text]
         
         
-        userImageView.circleBorder()
         userImageView.isUserInteractionEnabled = true
         
         if UserDefaultsManager.shared.image == "" {
@@ -64,25 +75,55 @@ extension ProfileViewController {
             userImageView.image = UIImage(named: UserDefaultsManager.shared.image)
         }
         
-        editImageView.image = UIImage(named: Constants.Image.camera)
         
         
         textfield.text = UserDefaultsManager.shared.nickname
-        textfield.borderStyle = .none
-        textfield.clipsToBounds = true
         textfield.placeholder = "닉네임을 입력해주세요 :)"
         
-        textfield.textColor = .text
         
         lineView.backgroundColor = .white
         
         stateLabel.font = .small
         stateLabel.text = ""
         
-        doneButton.setPointButton()
         doneButton.setTitle("완료", for: .normal)
         doneButton.addTarget(self, action: #selector(doneButtonTapped), for: .touchUpInside)
         doneButton.isEnabled = false
+        
+        gesture.addTarget(self, action: #selector(userImageViewTapped))
+    }
+    
+    func setupConstraints() {
+        userImageView.snp.makeConstraints { make in
+            make.height.width.equalTo(80)
+            make.top.equalTo(view.safeAreaLayoutGuide).inset(20)
+            make.centerX.equalToSuperview()
+        }
+        
+        editImageView.snp.makeConstraints { make in
+            make.bottom.trailing.equalTo(userImageView)
+            make.height.width.equalTo(30)
+        }
+        
+        textfield.snp.makeConstraints { make in
+            make.top.equalTo(userImageView.snp.bottom).offset(30)
+            make.leading.trailing.equalToSuperview().inset(20)
+        }
+        lineView.snp.makeConstraints { make in
+            make.height.equalTo(1)
+            make.horizontalEdges.equalToSuperview().inset(15)
+            make.top.equalTo(textfield.snp.bottom).offset(7)
+        }
+        stateLabel.snp.makeConstraints { make in
+            make.top.equalTo(lineView.snp.bottom).offset(5)
+            make.height.equalTo(20)
+            make.horizontalEdges.equalTo(textfield.snp.horizontalEdges)
+        }
+        doneButton.snp.makeConstraints { make in
+            make.top.equalTo(stateLabel.snp.bottom).offset(15)
+            make.horizontalEdges.equalTo(lineView.snp.horizontalEdges)
+            make.height.equalTo(40)
+        }
     }
     
     @objc func doneButtonTapped() {
