@@ -13,7 +13,6 @@
 		796FFDC32B67B2E700C3DE08 /* PointCornerRadiusButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796FFDC22B67B2E700C3DE08 /* PointCornerRadiusButton.swift */; };
 		79892C2E2B59107700904F52 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79892C2D2B59107700904F52 /* AppDelegate.swift */; };
 		79892C302B59107700904F52 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79892C2F2B59107700904F52 /* SceneDelegate.swift */; };
-		79892C322B59107700904F52 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79892C312B59107700904F52 /* ViewController.swift */; };
 		79892C352B59107700904F52 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79892C332B59107700904F52 /* Main.storyboard */; };
 		79892C372B59107800904F52 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79892C362B59107800904F52 /* Assets.xcassets */; };
 		79892C3A2B59107800904F52 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79892C382B59107800904F52 /* LaunchScreen.storyboard */; };
@@ -69,7 +68,6 @@
 		79892C2A2B59107700904F52 /* SeSACShopping.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeSACShopping.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79892C2D2B59107700904F52 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		79892C2F2B59107700904F52 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		79892C312B59107700904F52 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		79892C342B59107700904F52 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		79892C362B59107800904F52 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		79892C392B59107800904F52 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -173,7 +171,6 @@
 				79892C452B59130A00904F52 /* Extension */,
 				79892C2D2B59107700904F52 /* AppDelegate.swift */,
 				79892C2F2B59107700904F52 /* SceneDelegate.swift */,
-				79892C312B59107700904F52 /* ViewController.swift */,
 				79892C332B59107700904F52 /* Main.storyboard */,
 				79892C522B5917AA00904F52 /* Data */,
 				79939F4B2B5A7F0C00728E64 /* Onboarding */,
@@ -375,7 +372,6 @@
 				79892C492B59150E00904F52 /* SearchViewController.swift in Sources */,
 				799E72182B5FB79F00F93669 /* NotificationTableViewCell.swift in Sources */,
 				79892C682B594EBC00904F52 /* SearchResultCollectionViewCell.swift in Sources */,
-				79892C322B59107700904F52 /* ViewController.swift in Sources */,
 				79892C5D2B5928AD00904F52 /* Identifier.swift in Sources */,
 				79939F512B5CE9A600728E64 /* UINavigation+Extension.swift in Sources */,
 				79939F3B2B5A497300728E64 /* UILabel+Extension.swift in Sources */,
