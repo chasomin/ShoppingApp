@@ -86,7 +86,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: SettingTableViewCell.id, for: indexPath) as! SettingTableViewCell
             
-            cell.textLabel?.text = Constants.Setting.title[indexPath.row]
+            cell.textLabel?.text = Constants.Mock.Setting.title[indexPath.row]
             cell.textLabel?.font = .small
             return cell
         }

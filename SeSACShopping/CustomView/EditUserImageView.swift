@@ -15,7 +15,7 @@ class EditUserImageView: UIImageView {
     }
     
     func configureView() {
-        image = UIImage(named: Constants.Image.camera)
+        image = Constants.Image.camera
     }
     
     required init?(coder: NSCoder) {

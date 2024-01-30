@@ -33,7 +33,7 @@ extension ItemDetailViewController {
     }
     
     func setButton() {
-        let button = UIBarButtonItem(image: UserDefaultsManager.shared.like.contains(productId) ? UIImage(systemName:Constants.Image.heartFill) : UIImage(systemName:Constants.Image.heart), style: .plain, target: self, action: #selector(heartButtonTapped))
+        let button = UIBarButtonItem(image: UserDefaultsManager.shared.like.contains(productId) ? Constants.Image.heartFill : Constants.Image.heart, style: .plain, target: self, action: #selector(heartButtonTapped))
         
         navigationItem.rightBarButtonItem = button
         

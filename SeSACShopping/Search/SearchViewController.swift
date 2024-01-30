@@ -139,7 +139,7 @@ extension SearchViewController {
         
         emptyView.backgroundColor = .clear
         
-        emptyImageView.image = UIImage(named: Constants.Image.empty)
+        emptyImageView.image = Constants.Image.empty
         emptyImageView.contentMode = .scaleAspectFit
 
         emptyLabel.text = "최근 검색어가 없어요"

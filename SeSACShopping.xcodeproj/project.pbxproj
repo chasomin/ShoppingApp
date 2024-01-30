@@ -42,7 +42,7 @@
 		79939F382B5A3F8D00728E64 /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79939F362B5A3F8D00728E64 /* ProfileTableViewCell.swift */; };
 		79939F392B5A3F8D00728E64 /* ProfileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79939F372B5A3F8D00728E64 /* ProfileTableViewCell.xib */; };
 		79939F3B2B5A497300728E64 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79939F3A2B5A497300728E64 /* UILabel+Extension.swift */; };
-		79939F3D2B5A49A400728E64 /* Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79939F3C2B5A49A400728E64 /* Enum.swift */; };
+		79939F3D2B5A49A400728E64 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79939F3C2B5A49A400728E64 /* Constants.swift */; };
 		79939F402B5A4F8800728E64 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79939F3F2B5A4F8800728E64 /* ProfileViewController.swift */; };
 		79939F422B5A50CE00728E64 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79939F412B5A50CE00728E64 /* UIImageView+Extension.swift */; };
 		79939F442B5A519000728E64 /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79939F432B5A519000728E64 /* UIButton+Extension.swift */; };
@@ -97,7 +97,7 @@
 		79939F362B5A3F8D00728E64 /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		79939F372B5A3F8D00728E64 /* ProfileTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileTableViewCell.xib; sourceTree = "<group>"; };
 		79939F3A2B5A497300728E64 /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
-		79939F3C2B5A49A400728E64 /* Enum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enum.swift; sourceTree = "<group>"; };
+		79939F3C2B5A49A400728E64 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		79939F3F2B5A4F8800728E64 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		79939F412B5A50CE00728E64 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		79939F432B5A519000728E64 /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
@@ -140,6 +140,14 @@
 			path = CustomView;
 			sourceTree = "<group>";
 		};
+		796FFDF52B69424500C3DE08 /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				79939F3C2B5A49A400728E64 /* Constants.swift */,
+			);
+			path = Enum;
+			sourceTree = "<group>";
+		};
 		79892C212B59107700904F52 = {
 			isa = PBXGroup;
 			children = (
@@ -160,6 +168,7 @@
 		79892C2C2B59107700904F52 /* SeSACShopping */ = {
 			isa = PBXGroup;
 			children = (
+				796FFDF52B69424500C3DE08 /* Enum */,
 				796FFDBB2B67AF6900C3DE08 /* CustomView */,
 				79892C452B59130A00904F52 /* Extension */,
 				79892C2D2B59107700904F52 /* AppDelegate.swift */,
@@ -190,7 +199,6 @@
 				79939F432B5A519000728E64 /* UIButton+Extension.swift */,
 				79939F502B5CE9A600728E64 /* UINavigation+Extension.swift */,
 				799E720F2B5FAA9900F93669 /* UIViewController+Extension.swift */,
-				79939F3C2B5A49A400728E64 /* Enum.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -379,7 +387,7 @@
 				79892C652B59472100904F52 /* SearchResultViewController.swift in Sources */,
 				79939F342B5A3F6600728E64 /* SettingTableViewCell.swift in Sources */,
 				79892C6E2B59708300904F52 /* ItemDetailViewController.swift in Sources */,
-				79939F3D2B5A49A400728E64 /* Enum.swift in Sources */,
+				79939F3D2B5A49A400728E64 /* Constants.swift in Sources */,
 				79939F492B5A6C8000728E64 /* ProfileImageCollectionViewCell.swift in Sources */,
 				796FFDC32B67B2E700C3DE08 /* PointCornerRadiusButton.swift in Sources */,
 				79892C5B2B59274F00904F52 /* UserDefaultsManager.swift in Sources */,

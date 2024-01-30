@@ -81,13 +81,13 @@ extension ProfileImageViewController {
 extension ProfileImageViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        Constants.ProfileImages.profileImageList.count
+        Constants.Mock.ProfileImages.profileImageList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProfileImageCollectionViewCell.id, for: indexPath) as! ProfileImageCollectionViewCell
         
-        let image = UIImage(named: Constants.ProfileImages.profileImageList[indexPath.item])?.withRenderingMode(.alwaysOriginal)
+        let image = UIImage(named: Constants.Mock.ProfileImages.profileImageList[indexPath.item])?.withRenderingMode(.alwaysOriginal)
         cell.imageButton.setImage(image, for: .normal)
         
         cell.imageButton.tag = indexPath.item + 1

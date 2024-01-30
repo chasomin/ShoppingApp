@@ -83,7 +83,7 @@ extension SearchResultViewController {
         emptyLabel.textAlignment = .center
         emptyLabel.setLabelColor()
 
-        emptyImageView.image = UIImage(named: Constants.Image.empty)
+        emptyImageView.image = Constants.Image.empty
         emptyImageView.contentMode = .scaleAspectFit
         
         if data.total == 0 {
@@ -128,8 +128,8 @@ extension SearchResultViewController {
     }
     
     func filterButtonInactive() {
-        for i in 0..<Constants.FilterButton.allCases.count {
-            designActiveButton(buttons[i], active: false, title: Constants.FilterButton.allCases[i].rawValue)
+        for i in 0..<Constants.Button.FilterButton.allCases.count {
+            designActiveButton(buttons[i], active: false, title: Constants.Button.FilterButton.allCases[i].rawValue)
             buttons[i].isSelected = false
         }
     }
@@ -162,7 +162,7 @@ extension SearchResultViewController {
     @objc func filterButtonTapped(_ sender: UIButton) {
         filterButtonInactive()
         
-        designActiveButton(sender, active: true, title: Constants.FilterButton.allCases[sender.tag].rawValue)
+        designActiveButton(sender, active: true, title: Constants.Button.FilterButton.allCases[sender.tag].rawValue)
         sender.isSelected = true
         print(sender)
 

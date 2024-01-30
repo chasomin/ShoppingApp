@@ -36,10 +36,10 @@ class OnboardingViewController: UIViewController {
     }
     
     func setUI() {
-        titleImageView.image = UIImage(named: "sesacShopping")
+        titleImageView.image = Constants.Image.onboardingLogoImage
         titleImageView.contentMode = .scaleAspectFit
         
-        imageView.image = UIImage(named: "onboarding")
+        imageView.image = Constants.Image.onboardingImage
         imageView.contentMode = .scaleAspectFit
         
         startButton.setTitle("시작하기", for: .normal)

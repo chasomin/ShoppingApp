@@ -37,7 +37,7 @@ extension UIButton {
     func heartButton() {
         circle()
         self.setTitle("", for: .normal)
-        self.setImage(UIImage(systemName: Constants.Image.heart), for: .normal)
+        self.setImage(Constants.Image.heart, for: .normal)
         self.backgroundColor = .white
         self.tintColor = .black
     }
@@ -45,7 +45,7 @@ extension UIButton {
     func heartFillButton() {
         circle()
         self.setTitle("", for: .normal)
-        self.setImage(UIImage(systemName: Constants.Image.heartFill), for: .normal)
+        self.setImage(Constants.Image.heartFill, for: .normal)
         self.backgroundColor = .white
         self.tintColor = .black
     }
