@@ -10,56 +10,55 @@ import Kingfisher
 
 class SearchResultViewController: UIViewController {        
 
+    let mainView = SearchResultView()
+    
+    override func loadView() {
+        view = mainView
+    }
     var data = Shopping(total: 0, start: 0, display: 0, items: []) {
         didSet {
-            if collectionView != nil {
-                collectionView.reloadData()
+            if mainView.collectionView != nil {
+                mainView.collectionView.reloadData()
             }
             let number = data.total.formatted()
-            totalLabel.text = "\(number) 개의 검색 결과"
+            mainView.totalLabel.text = "\(number) 개의 검색 결과"
             start = 1
             if data.total == 0 {
-                collectionView.isHidden = true
-                emptyView.isHidden = false
+                mainView.collectionView.isHidden = true
+                mainView.emptyView.isHidden = false
             } else {
-                collectionView.isHidden = false
-                emptyView.isHidden = true
-
+                mainView.collectionView.isHidden = false
+                mainView.emptyView.isHidden = true
             }
-
-
         }
     }
     var text = ""
     var start = 1
+    lazy var number = data.total.formatted()
 
-    @IBOutlet var totalLabel: UILabel!
-    
-    @IBOutlet var accuracyButton: UIButton!
-    @IBOutlet var dateButton: UIButton!
-    @IBOutlet var highPriceButton: UIButton!
-    @IBOutlet var lowPriceButton: UIButton!
-    
-    @IBOutlet var collectionView: UICollectionView!
-    
-    @IBOutlet var emptyView: UIView!
-    @IBOutlet var emptyImageView: UIImageView!
-    @IBOutlet var emptyLabel: UILabel!
-    
-    lazy var buttons: [UIButton] = [accuracyButton, dateButton, highPriceButton, lowPriceButton]
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUI()
-        setButton()
-        setCollectionView()
         
+        navigationController?.setNavigationBar()
+        mainView.collectionView.delegate = self
+        mainView.collectionView.dataSource = self
+        mainView.collectionView.prefetchDataSource = self
+        mainView.collectionView.register(SearchResultCollectionViewCell.self, forCellWithReuseIdentifier: SearchResultCollectionViewCell.id)
+
+        mainView.totalLabel.text = "\(number) 개의 검색 결과"
+
+        if data.total == 0 {
+            mainView.collectionView.isHidden = true
+        } else {
+            mainView.collectionView.isHidden = false
+        }
 
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        collectionView.reloadData() // 좋아요 버튼 동기화
+        mainView.collectionView.reloadData() // 좋아요 버튼 동기화
 
     }
 
@@ -68,101 +67,28 @@ class SearchResultViewController: UIViewController {
 
 
 extension SearchResultViewController {
-    func setUI() {
-        navigationController?.setNavigationBar()
-        
-        totalLabel.font = .regularBold
-        totalLabel.textColor = .point
-        let number = data.total.formatted()
-        totalLabel.text = "\(number) 개의 검색 결과"
-        
-        emptyView.setBackgroundColor()
-        
-        emptyLabel.text = "검색어에 맞는 상품이 없어요"
-        emptyLabel.font = .largeBold
-        emptyLabel.textAlignment = .center
-        emptyLabel.setLabelColor()
-
-        emptyImageView.image = Constants.Image.empty
-        emptyImageView.contentMode = .scaleAspectFit
-        
-        if data.total == 0 {
-            collectionView.isHidden = true
-        } else {
-            collectionView.isHidden = false
-        }
-    }
-    
     func setButton() {
-        for i in 0..<buttons.count {
-            buttons[i].tag = i
+        for i in 0..<mainView.buttons.count {
+            mainView.buttons[i].tag = i
         }
         
-        filterButtonTapped(accuracyButton)
+        filterButtonTapped(mainView.accuracyButton)
         
-        accuracyButton.addTarget(self, action: #selector(filterButtonTapped), for: .touchUpInside)
-        dateButton.addTarget(self, action: #selector(filterButtonTapped), for: .touchUpInside)
-        highPriceButton.addTarget(self, action: #selector(filterButtonTapped), for: .touchUpInside)
-        lowPriceButton.addTarget(self, action: #selector(filterButtonTapped), for: .touchUpInside)
-        
+        mainView.accuracyButton.addTarget(self, action: #selector(filterButtonTapped), for: .touchUpInside)
+        mainView.dateButton.addTarget(self, action: #selector(filterButtonTapped), for: .touchUpInside)
+        mainView.highPriceButton.addTarget(self, action: #selector(filterButtonTapped), for: .touchUpInside)
+        mainView.lowPriceButton.addTarget(self, action: #selector(filterButtonTapped), for: .touchUpInside)
     }
         
-    // 상태에 따른 필터링 버튼 디자인 차이
-    func designActiveButton(_ button: UIButton, active: Bool, title: String) {
-        if active {
-            button.backgroundColor = .white
-            button.setTitleColor(.black, for: .normal)
-            button.tintColor = .clear
-        } else {
-            button.backgroundColor = .black
-            button.setTitleColor(.white, for: .normal)
-            button.tintColor = .clear
-        }
-        button.layer.cornerRadius = 10
-        button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor.white.cgColor
-        button.setTitle(title, for: .normal)
-        let edgeInsets = UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)
-        button.contentEdgeInsets = edgeInsets
-        
-    }
-    
-    func filterButtonInactive() {
-        for i in 0..<Constants.Button.FilterButton.allCases.count {
-            designActiveButton(buttons[i], active: false, title: Constants.Button.FilterButton.allCases[i].rawValue)
-            buttons[i].isSelected = false
-        }
-    }
-    
-    func setCollectionView() {
-        let xib = UINib(nibName: SearchResultCollectionViewCell.id, bundle: nil)
-        collectionView.register(xib, forCellWithReuseIdentifier: SearchResultCollectionViewCell.id)
-        
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        collectionView.prefetchDataSource = self
-        
-        let spacing: CGFloat = 10
-        let width = (UIScreen.main.bounds.width - (spacing * 3)) / 2
-        
-        let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: width, height: width + 70)
-        layout.minimumLineSpacing = spacing
-        layout.minimumInteritemSpacing = spacing
-        layout.sectionInset = UIEdgeInsets(top: 0, left: spacing, bottom: 0, right: spacing)
-        layout.scrollDirection = .vertical
-        collectionView.collectionViewLayout = layout
-        
-    }
 }
 
 
 // 필터링 버튼들 클릭 시 수행 할 액션
 extension SearchResultViewController {
     @objc func filterButtonTapped(_ sender: UIButton) {
-        filterButtonInactive()
+        mainView.filterButtonInactive()
         
-        designActiveButton(sender, active: true, title: Constants.Button.FilterButton.allCases[sender.tag].rawValue)
+        mainView.designActiveButton(sender, active: true, title: Constants.Button.FilterButton.allCases[sender.tag].rawValue)
         sender.isSelected = true
         print(sender)
 
@@ -171,7 +97,7 @@ extension SearchResultViewController {
         }
         
         if data.total != 0 {
-            self.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
+            self.mainView.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
         }
     }
 }
@@ -209,7 +135,7 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
         
         let url = "https://msearch.shopping.naver.com/product/\(data.items[indexPath.item].productId)"
         
-        let vc = storyboard?.instantiateViewController(withIdentifier: ItemDetailViewController.id) as! ItemDetailViewController
+        let vc = ItemDetailViewController()
         
         vc.urlString = url
 
@@ -229,7 +155,7 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
         }
         
         print(UserDefaultsManager.shared.like.count)
-        collectionView.reloadData()
+        mainView.collectionView.reloadData()
     }
 }
 
@@ -242,19 +168,19 @@ extension SearchResultViewController: UICollectionViewDataSourcePrefetching {
         for item in indexPaths {
             if data.items.count - 7 == item.row && data.items.count != data.total {
                 start += 30
-                if accuracyButton.isSelected {
+                if mainView.accuracyButton.isSelected {
                     APIManager.shard.callRequest(text: text, start: start, sort: Constants.Sort.accuracy.rawValue) { shopping in
                         self.data.items.append(contentsOf: shopping.items)
                     }
-                } else if dateButton.isSelected {
+                } else if mainView.dateButton.isSelected {
                     APIManager.shard.callRequest(text: text, start: start, sort: Constants.Sort.date.rawValue) { shopping in
                         self.data.items.append(contentsOf: shopping.items)
                     }
-                } else if highPriceButton.isSelected{
+                } else if mainView.highPriceButton.isSelected{
                     APIManager.shard.callRequest(text: text, start: start, sort: Constants.Sort.highPrice.rawValue) { shopping in
                         self.data.items.append(contentsOf: shopping.items)
                     }
-                } else if lowPriceButton.isSelected {
+                } else if mainView.lowPriceButton.isSelected {
                     APIManager.shard.callRequest(text: text, start: start, sort: Constants.Sort.lowPrice.rawValue) { shopping in
                         self.data.items.append(contentsOf: shopping.items)
                     }

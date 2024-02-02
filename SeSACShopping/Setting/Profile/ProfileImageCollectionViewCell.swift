@@ -9,13 +9,24 @@ import UIKit
 
 
 class ProfileImageCollectionViewCell: UICollectionViewCell {
-    @IBOutlet var imageButton: UIButton!
+    let imageButton = UIButton()
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         
         imageButton.setTitle("", for: .normal)
         imageButton.circle()
         
+        contentView.addSubview(imageButton)
+        imageButton.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+
     }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+
 }

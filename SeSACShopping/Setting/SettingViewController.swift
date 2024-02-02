@@ -8,55 +8,33 @@
 import UIKit
 
 class SettingViewController: UIViewController {
-        
-
-    let tableView = UITableView.init(frame: CGRect.zero, style: .insetGrouped)
+    let mainView = SettingView()
     
+    override func loadView() {
+        view = mainView
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureHierarchy()
-        setUI()
-        setupConstraints()
+        mainView.tableView.delegate = self
+        mainView.tableView.dataSource = self
         
-        tableView.delegate = self
-        tableView.dataSource = self
+        mainView.tableView.register(ProfileTableViewCell.self, forCellReuseIdentifier: ProfileTableViewCell.id)
+        mainView.tableView.register(SettingTableViewCell.self, forCellReuseIdentifier: SettingTableViewCell.id)
         
-        tableView.register(ProfileTableViewCell.self, forCellReuseIdentifier: ProfileTableViewCell.id)
-        
-        tableView.register(SettingTableViewCell.self, forCellReuseIdentifier: SettingTableViewCell.id)
+        navigationItem.title = "설정"
+        self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.text]
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        tableView.reloadData()
+        mainView.tableView.reloadData()
     }
 
 
 }
 
-extension SettingViewController {
-    
-    func configureHierarchy() {
-        view.addSubview(tableView)
-    }
-    
-    func setUI() {
-        navigationItem.title = "설정"
-        self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.text]
-
-        view.setBackgroundColor()
-        tableView.backgroundColor = .clear
-        tableView.sectionHeaderTopPadding = 0
-        tableView.sectionFooterHeight = 0
-        tableView.rowHeight = UITableView.automaticDimension
-
-    }
-    func setupConstraints() {
-        tableView.snp.makeConstraints { make in
-            make.edges.equalTo(view.safeAreaLayoutGuide)
-        }
-    }
-}
 
 
 extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
@@ -77,17 +55,11 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTableViewCell.id, for: indexPath) as! ProfileTableViewCell
             
-            cell.userImageView.image = UIImage(named: UserDefaultsManager.shared.image)
-            
-            cell.setLikeButton()
-
-            
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: SettingTableViewCell.id, for: indexPath) as! SettingTableViewCell
             
             cell.textLabel?.text = Constants.Mock.Setting.title[indexPath.row]
-            cell.textLabel?.font = .small
             return cell
         }
         
@@ -95,10 +67,6 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 {
-            //let sb = UIStoryboard(name: "Profile", bundle: nil)
-            
-            //let vc = sb.instantiateViewController(withIdentifier: ProfileViewController.id) as! ProfileViewController
-            
             let vc = ProfileViewController()
             
             vc.navigationItem.title = "프로필 수정"

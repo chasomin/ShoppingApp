@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Search Result View Controller-->
+        <!--View Controller-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController storyboardIdentifier="SearchResultViewController" id="Y6W-OH-hqX" customClass="SearchResultViewController" customModule="SeSACShopping" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SearchResultViewController" id="Y6W-OH-hqX" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -40,7 +40,6 @@
                                     <constraint firstItem="hBD-EK-jBz" firstAttribute="top" secondItem="P4R-g0-f2Q" secondAttribute="top" constant="70" id="JND-Oz-oOw"/>
                                     <constraint firstAttribute="trailing" secondItem="hBD-EK-jBz" secondAttribute="trailing" constant="20" id="L8p-P1-SEi"/>
                                     <constraint firstItem="Umc-RP-nJb" firstAttribute="top" secondItem="hBD-EK-jBz" secondAttribute="bottom" id="UvT-hK-UEj"/>
-                                    <constraint firstItem="Umc-RP-nJb" firstAttribute="centerX" secondItem="P4R-g0-f2Q" secondAttribute="centerX" id="V1c-hg-zMj"/>
                                     <constraint firstAttribute="trailing" secondItem="Umc-RP-nJb" secondAttribute="trailing" constant="20" id="XAt-1L-ubt"/>
                                     <constraint firstItem="Umc-RP-nJb" firstAttribute="leading" secondItem="P4R-g0-f2Q" secondAttribute="leading" constant="20" id="dfD-54-Cy6"/>
                                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Umc-RP-nJb" secondAttribute="bottom" constant="30" id="hmd-Vr-VSm"/>
@@ -116,17 +115,6 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Cd7-L5-Bzv"/>
-                    <connections>
-                        <outlet property="accuracyButton" destination="dJE-uN-i5I" id="Dup-qN-ck2"/>
-                        <outlet property="collectionView" destination="heW-dh-RWH" id="WWZ-6e-99X"/>
-                        <outlet property="dateButton" destination="So0-GV-alG" id="vWg-tI-AYB"/>
-                        <outlet property="emptyImageView" destination="hBD-EK-jBz" id="j1S-Ad-PeU"/>
-                        <outlet property="emptyLabel" destination="Umc-RP-nJb" id="fCy-R7-NgF"/>
-                        <outlet property="emptyView" destination="P4R-g0-f2Q" id="Mgv-83-g4O"/>
-                        <outlet property="highPriceButton" destination="w3Z-1d-mOJ" id="3uM-ik-ta8"/>
-                        <outlet property="lowPriceButton" destination="QqH-xO-EIP" id="dxt-4O-vOF"/>
-                        <outlet property="totalLabel" destination="opb-wr-SqJ" id="j7i-uF-LFg"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
