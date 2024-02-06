@@ -11,16 +11,20 @@ import WebKit
 class ItemDetailViewController: UIViewController {
     var urlString = "https://www.apple.com"
     var productId = ""
-    @IBOutlet var webView: WKWebView!
+    let  webView = WKWebView()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setWebView()
-
         setButton()
-        
         navigationController?.setNavigationBar()
+        
+        view.addSubview(webView)
+        
+        webView.snp.makeConstraints { make in
+            make.edges.equalTo(view.safeAreaLayoutGuide)
+        }
     }
 }
 
