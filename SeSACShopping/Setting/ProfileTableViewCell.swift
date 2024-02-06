@@ -19,6 +19,7 @@ class ProfileTableViewCell: UITableViewCell {
         print("init")
         configureHierarchy()
         setupConstraints()
+        setUI()
     }
     
     required init?(coder: NSCoder) {
@@ -28,6 +29,10 @@ class ProfileTableViewCell: UITableViewCell {
 }
 
 extension ProfileTableViewCell {
+    
+    func configureCell() {
+        userImageView.image = UIImage(named: UserDefaultsManager.shared.image)
+    }
 
     func configureHierarchy() {
         contentView.addSubview(userImageView)
@@ -36,8 +41,6 @@ extension ProfileTableViewCell {
     }
     
     func setUI() {
-        userImageView.image = UIImage(named: UserDefaultsManager.shared.image)
-        
         userNicknameLabel.font = .largeBold
         userNicknameLabel.setLabelColor()
         userNicknameLabel.numberOfLines = 1

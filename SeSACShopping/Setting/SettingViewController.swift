@@ -56,7 +56,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTableViewCell.id, for: indexPath) as! ProfileTableViewCell
             
-            cell.setUI()
+            cell.configureCell()
             
             return cell
         } else {
