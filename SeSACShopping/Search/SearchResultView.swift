@@ -6,15 +6,16 @@
 //
 
 import UIKit
+import SnapKit
 
 class SearchResultView: BaseView {
     
 
     let totalLabel = UILabel()
-    let accuracyButton = UIButton()
-    let dateButton = UIButton()
-    let highPriceButton = UIButton()
-    let lowPriceButton = UIButton()
+    let accuracyButton = FilterButton()
+    let dateButton = FilterButton()
+    let highPriceButton = FilterButton()
+    let lowPriceButton = FilterButton()
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: setCollectionView())
     let emptyView = UIView()
     let emptyImageView = UIImageView()
@@ -41,7 +42,6 @@ class SearchResultView: BaseView {
     override func configureLayout() {
         totalLabel.snp.makeConstraints { make in
             make.top.leading.equalTo(safeAreaLayoutGuide).inset(10)
-            
         }
         
         accuracyButton.snp.makeConstraints { make in
@@ -88,6 +88,11 @@ class SearchResultView: BaseView {
         totalLabel.font = .regularBold
         totalLabel.textColor = .point
         
+        accuracyButton.setTitle("정확도", for: .normal)
+        dateButton.setTitle("날짜순", for: .normal)
+        highPriceButton.setTitle("가격높은순", for: .normal)
+        lowPriceButton.setTitle("가격낮은순", for: .normal)
+
         emptyView.setBackgroundColor()
         
         emptyLabel.text = "검색어에 맞는 상품이 없어요"
@@ -115,28 +120,15 @@ class SearchResultView: BaseView {
     }
     
     // 상태에 따른 필터링 버튼 디자인 차이
-    func designActiveButton(_ button: UIButton, active: Bool, title: String) {
-        if active {
-            button.backgroundColor = .white
-            button.setTitleColor(.black, for: .normal)
-            button.tintColor = .clear
-        } else {
-            button.backgroundColor = .black
-            button.setTitleColor(.white, for: .normal)
-            button.tintColor = .clear
-        }
-        button.layer.cornerRadius = 10
-        button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor.white.cgColor
-        button.setTitle(title, for: .normal)
-        let edgeInsets = UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)
-        button.contentEdgeInsets = edgeInsets
+    func designActiveButton(_ button: UIButton, title: String) {
+        button.backgroundColor = .white
+        button.setTitleColor(.black, for: .normal)
         
     }
-    func filterButtonInactive() {
-        for i in 0..<Constants.Button.FilterButton.allCases.count {
-            designActiveButton(buttons[i], active: false, title: Constants.Button.FilterButton.allCases[i].rawValue)
-            buttons[i].isSelected = false
+    func designInactiveButton() {
+        for sender in buttons {
+            sender.backgroundColor = .black
+            sender.setTitleColor(.white, for: .normal)
         }
     }
 
