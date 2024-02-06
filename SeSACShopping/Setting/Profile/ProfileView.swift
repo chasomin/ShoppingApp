@@ -25,7 +25,7 @@ class ProfileView: BaseView {
         addSubview(stateLabel)
         addSubview(doneButton)
         addSubview(lineView)
-        addGestureRecognizer(gesture)
+        userImageView.addGestureRecognizer(gesture)
     }
     
     override func configureLayout() {
@@ -64,10 +64,6 @@ class ProfileView: BaseView {
     override func configureView() {
         setBackgroundColor()
         
-        // FIXME: customview로 하니까 cornerradius 잘 안 됨
-        DispatchQueue.main.async {
-            self.userImageView.layer.cornerRadius = self.userImageView.frame.width / 2
-        }
         userImageView.isUserInteractionEnabled = true
         
         if UserDefaultsManager.shared.image == "" {

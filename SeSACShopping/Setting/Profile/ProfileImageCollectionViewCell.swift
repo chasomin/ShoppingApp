@@ -9,13 +9,12 @@ import UIKit
 
 
 class ProfileImageCollectionViewCell: UICollectionViewCell {
-    let imageButton = UIButton()
+    let imageButton = CircleImageButton()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         imageButton.setTitle("", for: .normal)
-        imageButton.circle()
         
         contentView.addSubview(imageButton)
         imageButton.snp.makeConstraints { make in

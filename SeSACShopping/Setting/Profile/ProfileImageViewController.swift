@@ -43,9 +43,9 @@ extension ProfileImageViewController: UICollectionViewDelegate, UICollectionView
         cell.imageButton.tag = indexPath.item + 1
         
         if UserDefaultsManager.shared.image == "profile\(cell.imageButton.tag)" {
-            cell.imageButton.circleBorder()
+            cell.imageButton.layer.borderWidth = 5
         } else {
-            cell.imageButton.circle()
+            cell.imageButton.layer.borderWidth = 0
         }
             
         cell.imageButton.addTarget(self, action: #selector(imageButtonTapped), for: .touchUpInside)

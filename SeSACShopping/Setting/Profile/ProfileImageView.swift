@@ -18,11 +18,7 @@ class ProfileImageView: BaseView {
         addSubview(collectionView)
     }
     override func configureLayout() {
-        imageView.image = UIImage(named: UserDefaultsManager.shared.image)
-        DispatchQueue.main.async {//FIXME: customView에서 처리해줬는데 안되는 이유?
-            self.imageView.layer.cornerRadius = self.imageView.frame.width / 2
-        }
-        
+        imageView.image = UIImage(named: UserDefaultsManager.shared.image)        
     }
     override func configureView() {
         imageView.snp.makeConstraints { make in

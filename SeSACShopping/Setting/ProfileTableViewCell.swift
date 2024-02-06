@@ -10,14 +10,14 @@ import UIKit
 class ProfileTableViewCell: UITableViewCell {
 
     
-    let userImageView = UIImageView()
+    let userImageView = PointBorderUserImageView(frame: .zero)
     let userNicknameLabel = UILabel()
     let userLikeLabel = UILabel()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        print("init")
         configureHierarchy()
-        setUI()
         setupConstraints()
     }
     
@@ -28,11 +28,7 @@ class ProfileTableViewCell: UITableViewCell {
 }
 
 extension ProfileTableViewCell {
-    
-    func configureCell() {
 
-    }
-    
     func configureHierarchy() {
         contentView.addSubview(userImageView)
         contentView.addSubview(userNicknameLabel)
@@ -40,7 +36,6 @@ extension ProfileTableViewCell {
     }
     
     func setUI() {
-        userImageView.circleBorder()
         userImageView.image = UIImage(named: UserDefaultsManager.shared.image)
         
         userNicknameLabel.font = .largeBold
