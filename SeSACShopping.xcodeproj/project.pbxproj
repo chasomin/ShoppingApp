@@ -17,7 +17,8 @@
 		7921B6FC2B6BBE8700848184 /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7921B6FB2B6BBE8700848184 /* ProfileImageView.swift */; };
 		7921B6FE2B6BC00400848184 /* SearchResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7921B6FD2B6BC00400848184 /* SearchResultView.swift */; };
 		793F225B2B72237200698E43 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 793F225A2B72237200698E43 /* Toast */; };
-		793F225D2B72452000698E43 /* filterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793F225C2B72452000698E43 /* filterButton.swift */; };
+		793F225D2B72452000698E43 /* FilterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793F225C2B72452000698E43 /* FilterButton.swift */; };
+		793F22602B72528000698E43 /* CircleImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793F225F2B72528000698E43 /* CircleImageButton.swift */; };
 		796FFDBA2B67AECC00C3DE08 /* PointBorderUserImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796FFDB92B67AECC00C3DE08 /* PointBorderUserImageView.swift */; };
 		796FFDBF2B67B0E800C3DE08 /* EditUserImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796FFDBE2B67B0E800C3DE08 /* EditUserImageView.swift */; };
 		796FFDC12B67B1F600C3DE08 /* NicknameTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796FFDC02B67B1F600C3DE08 /* NicknameTextField.swift */; };
@@ -81,7 +82,8 @@
 		7921B6F92B6BBD4200848184 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		7921B6FB2B6BBE8700848184 /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
 		7921B6FD2B6BC00400848184 /* SearchResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultView.swift; sourceTree = "<group>"; };
-		793F225C2B72452000698E43 /* filterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = filterButton.swift; sourceTree = "<group>"; };
+		793F225C2B72452000698E43 /* FilterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterButton.swift; sourceTree = "<group>"; };
+		793F225F2B72528000698E43 /* CircleImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleImageButton.swift; sourceTree = "<group>"; };
 		796FFDB92B67AECC00C3DE08 /* PointBorderUserImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointBorderUserImageView.swift; sourceTree = "<group>"; };
 		796FFDBE2B67B0E800C3DE08 /* EditUserImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditUserImageView.swift; sourceTree = "<group>"; };
 		796FFDC02B67B1F600C3DE08 /* NicknameTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameTextField.swift; sourceTree = "<group>"; };
@@ -167,14 +169,6 @@
 			path = Base;
 			sourceTree = "<group>";
 		};
-		793F225E2B7246FE00698E43 /* Custom */ = {
-			isa = PBXGroup;
-			children = (
-				793F225C2B72452000698E43 /* filterButton.swift */,
-			);
-			path = Custom;
-			sourceTree = "<group>";
-		};
 		796FFDBB2B67AF6900C3DE08 /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
@@ -182,6 +176,8 @@
 				796FFDBE2B67B0E800C3DE08 /* EditUserImageView.swift */,
 				796FFDC02B67B1F600C3DE08 /* NicknameTextField.swift */,
 				796FFDC22B67B2E700C3DE08 /* PointCornerRadiusButton.swift */,
+				793F225C2B72452000698E43 /* FilterButton.swift */,
+				793F225F2B72528000698E43 /* CircleImageButton.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -215,7 +211,6 @@
 			isa = PBXGroup;
 			children = (
 				7921B6EC2B6BB69500848184 /* Base */,
-				793F225E2B7246FE00698E43 /* Custom */,
 				796FFDF52B69424500C3DE08 /* Enum */,
 				796FFDBB2B67AF6900C3DE08 /* CustomView */,
 				79892C452B59130A00904F52 /* Extension */,
@@ -432,7 +427,7 @@
 				79892C492B59150E00904F52 /* SearchViewController.swift in Sources */,
 				799E72182B5FB79F00F93669 /* NotificationTableViewCell.swift in Sources */,
 				79892C682B594EBC00904F52 /* SearchResultCollectionViewCell.swift in Sources */,
-				793F225D2B72452000698E43 /* filterButton.swift in Sources */,
+				793F225D2B72452000698E43 /* FilterButton.swift in Sources */,
 				79892C5D2B5928AD00904F52 /* Identifier.swift in Sources */,
 				79939F512B5CE9A600728E64 /* UINavigation+Extension.swift in Sources */,
 				79939F3B2B5A497300728E64 /* UILabel+Extension.swift in Sources */,
@@ -448,6 +443,7 @@
 				79939F342B5A3F6600728E64 /* SettingTableViewCell.swift in Sources */,
 				79892C6E2B59708300904F52 /* ItemDetailViewController.swift in Sources */,
 				79939F3D2B5A49A400728E64 /* Constants.swift in Sources */,
+				793F22602B72528000698E43 /* CircleImageButton.swift in Sources */,
 				79939F492B5A6C8000728E64 /* ProfileImageCollectionViewCell.swift in Sources */,
 				796FFDC32B67B2E700C3DE08 /* PointCornerRadiusButton.swift in Sources */,
 				79892C5B2B59274F00904F52 /* UserDefaultsManager.swift in Sources */,
