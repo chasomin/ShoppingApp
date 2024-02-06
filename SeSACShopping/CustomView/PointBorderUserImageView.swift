@@ -14,15 +14,18 @@ class PointBorderUserImageView: UIImageView {
         configureView()
     }
     
-    func configureView() {
-//        DispatchQueue.main.async {
-//            self.layer.cornerRadius = self.frame.width / 2
-//        }
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        print(#function)
+        self.layer.cornerRadius = self.frame.width / 2
         self.clipsToBounds = true
+    }
+    
+    
+    func configureView() {
         self.layer.borderColor = UIColor.point.cgColor
         self.layer.borderWidth = 5
     }
-    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
