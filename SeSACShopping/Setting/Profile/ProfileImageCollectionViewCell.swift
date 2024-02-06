@@ -8,24 +8,21 @@
 import UIKit
 
 
-class ProfileImageCollectionViewCell: UICollectionViewCell {
+class ProfileImageCollectionViewCell: BaseCollectionViewCell {
     let imageButton = CircleImageButton()
-
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        imageButton.setTitle("", for: .normal)
-        
+    
+    
+    override func configureHierarchy() {
         contentView.addSubview(imageButton)
+    }
+    
+    override func configureLayout() {
         imageButton.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    override func configureView() {
+        imageButton.setTitle("", for: .normal)
     }
-    
-
 }

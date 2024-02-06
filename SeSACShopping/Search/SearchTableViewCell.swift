@@ -7,52 +7,20 @@
 
 import UIKit
 
-class SearchTableViewCell: UITableViewCell {
+class SearchTableViewCell: BaseTableViewCell {
 
     let iconImageView = UIImageView()
     let label = UILabel()
     let deleteButton = UIButton()
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        configureHierarchy()
-        setUI()
-        setupConstraints()
-    }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-}
-
-extension SearchTableViewCell {
-    
-    func configureHierarchy() {
+    override func configureHierarchy() {
         contentView.addSubview(iconImageView)
         contentView.addSubview(label)
         contentView.addSubview(deleteButton)
-    }
 
-    func setUI() {
-        backgroundColor = .clear
-        selectionStyle = .none
-        
-        iconImageView.image = Constants.Image.search
-        iconImageView.tintColor = .white
-        
-        label.font = .small
-        label.setLabelColor()
-        
-        
-        deleteButton.setTitle("", for: .normal)
-        deleteButton.setImage(Constants.Image.delete, for: .normal)
-        deleteButton.tintColor = .gray
-        
     }
-    
-    func setupConstraints() {
-        
+    override func configureLayout() {
         iconImageView.snp.makeConstraints { make in
             make.leading.equalTo(contentView).inset(20)
             make.width.height.equalTo(20)
@@ -70,5 +38,24 @@ extension SearchTableViewCell {
             make.top.bottom.equalTo(contentView).inset(15)
         }
         
+
     }
+    override func configureView() {
+        backgroundColor = .clear
+        selectionStyle = .none
+        
+        iconImageView.image = Constants.Image.search
+        iconImageView.tintColor = .white
+        
+        label.font = .small
+        label.setLabelColor()
+        
+        
+        deleteButton.setTitle("", for: .normal)
+        deleteButton.setImage(Constants.Image.delete, for: .normal)
+        deleteButton.tintColor = .gray
+
+    }
+    
 }
+
