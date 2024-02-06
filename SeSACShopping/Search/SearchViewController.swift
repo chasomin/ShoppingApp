@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import Toast
 
 class SearchViewController: UIViewController {
         
@@ -106,24 +107,30 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         
         let vc = SearchResultViewController()
         
-        vc.navigationItem.title = search[indexPath.row]
         
-        APIManager.shard.callRequest(text: search[indexPath.row], start: 1, sort: Constants.Sort.accuracy.rawValue) { shopping in
-            vc.data = shopping
-        }
-        vc.text = search[indexPath.row]
-        vc.start = 1
+        APIManager.shard.request(text: search[indexPath.row], start: 1, sort: Constants.Sort.accuracy.rawValue) { result, error in
+            if error == nil {
+                guard let result else { return }
+                vc.data = result
+                self.navigationController?.pushViewController(vc, animated: true)
+                vc.text = self.search[indexPath.row]
+                vc.start = 1
+                vc.navigationItem.title = self.search[indexPath.row]
 
-        
-        if indexPath.row != 0 {
-            let text = search[indexPath.row]
-            
-            search.remove(at: indexPath.row)
-            search.insert(text, at: 0)
-            UserDefaultsManager.shared.search = search
-            
+                if indexPath.row != 0 {
+                    let text = self.search[indexPath.row]
+                    
+                    self.search.remove(at: indexPath.row)
+                    self.search.insert(text, at: 0)
+                    UserDefaultsManager.shared.search = self.search
+                    
+                }
+            } else {
+                self.showToast(view: self.mainView.tableView, message: "오류가 발생했습니다.\n잠시후에 다시 시도해주세요")
+            }
         }
-        self.navigationController?.pushViewController(vc, animated: true)
+        
+
     }
 }
 
@@ -131,7 +138,6 @@ extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         let text = searchBar.text!.lowercased().trimmingCharacters(in: .whitespaces)
 
-        
         let vc = SearchResultViewController()
         
         vc.navigationItem.title = text
@@ -139,26 +145,46 @@ extension SearchViewController: UISearchBarDelegate {
         vc.start = 1
 
         if text != "" {
-            APIManager.shard.callRequest(text: text, start: 1, sort: Constants.Sort.accuracy.rawValue) { shopping in
-                vc.data = shopping
-            }
-            
-            
-            if !UserDefaultsManager.shared.search.contains(text){
-                search.insert(text, at: 0)
-                UserDefaultsManager.shared.search = search
-            } else {
-                guard let index = search.firstIndex(of: text) else {return}
-                search.remove(at: index)
-                search.insert(text, at: 0)
-                UserDefaultsManager.shared.search = search
-            }
-            
-            self.navigationController?.pushViewController(vc, animated: true)
+            APIManager.shard.request(text: text, start: 1, sort: Constants.Sort.accuracy.rawValue) { result, error in
+                if error == nil {
+                    guard let result else { return }
+                    vc.data = result
+                    
+                    if !UserDefaultsManager.shared.search.contains(text){
+                        self.search.insert(text, at: 0)
+                        UserDefaultsManager.shared.search = self.search
+                    } else {
+                        guard let index = self.search.firstIndex(of: text) else {return}
+                        self.search.remove(at: index)
+                        self.search.insert(text, at: 0)
+                        UserDefaultsManager.shared.search = self.search
+                    }
+                    
+                    self.navigationController?.pushViewController(vc, animated: true)
+                    
+                    searchBar.text = ""
 
+
+                } else {
+                    if UserDefaultsManager.shared.search.isEmpty {
+                        self.showToast(view: self.mainView.emptyView, message: "오류가 발생했습니다.\n잠시후에 다시 시도해주세요")
+                    } else {
+                        self.showToast(view: self.mainView.tableView, message: "오류가 발생했습니다.\n잠시후에 다시 시도해주세요")
+                    }
+                }
+            }
+
+            
+            
+
+        } else {
+            if UserDefaultsManager.shared.search.isEmpty {
+                self.showToast(view: self.mainView.emptyView, message: "검색어를 입력해주세요")
+            } else {
+                self.showToast(view: self.mainView.tableView, message: "검색어를 입력해주세요")
+            }
         }
         
-        searchBar.text = ""
 
         print(UserDefaultsManager.shared.search)
         

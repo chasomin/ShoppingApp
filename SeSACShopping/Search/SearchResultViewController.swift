@@ -36,6 +36,7 @@ class SearchResultViewController: UIViewController {
     var start = 1
     lazy var number = data.total.formatted()
 
+    lazy var seletButton = mainView.accuracyButton
 
     
     override func viewDidLoad() {
@@ -54,7 +55,7 @@ class SearchResultViewController: UIViewController {
         } else {
             mainView.collectionView.isHidden = false
         }
-
+        setButton()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -85,19 +86,31 @@ extension SearchResultViewController {
 
 // 필터링 버튼들 클릭 시 수행 할 액션
 extension SearchResultViewController {
-    @objc func filterButtonTapped(_ sender: UIButton) {
-        mainView.filterButtonInactive()
+    @objc func filterButtonTapped(_ sender: FilterButton) {
+        mainView.designInactiveButton()
+        mainView.designActiveButton(sender, title: Constants.Button.FilterButton.allCases[sender.tag].rawValue)
+        seletButton = sender
         
-        mainView.designActiveButton(sender, active: true, title: Constants.Button.FilterButton.allCases[sender.tag].rawValue)
-        sender.isSelected = true
-        print(sender)
-
-        APIManager.shard.callRequest(text: text, start: start, sort: Constants.Sort.allCases[sender.tag].rawValue) { shopping in
-            self.data = shopping
+        request(sort: .allCases[sender.tag]) { result in
+            self.data = result
         }
         
         if data.total != 0 {
             self.mainView.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
+        }
+    }
+    
+    func request(sort: Constants.Sort, completionHandler: @escaping (Shopping) -> Void) {
+        APIManager.shard.request(text: text, start: start, sort: sort.rawValue) { result, error in
+            if error == nil {
+                guard let result else { return }
+                completionHandler(result)
+            } else {
+                self.showAlert(title: "오류가 발생했습니다!", message: error?.rawValue ?? "알 수 없는 오류가 발생했습니다.\n잠시후에 다시 시도해주세요", buttonTitle: "확인") {
+                }
+                self.showToast(view: self.mainView.collectionView, message: "오류가 발생했습니다.\n잠시후에 다시 시도해주세요")
+                
+            }
         }
     }
 }
@@ -168,22 +181,31 @@ extension SearchResultViewController: UICollectionViewDataSourcePrefetching {
         for item in indexPaths {
             if data.items.count - 7 == item.row && data.items.count != data.total {
                 start += 30
-                if mainView.accuracyButton.isSelected {
-                    APIManager.shard.callRequest(text: text, start: start, sort: Constants.Sort.accuracy.rawValue) { shopping in
-                        self.data.items.append(contentsOf: shopping.items)
+                switch seletButton {
+                case mainView.accuracyButton:
+                    print("")
+                    request(sort: .accuracy) { result in
+                        self.data.items.append(contentsOf: result.items)
                     }
-                } else if mainView.dateButton.isSelected {
-                    APIManager.shard.callRequest(text: text, start: start, sort: Constants.Sort.date.rawValue) { shopping in
-                        self.data.items.append(contentsOf: shopping.items)
+
+                case mainView.dateButton:
+                    print("")
+                    request(sort: .date) { result in
+                        self.data.items.append(contentsOf: result.items)
                     }
-                } else if mainView.highPriceButton.isSelected{
-                    APIManager.shard.callRequest(text: text, start: start, sort: Constants.Sort.highPrice.rawValue) { shopping in
-                        self.data.items.append(contentsOf: shopping.items)
+
+                case mainView.highPriceButton:
+                    request(sort: .highPrice) { result in
+                        self.data.items.append(contentsOf: result.items)
                     }
-                } else if mainView.lowPriceButton.isSelected {
-                    APIManager.shard.callRequest(text: text, start: start, sort: Constants.Sort.lowPrice.rawValue) { shopping in
-                        self.data.items.append(contentsOf: shopping.items)
+                    
+                case mainView.lowPriceButton:
+                    request(sort: .lowPrice) { result in
+                        self.data.items.append(contentsOf: result.items)
                     }
+
+                default:
+                    break
                 }
             }
                 
