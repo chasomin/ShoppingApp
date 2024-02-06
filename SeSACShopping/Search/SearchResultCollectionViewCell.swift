@@ -47,15 +47,15 @@ extension SearchResultCollectionViewCell {
             make.width.height.equalTo(30)
         }
         mallNameLabel.snp.makeConstraints { make in
-            make.leading.equalToSuperview().inset(10)
+            make.horizontalEdges.equalToSuperview().inset(10)
             make.top.equalTo(imageView.snp.bottom).offset(5)
         }
         titleLabel.snp.makeConstraints { make in
-            make.leading.equalToSuperview().inset(10)
+            make.horizontalEdges.equalToSuperview().inset(10)
             make.top.equalTo(mallNameLabel.snp.bottom).offset(2)
         }
         priceLabel.snp.makeConstraints { make in
-            make.leading.equalToSuperview().inset(10)
+            make.horizontalEdges.equalToSuperview().inset(10)
             make.top.equalTo(titleLabel.snp.bottom).offset(2)
         }
 
@@ -63,13 +63,16 @@ extension SearchResultCollectionViewCell {
     func setUI() {
         imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 15
+        imageView.clipsToBounds = true
                 
         mallNameLabel.textColor = .gray
         mallNameLabel.font = .small
+        mallNameLabel.numberOfLines = 1
         
         titleLabel.font = .regular
         titleLabel.numberOfLines = 2
         titleLabel.setLabelColor()
+        
         
         priceLabel.setLabelColor()
         priceLabel.font = .largeBold
