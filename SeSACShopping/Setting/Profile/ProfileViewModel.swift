@@ -1,0 +1,86 @@
+//
+//  ProfileViewModel.swift
+//  SeSACShopping
+//
+//  Created by 차소민 on 2/24/24.
+//
+
+import Foundation
+
+enum NicknameError: Error {
+    case empty
+    case symbol
+    case number
+    case length
+    case cerrent
+}
+
+final class ProfileViewModel {
+    var inputNickName = Observable("")
+
+    
+    var outputNickName = Observable("")
+    var outputVaildState = Observable(false)
+    
+    init() {
+        inputNickName.bind { value in
+            self.vaildNickName(value)
+        }
+    }
+    
+    
+    private func validateUserInputError(text: String) throws -> Bool {
+        guard !text.isEmpty else {
+            throw NicknameError.empty
+        }
+        try text.forEach {
+            guard !"0123456789".contains($0) else {
+                throw NicknameError.number
+            }
+            guard !"@#$%".contains($0) else {
+                throw NicknameError.symbol
+            }
+        }
+        guard !(text.count < 2 || text.count > 9) else {
+            throw NicknameError.length
+        }
+        guard text != UserDefaultsManager.shared.nickname else {
+            throw NicknameError.cerrent
+        }
+        return true
+    }
+    
+    private func vaildNickName(_ value: String) {
+        do {
+            let _ = try validateUserInputError(text: inputNickName.value)
+            outputNickName.value = "사용할 수 있는 닉네임이에요."
+            outputVaildState.value = true
+
+        } catch {
+            switch error {
+            case NicknameError.empty:
+                outputVaildState.value = false
+                
+            case NicknameError.number:
+                outputNickName.value = "닉네임에 숫자는 포함할 수 없어요"
+                outputVaildState.value = false
+
+            case NicknameError.symbol:
+                outputNickName.value = "닉네임에 @, #, $, % 는 포함할 수 없어요."
+                outputVaildState.value = false
+
+            case NicknameError.length:
+                outputNickName.value = "2글자 이상 10글자 미만으로 설정해주세요"
+                outputVaildState.value = false
+
+            case NicknameError.cerrent:
+                outputNickName.value = "현재 닉네임과 다른 닉네임으로 설정해주세요"
+                outputVaildState.value = false
+
+            default:
+                break
+            }
+        }
+
+    }
+}
