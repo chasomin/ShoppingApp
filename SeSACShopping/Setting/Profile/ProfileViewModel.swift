@@ -17,14 +17,19 @@ enum NicknameError: Error {
 
 final class ProfileViewModel {
     var inputNickName = Observable("")
-
+    var inputDoneButton = Observable("")
     
     var outputNickName = Observable("")
     var outputVaildState = Observable(false)
     
+    
     init() {
         inputNickName.bind { value in
             self.vaildNickName(value)
+            
+        }
+        inputDoneButton.bind { value in
+            self.saveNickname(value)
         }
     }
     
@@ -81,6 +86,11 @@ final class ProfileViewModel {
                 break
             }
         }
-
+    }
+    
+    func saveNickname(_ value: String) {
+        print("++++")
+        UserDefaultsManager.shared.userState = true
+        UserDefaultsManager.shared.nickname = value
     }
 }

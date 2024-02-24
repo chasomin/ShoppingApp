@@ -39,25 +39,21 @@ class ProfileViewController: UIViewController {
         mainView.userImageView.image = UIImage(named: UserDefaultsManager.shared.image)
     }
     
-    
     @objc func userImageViewTapped(_ sender: UITapGestureRecognizer) {
-        
         let vc = ProfileImageViewController()
-        
         vc.navigationItem.title = self.navigationItem.title
-        
         navigationController?.pushViewController(vc, animated: true)
     }
-    
 }
 
 extension ProfileViewController {
     @objc func doneButtonTapped() {
         guard let text = mainView.textfield.text else { return }
-        
-        UserDefaultsManager.shared.userState = true
-        UserDefaultsManager.shared.nickname = text
-        
+        viewModel.inputDoneButton.value = text
+        setViewController()
+    }
+    
+    func setViewController() {
         let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
         
         let sceneDelegate = windowScene?.delegate as? SceneDelegate
@@ -74,6 +70,7 @@ extension ProfileViewController {
         
         sceneDelegate?.window?.rootViewController = tabbar
         sceneDelegate?.window?.makeKeyAndVisible()
+
     }
 }
 
