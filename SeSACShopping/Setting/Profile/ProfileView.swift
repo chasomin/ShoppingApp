@@ -65,16 +65,7 @@ class ProfileView: BaseView {
         setBackgroundColor()
         
         userImageView.isUserInteractionEnabled = true
-        
-        if UserDefaultsManager.shared.image == "" {
-            userImageView.image = UIImage(named: "profile\(num)")
-            UserDefaultsManager.shared.image = "profile\(num)"
-        } else {
-            userImageView.image = UIImage(named: UserDefaultsManager.shared.image)
-        }
-        
-        
-        
+
         textfield.text = UserDefaultsManager.shared.nickname
         textfield.placeholder = "닉네임을 입력해주세요 :)"
         

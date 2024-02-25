@@ -18,10 +18,11 @@ enum NicknameError: Error {
 final class ProfileViewModel {
     var inputNickName = Observable("")
     var inputDoneButton = Observable("")
+    var inputUserImage = Observable("")
     
     var outputNickName = Observable("")
     var outputVaildState = Observable(false)
-    
+    var outputUserImage = Observable("")
     
     init() {
         inputNickName.bind { value in
@@ -30,6 +31,9 @@ final class ProfileViewModel {
         }
         inputDoneButton.bind { value in
             self.saveNickname(value)
+        }
+        inputUserImage.bind { value in
+            self.checkUserImage(value)
         }
     }
     
@@ -57,7 +61,7 @@ final class ProfileViewModel {
     
     private func vaildNickName(_ value: String) {
         do {
-            let _ = try validateUserInputError(text: inputNickName.value)
+            let _ = try validateUserInputError(text: value)
             outputNickName.value = "사용할 수 있는 닉네임이에요."
             outputVaildState.value = true
 
@@ -88,9 +92,17 @@ final class ProfileViewModel {
         }
     }
     
-    func saveNickname(_ value: String) {
-        print("++++")
+    private func saveNickname(_ value: String) {
         UserDefaultsManager.shared.userState = true
         UserDefaultsManager.shared.nickname = value
+    }
+    
+    private func checkUserImage(_ image: String) {
+        if image == "" {
+            let num = Int.random(in: 1...14)
+            outputUserImage.value = "profile\(num)"
+        } else {
+            outputUserImage.value = image
+        }
     }
 }

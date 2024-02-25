@@ -31,6 +31,11 @@ class ProfileViewController: UIViewController {
             self.mainView.stateLabel.textColor = self.setTextColor(value)
             self.mainView.doneButton.isEnabled = value
         }
+        viewModel.outputUserImage.bind { value in
+            self.mainView.userImageView.image = UIImage(named: value)
+            UserDefaultsManager.shared.image = value
+        }
+        
 
     }
     
