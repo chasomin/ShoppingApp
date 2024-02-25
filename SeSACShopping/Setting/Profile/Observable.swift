@@ -7,8 +7,8 @@
 
 import Foundation
 
-class Observable<T> {
-    var closure: ((T) -> Void)?
+final class Observable<T> {
+    private var closure: ((T) -> Void)?
     
     var value: T {
         didSet {

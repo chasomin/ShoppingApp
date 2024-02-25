@@ -10,7 +10,8 @@ import UIKit
 class ProfileImageViewController: UIViewController {
     
     let mainView = ProfileImageView()
-    
+    var viewModel = ProfileImageViewModel()
+
     override func loadView() {
         view = mainView
     }
@@ -23,6 +24,11 @@ class ProfileImageViewController: UIViewController {
         mainView.collectionView.register(ProfileImageCollectionViewCell.self, forCellWithReuseIdentifier: ProfileImageCollectionViewCell.id)
         
         navigationController?.setNavigationBar()
+        
+        viewModel.output.bind { value in
+            self.mainView.collectionView.reloadData()
+            self.mainView.imageView.image = UIImage(named: UserDefaultsManager.shared.image)
+        }
 
     }
 }
@@ -55,9 +61,7 @@ extension ProfileImageViewController: UICollectionViewDelegate, UICollectionView
     
     
     @objc func imageButtonTapped(sender: UIButton) {
-        UserDefaultsManager.shared.image = "profile\(sender.tag)"
-        mainView.collectionView.reloadData()
-        mainView.imageView.image = UIImage(named: UserDefaultsManager.shared.image)
+        viewModel.input.value = sender.tag
     }
     
 
