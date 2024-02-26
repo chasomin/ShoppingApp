@@ -11,7 +11,7 @@ class ProfileImageViewController: UIViewController {
     
     let mainView = ProfileImageView()
     var viewModel = ProfileImageViewModel()
-
+    let profileImageList = Constants.Mock.ProfileImages.profileImageList
     override func loadView() {
         view = mainView
     }
@@ -37,13 +37,13 @@ class ProfileImageViewController: UIViewController {
 extension ProfileImageViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        Constants.Mock.ProfileImages.profileImageList.count
+        profileImageList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProfileImageCollectionViewCell.id, for: indexPath) as! ProfileImageCollectionViewCell
         
-        let image = UIImage(named: Constants.Mock.ProfileImages.profileImageList[indexPath.item])?.withRenderingMode(.alwaysOriginal)
+        let image = UIImage(named: profileImageList[indexPath.item])?.withRenderingMode(.alwaysOriginal)
         cell.imageButton.setImage(image, for: .normal)
         
         cell.imageButton.tag = indexPath.item + 1

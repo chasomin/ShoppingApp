@@ -8,6 +8,7 @@
 import Foundation
 
 class ProfileImageViewModel {
+        
     var input = Observable(0)
     let output = Observable("")
     
@@ -25,4 +26,6 @@ class ProfileImageViewModel {
             output.value = UserDefaultsManager.shared.image
         }
     }
+    
+    
 }
