@@ -41,7 +41,7 @@ class ProfileViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        mainView.userImageView.image = UIImage(named: UserDefaultsManager.shared.image)
+        viewModel.inputUserImage.value = UserDefaultsManager.shared.image
     }
     
     @objc func userImageViewTapped(_ sender: UITapGestureRecognizer) {
