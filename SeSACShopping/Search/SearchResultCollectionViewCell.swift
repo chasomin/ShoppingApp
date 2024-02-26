@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import RealmSwift
 
 class SearchResultCollectionViewCell: BaseCollectionViewCell {
 
@@ -65,5 +66,30 @@ class SearchResultCollectionViewCell: BaseCollectionViewCell {
         
         priceLabel.setLabelColor()
         priceLabel.font = .largeBold
+    }
+    
+    func configureCell(index: Int, data: Shopping?, favoriteData: FavoriteTable) {
+        guard let data else {
+            return
+        }
+        imageView.kf.setImage(with: URL(string: data.items[index].image))
+        
+        mallNameLabel.text = data.items[index].mallName
+        
+        titleLabel.text = data.items[index].titleFilter
+        
+        heartButton.tag = index
+        
+        
+        
+        if favoriteData.product == data.items[index].productId {
+            heartButton.heartFillButton()
+        } else {
+            heartButton.heartButton()
+        }
+    
+priceLabel.text = Int(data.items[index].lprice)?.formatted()
+
+
     }
 }

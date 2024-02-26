@@ -57,13 +57,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let tabbar = UITabBarController()
 
             let searchViewController = UINavigationController(rootViewController: SearchViewController())
+            let favoriteViewController = UINavigationController(rootViewController: FavoriteViewController())
             let settingViewController = UINavigationController(rootViewController: SettingViewController())
 
             searchViewController.tabBarItem = UITabBarItem(title: "검색", image: UIImage(systemName: "magnifyingglass"),selectedImage: UIImage(systemName: "magnifyingglass"))
+            favoriteViewController.tabBarItem = UITabBarItem(title: "좋아요", image: UIImage(systemName: "heart"), selectedImage: UIImage(systemName: "heart.fill"))
             settingViewController.tabBarItem = UITabBarItem(title: "설정", image: UIImage(systemName: "person"),selectedImage: UIImage(systemName: "person"))
 
             
-            tabbar.viewControllers = [searchViewController, settingViewController]
+            tabbar.viewControllers = [searchViewController, favoriteViewController, settingViewController]
             
             window?.rootViewController = tabbar
             window?.makeKeyAndVisible()

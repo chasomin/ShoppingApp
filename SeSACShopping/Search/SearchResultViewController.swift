@@ -7,36 +7,19 @@
 
 import UIKit
 import Kingfisher
+import RealmSwift
 
 class SearchResultViewController: UIViewController {        
 
     let mainView = SearchResultView()
-    
+    let viewModel = SearchResultViewModel()
     override func loadView() {
         view = mainView
     }
-    var data = Shopping(total: 0, start: 0, display: 0, items: []) {
-        didSet {
-            if mainView.collectionView != nil {
-                mainView.collectionView.reloadData()
-            }
-            let number = data.total.formatted()
-            mainView.totalLabel.text = "\(number) 개의 검색 결과"
-            start = 1
-            if data.total == 0 {
-                mainView.collectionView.isHidden = true
-                mainView.emptyView.isHidden = false
-            } else {
-                mainView.collectionView.isHidden = false
-                mainView.emptyView.isHidden = true
-            }
-        }
-    }
-    var text = ""
-    var start = 1
-    lazy var number = data.total.formatted()
 
-    lazy var seletButton = mainView.accuracyButton
+    var favoriteDataList: Results<FavoriteTable>!
+    var favoriteData: FavoriteTable = FavoriteTable(product: "", title: "", link: "", image: "", lprice: "", mallName: "")
+    let repository = FavoriteTableRepository()
 
     
     override func viewDidLoad() {
@@ -47,20 +30,41 @@ class SearchResultViewController: UIViewController {
         mainView.collectionView.dataSource = self
         mainView.collectionView.prefetchDataSource = self
         mainView.collectionView.register(SearchResultCollectionViewCell.self, forCellWithReuseIdentifier: SearchResultCollectionViewCell.id)
-
-        mainView.totalLabel.text = "\(number) 개의 검색 결과"
-
-        if data.total == 0 {
-            mainView.collectionView.isHidden = true
-        } else {
-            mainView.collectionView.isHidden = false
-        }
         setButton()
+        
+        viewModel.outputRequestError.bind { error in
+            guard error != nil else { return }
+            self.showToast(view: self.mainView.collectionView, message: "오류가 발생했습니다.\n잠시후에 다시 시도해주세요")
+        }
+        
+        viewModel.data.bind { data in
+            self.mainView.collectionView.reloadData()
+            if data.total == 0 {
+                self.mainView.collectionView.isHidden = true
+                self.mainView.emptyView.isHidden = false
+            } else {
+                self.mainView.collectionView.isHidden = false
+                self.mainView.emptyView.isHidden = true
+
+            }
+        }
+        viewModel.outputProductNum.bind { value in
+            self.mainView.totalLabel.text = value
+        }
+        viewModel.inputSetViewDidLoad.value = ()
+        
+
+        viewModel.outputTopPage.bind { value in
+            guard let value else { return }
+            self.mainView.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
+        }
+
+
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         mainView.collectionView.reloadData() // 좋아요 버튼 동기화
-
+        favoriteDataList = repository.read()
     }
 
 
@@ -89,85 +93,71 @@ extension SearchResultViewController {
     @objc func filterButtonTapped(_ sender: FilterButton) {
         mainView.designInactiveButton()
         mainView.designActiveButton(sender, title: Constants.Button.FilterButton.allCases[sender.tag].rawValue)
-        seletButton = sender
-        
-        request(sort: .allCases[sender.tag]) { result in
-            self.data = result
-        }
-        
-        if data.total != 0 {
-            self.mainView.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
-        }
-    }
-    
-    func request(sort: Constants.Sort, completionHandler: @escaping (Shopping) -> Void) {
-        APIManager.shard.request(text: text, start: start, sort: sort.rawValue) { result, error in
-            if error == nil {
-                guard let result else { return }
-                completionHandler(result)
-            } else {
-                self.showAlert(title: "오류가 발생했습니다!", message: error?.rawValue ?? "알 수 없는 오류가 발생했습니다.\n잠시후에 다시 시도해주세요", buttonTitle: "확인") {
-                }
-                self.showToast(view: self.mainView.collectionView, message: "오류가 발생했습니다.\n잠시후에 다시 시도해주세요")
-                
-            }
-        }
+        viewModel.inputSortButton.value = sender.tag
     }
 }
 
 
 extension SearchResultViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return data.items.count
+        return viewModel.data.value.items.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchResultCollectionViewCell.id, for: indexPath) as! SearchResultCollectionViewCell
+       
+        //test
+        cell.configureCell(index: indexPath.item, data: viewModel.data.value, favoriteData: favoriteDataList[0])
         
-        cell.imageView.kf.setImage(with: URL(string: data.items[indexPath.item].image))
-        
-        cell.mallNameLabel.text = data.items[indexPath.item].mallName
-        
-        cell.titleLabel.text = data.items[indexPath.item].titleFilter
-        
-        cell.heartButton.tag = indexPath.row
         cell.heartButton.addTarget(self, action: #selector(heartButtonTapped(sender:)), for: .touchUpInside)
-        
-        if UserDefaultsManager.shared.like.contains(data.items[indexPath.row].productId) {
-            cell.heartButton.heartFillButton()
-        } else {
-            cell.heartButton.heartButton()
-        }
-
-        cell.priceLabel.text = Int(data.items[indexPath.item].lprice)?.formatted()
-
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        let url = "https://msearch.shopping.naver.com/product/\(data.items[indexPath.item].productId)"
+        let url = "https://msearch.shopping.naver.com/product/\(viewModel.data.value.items[indexPath.item].productId)"
         
         let vc = ItemDetailViewController()
         
         vc.urlString = url
 
-        vc.navigationItem.title = data.items[indexPath.item].titleFilter
-        vc.productId = data.items[indexPath.item].productId
+        vc.navigationItem.title = viewModel.data.value.items[indexPath.item].titleFilter
+        vc.productId = viewModel.data.value.items[indexPath.item].productId
         
         navigationController?.pushViewController(vc, animated: true)
         
     }
     
+    // TODO: 좋아요 버튼 realm 저장 
     @objc func heartButtonTapped(sender: UIButton) {
-        if UserDefaultsManager.shared.like.contains(data.items[sender.tag].productId) {
-            guard let index = UserDefaultsManager.shared.like.firstIndex(of: data.items[sender.tag].productId) else { return }
-            UserDefaultsManager.shared.like.remove(at: index)
+        let item = viewModel.data.value.items[sender.tag]
+        if favoriteDataList.isEmpty {
+            repository.createItem(FavoriteTable(product: item.productId, title: item.titleFilter, link: item.link, image: item.image, lprice: item.lprice, mallName: item.mallName))
         } else {
-            UserDefaultsManager.shared.like.append(data.items[sender.tag].productId)
+//            
+//            favoriteDataList.forEach {
+//                if $0.product == data.items[sender.tag].productId {
+//                    repository.deleteItem(favoriteDataList[sender.tag])
+//                } else {
+//                    repository.createItem(FavoriteTable(product: item.productId, title: item.titleFilter, link: item.link, image: item.image, lprice: item.lprice, mallName: item.mallName))
+//                }
+//            }
+            favoriteData = FavoriteTable(product: item.productId, title: item.titleFilter, link: item.link, image: item.image, lprice: item.lprice, mallName: item.mallName)
+            if favoriteDataList.contains(favoriteData) {
+                repository.deleteItem(favoriteData)
+            } else {
+                repository.createItem(favoriteData)
+            }
         }
         
-        print(UserDefaultsManager.shared.like.count)
+//        if UserDefaultsManager.shared.like.contains(data.items[sender.tag].productId) {
+//            guard let index = UserDefaultsManager.shared.like.firstIndex(of: data.items[sender.tag].productId) else { return }
+//            UserDefaultsManager.shared.like.remove(at: index)
+//        } else {
+//            UserDefaultsManager.shared.like.append(data.items[sender.tag].productId)
+//        }
+//
+//        print(UserDefaultsManager.shared.like.count)
         mainView.collectionView.reloadData()
     }
 }
@@ -179,38 +169,9 @@ extension SearchResultViewController: UICollectionViewDataSourcePrefetching {
         print(#function, indexPaths)
         
         for item in indexPaths {
-            if data.items.count - 7 == item.row && data.items.count != data.total {
-                start += 30
-                switch seletButton {
-                case mainView.accuracyButton:
-                    print("")
-                    request(sort: .accuracy) { result in
-                        self.data.items.append(contentsOf: result.items)
-                    }
-
-                case mainView.dateButton:
-                    print("")
-                    request(sort: .date) { result in
-                        self.data.items.append(contentsOf: result.items)
-                    }
-
-                case mainView.highPriceButton:
-                    request(sort: .highPrice) { result in
-                        self.data.items.append(contentsOf: result.items)
-                    }
-                    
-                case mainView.lowPriceButton:
-                    request(sort: .lowPrice) { result in
-                        self.data.items.append(contentsOf: result.items)
-                    }
-
-                default:
-                    break
-                }
-            }
-                
-            
+            viewModel.inputPagenation.value = item
         }
+
     }
     
     func collectionView(_ collectionView: UICollectionView, cancelPrefetchingForItemsAt indexPaths: [IndexPath]) {
