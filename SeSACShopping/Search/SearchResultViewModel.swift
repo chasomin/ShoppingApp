@@ -8,24 +8,24 @@
 import Foundation
 
 
+@MainActor
 class SearchResultViewModel {
     let data: Observable<Shopping> = Observable(Shopping(total: 0, start: 0, display: 0, items: []))
     
     var text = Observable("")
     var start = Observable(1)
-
+    
     let inputSortButton = Observable(0)
     let inputSetViewDidLoad: Observable<Void?> = Observable(nil)
     let inputPagenation: Observable<IndexPath?> = Observable(nil)
     let currentSortType: Observable<Constants.Sort?> = Observable(nil)
     
-    let outputReqeustValue: Observable<Shopping?> = Observable(nil)
     let outputRequestError: Observable<RequestError?> = Observable(nil)
     let outputProductNum = Observable("")
     let outputTopPage: Observable<Void?> = Observable(nil)
     
     init() {
-
+        
         inputSortButton.bind { value in
             guard let currentSort = self.currentSortType.value else { return }
             let seleteSortType = Constants.Sort.allCases[value]
@@ -44,27 +44,22 @@ class SearchResultViewModel {
             self.setPagenation(item)
         }
     }
+    
     private func callRequest(text: String, sort: Constants.Sort, start: Int) {
-            currentSortType.value = sort
-
-            APIManager.shard.request(text: text, start: start, sort: sort.rawValue) { [weak self] result, error in
-                guard let self else { return }
-                if error == nil {
-                    guard let result else { return }
-                    if result.items.isEmpty {
-                        return
-                    }
-                    data.value.total = result.total
-                    setFetch()
-                    data.value.items.append(contentsOf: result.items)
-                    print("~~~~\(currentSortType),\(sort)")
-                    self.outputTopPage.value = ()
-
-                } else {
-                    outputRequestError.value = nil
-                }
+        currentSortType.value = sort
+        print("⚠️", text)
+        Task {
+            print("여기",Thread.isMainThread)
+            let result = try await APIManager.shard.request(text: text, start: start, sort: sort.rawValue)
+            if result.items.isEmpty {
+                return
             }
-        
+            data.value.total = result.total
+            setFetch()
+            data.value.items.append(contentsOf: result.items)
+            print("~~~~\(currentSortType),\(sort)")
+            self.outputTopPage.value = ()
+        }
     }
     
     private func setFetch() {

@@ -68,12 +68,11 @@ class SearchViewController: UIViewController {
             self.navigationController?.pushViewController(vc, animated: true)
             
             vc.viewModel.text.value = value
-//            vc.start = 1
+            //            vc.start = 1
             vc.navigationItem.title = value
-
-
         }
         
+        viewModel.outputShoppingData
     }
     
     override func viewWillAppear(_ animated: Bool) {

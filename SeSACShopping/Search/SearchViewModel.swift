@@ -17,6 +17,7 @@ class SearchViewModel {
     
     let outputSearchHistory: Observable<Bool> = Observable(false)
     let outputSearchText: Observable<String?> = Observable(nil)
+    let outputShoppingData: Observable<Shopping?> = Observable(nil)
     
     init() {
         searchKeywords.bind { keywords in
@@ -36,7 +37,7 @@ class SearchViewModel {
         }
         inputSearchBarButtonTapped.bind { value in
             print(" !!!검색", value)
-
+            
             self.searchBarSearchButton(value)
         }
     }
@@ -53,41 +54,45 @@ class SearchViewModel {
                 searchKeywords.value.remove(at: value)
             }
         }
-
+        
     }
     private func setSearchHistory(_ value: [String]) {
         if value.isEmpty {
             outputSearchHistory.value = true
         } else {
             outputSearchHistory.value = false
-
+            
         }
     }
- 
+    
     
     private func searchSelectRowAt(_ index: Int?) {
         guard let index else { return }
         let text = self.searchKeywords.value[index]
-//        callRequest(text: text) {
-            self.searchKeywords.value.remove(at: index)
-            self.searchKeywords.value.insert(text, at: 0)
+        self.searchKeywords.value.remove(at: index)
+        self.searchKeywords.value.insert(text, at: 0)
         outputSearchText.value = text
-
-            print(self.searchKeywords.value)
-//        }
+        
+        print(self.searchKeywords.value)
     }
     
     private func searchBarSearchButton(_ text: String?) {
         guard let text else { return }
-//        callRequest(text: text) {
-            guard let index = self.searchKeywords.value.firstIndex(of: text) else { 
-                self.searchKeywords.value.insert(text, at: 0)
-                return
-            }
-            self.searchKeywords.value.remove(at: index)
+        if searchKeywords.value.first == text {
+            self.searchKeywords.value.remove(at: 0)
             self.searchKeywords.value.insert(text, at: 0)
+        } else {
+            self.searchKeywords.value.insert(text, at: 0)
+        }
+        
         outputSearchText.value = text
-            print("!!! UserD", self.searchKeywords.value)
-//        }
+        print("👻")
+        Task {
+            let result = try await APIManager.shard.request(text: text, start: 0, sort: Constants.Sort.accuracy.rawValue)
+            outputShoppingData.value = result
+            print("❗️", result)
+        }
+        
+        print("!!! UserD", self.searchKeywords.value)
     }
 }

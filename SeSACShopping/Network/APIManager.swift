@@ -44,8 +44,10 @@ struct APIManager {
 //    }
     
 
-    func request(text: String, start: Int, sort: String, completionHandler:  @escaping (Shopping?, RequestError?) -> ()) {
-        guard let query = text.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return }
+    func request(text: String, start: Int, sort: String) async throws -> Shopping {
+        guard let query = text.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
+            return Shopping.init(total: 0, start: 0, display: 0, items: [])
+        }
 
         var components = URLComponents()
         components.scheme = "https"
@@ -59,8 +61,8 @@ struct APIManager {
         ]
         
         guard let url = components.url else {
-            print("url nil")
-            return
+            print("!@!@에러11")
+            throw RequestError.failedRequest
         }
         
         var urlRequest = URLRequest(url: url)
@@ -69,37 +71,20 @@ struct APIManager {
             HTTPHeader(name: "X-Naver-Client-Secret", value: APIKey.clientSecret)
         ]
         
-        URLSession.shared.dataTask(with: urlRequest) { data, response, error in
-            DispatchQueue.main.async {
-                
-                guard error == nil else {
-                    print("error!!")
-                    completionHandler(nil, .failedRequest)
-                    return
-                }
-                
-                guard let response = response as? HTTPURLResponse, (200...299).contains(response.statusCode) else {
-                    print("상태코드 오류")
-                    completionHandler(nil, .invaildResponse)
-                    return
-                }
-                
-                guard let data else {
-                    print("데이터 오류")
-                    completionHandler(nil, .noData)
-                    return
-                }
-                
-                do {
-                    let result = try JSONDecoder().decode(Shopping.self, from: data)
-                    dump(result)
-                    completionHandler(result, nil)
-                } catch {
-                    print(error)
-                    completionHandler(nil, .invaildData)
-                }
-            }
-        }.resume()
+        let (data, response) = try await URLSession.shared.data(for: urlRequest)
+
+        guard let response = response as? HTTPURLResponse, (200...299).contains(response.statusCode) else {
+            print("!@!@에러22")
+            throw RequestError.failedRequest
+        }
+        
+        do {
+            let result = try JSONDecoder().decode(Shopping.self, from: data)
+            dump(result)
+            return result
+        } catch {
+            throw RequestError.invaildData
+        }
     }
     
 }
